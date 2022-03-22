@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:43:20 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/22 13:30:59 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/22 15:35:22 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 # define PARSING_H
 
 # include "../minishell.h"
+
+/*---define---*/
+
+# define WHITESPACE	" \n\t\f\v\f\r"
+# define NO_QUOTE		0
+# define QUOTE_ERROR	-10
+# define SQUOTE_START	1
+# define SQUOTE_STOP	-1
+# define DQUOTE_START	2
+# define DQUOTE_STOP	-2
 
 /*---token---*/
 
@@ -33,6 +43,13 @@ typedef struct s_data
 	char	**data;
 	int		nbr_arg;
 }				t_data;
+
+typedef struct s_index
+{
+	int	i;
+	int	j;
+	int	k;
+}				t_index;
 
 /*---dollar.c---*/
 

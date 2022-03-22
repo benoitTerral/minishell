@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:59:35 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/22 10:20:44 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/22 14:29:16 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdbool.h>
 
 int	is_whitespace(char c);
 

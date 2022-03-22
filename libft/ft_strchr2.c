@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 16:11:08 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/21 15:24:24 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/22 17:40:31 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*ft_strchr2(const char *str, int search_char, int *i)
 	*i = 0;
 	while (str[*i])
 	{
+		//jump''
 		if (str[*i] == (char) search_char)
 			return ((char *)&str[*i]);
 		*i += 1;

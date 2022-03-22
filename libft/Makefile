@@ -11,7 +11,7 @@ all: ${NAME}
 %.o: %.c libft.h get_next_line.h
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-${NAME}: ${OBJ}
+${NAME}: ${OBJ} ${SRC}
 	ar -rc ${NAME} ${OBJ}
 	ranlib ${NAME}
 
