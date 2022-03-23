@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:18:47 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/21 17:39:43 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/23 16:15:49 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,17 @@ void	ft_envdel(t_cmd *cmd, char *name)
 	current = cmd->head->next;
 	while (current)
 	{
-		if (ft_strncmp(current->name, name, ft_strlen(name))
+		printf("current->name : %s\n", current->name);
+		if (!ft_strncmp(current->name, name, ft_strlen(name))
 			&& ft_strlen(name) == ft_strlen(current->name))
 		{
 			previous->next = current->next;
 			current->name = NULL;
 			current->value = NULL;
 			free(current);
+			return ;
 		}
+		previous = current;
+		current  = current->next;
 	}
 }
