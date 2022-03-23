@@ -1,1 +1,2 @@
 echo $SHLVL$NOP | cmd1 > out1
+0"23""  x"   'cc'   slt "  |"    "a'pas"

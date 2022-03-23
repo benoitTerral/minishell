@@ -2,7 +2,7 @@ CC= gcc
 CFLAGS= -Wall -Wextra -Werror
 FFLAGS= -fsanitize=address -g
 NAME= minishell
-SRC= main.c
+SRC= main.c strdel_index.c
 SRC_ALLOC= alloc_mem/ft_free.c
 SRC_PARSING= parsing/dollar.c parsing/quote.c parsing/parsing.c
 SRC_PRINT= print/print.c

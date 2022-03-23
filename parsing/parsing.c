@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 11:01:26 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/22 14:55:09 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 14:28:59 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,19 @@ void	del_whitespace(char *str)
 	}
 }
 
+void	printsplit(char **split)
+{
+	int	j;
+	j = 0;
+	printf("\n");
+	while (split[j])
+	{
+		printf("ARG[%d]=%s\n", j, split[j]);
+		j++;
+	}
+	printf("ARG[%d]=%s\n", j, split[j]);
+}
+
 int	parsing(char *line)
 {
 	char	**arg;
@@ -36,6 +49,12 @@ int	parsing(char *line)
 	line = parsing_dollar(line);
 	printf("END_line =%s", line);
 	arg = split_quote(line);
+	if (!arg)
+	{
+		ft_free(line);
+		return (-1);
+	}
+	printsplit(arg);
 	ft_free(line);
 	return (0);
 }

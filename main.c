@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/22 11:43:39 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 10:01:28 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ int	main(void)
 		}
 		else
 		{
-			parsing(line);
+			if (!parsing(line))
+				printf("parsing = OK\n");
+			else
+				printf("Ligne Suivante\n");
 		}
 	}
 }
