@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strdel_index.c                                     :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/23 12:36:12 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/23 13:21:42 by laraujo          ###   ########lyon.fr   */
+/*   Created: 2022/03/23 15:28:55 by laraujo           #+#    #+#             */
+/*   Updated: 2022/03/23 18:27:59 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 void	strdel_index(char **str, int index)
 {
@@ -25,14 +25,3 @@ void	strdel_index(char **str, int index)
 	free(temp);
 	free(end);
 }
-/*
-int main()
-{
-	char	*str = NULL;
-
-	str = ft_strdup("Salut_jesuis");
-	printf("AVANT=%s\n", str);
-	strdel_index(&str, 5);
-	printf("APRES=%s\n", str);
-	free(str);
-}*/

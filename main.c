@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/23 10:01:28 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 17:55:15 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,24 @@ int	main(void)
 
 	while (1)
 	{
-		print_prompter();
-		line = get_next_line(STDIN_FILENO);
+		//print_prompter();
+		//line = get_next_line(STDIN_FILENO);
+		line = readline(MINISHELL);
 		if (!line)
 			return (0);
+		add_history(line);
 		if (!ft_strncmp(line, "exit", ft_strlen("exit")))
 		{
 			free(line);
-			dprintf(STDOUT_FILENO, "e%sx%si%st\n", RED, GREEN, YELLOW);
+			dprintf(STDOUT_FILENO, "%se%sxi%st%s\n", BLUE, WHITE, RED, WHITE);
 			return (1);
 		}
 		else
 		{
 			if (!parsing(line))
 				printf("parsing = OK\n");
-			else
-				printf("Ligne Suivante\n");
+			// else
+			// 	printf("Ligne Suivante\n");
 		}
 	}
 }

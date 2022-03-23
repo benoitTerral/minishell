@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:50:51 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/22 10:03:15 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 17:50:25 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,14 @@
 # define CYAN	"\033[0;36m"
 # define WHITE	"\033[0;37m"
 
+# define MINISHELL	"\033[0;34mMin\033[0;37miSh\033[0;31mell\033[0;37m $ "
+
+// "%sMin%siS", BLUE, WHITE
+// "h%sell%s $ ", RED, WHITE
+
 /*---print.c---*/
 
 void	print_prompter(void);
+void	printsplit(char **split);
 
 #endif

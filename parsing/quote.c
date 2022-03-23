@@ -6,31 +6,13 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:33:06 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/23 14:30:45 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 19:39:43 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	strdel_index(char **str, int index);
-
-int	status_quote(int quote, char c)
-{
-	if (c == '\0')
-		return (QUOTE_ERROR);
-	else if (c == '\'' && quote == NO_QUOTE)
-		return (SQUOTE_START);
-	else if (c == '"' && quote == NO_QUOTE)
-		return (DQUOTE_START);
-	else if (c == '\'' && quote == SQUOTE_START)
-		return (SQUOTE_STOP);
-	else if (c == '"' && quote == DQUOTE_START)
-		return (DQUOTE_STOP);
-	else
-		return (quote);
-}
-
-int	jump_quote(char *str, int *i, int *quote)
+static int	jump_quote(char *str, int *i, int *quote)
 {
 	*quote = status_quote(*quote, str[*i]);
 	if (*quote == SQUOTE_STOP || *quote == DQUOTE_STOP) //condition arret
@@ -45,6 +27,7 @@ int	jump_quote(char *str, int *i, int *quote)
 			if (*quote == QUOTE_ERROR)
 			{
 				dprintf(STDERR_FILENO, RED ERROR_QUOTE WHITE);
+				ft_free(&str);
 				return (QUOTE_ERROR);
 			}
 			*i += 1;
@@ -86,10 +69,10 @@ static int	cpt_word(char *str)
 	return (cpt);
 }
 
-int	jump_delquote(char **str, int *i, int *quote)
+static int	jump_delquote(char **str, int *i, int *quote)
 {
 	*quote = status_quote(*quote, str[0][*i]);
-	if (*quote == SQUOTE_STOP || *quote == DQUOTE_STOP) //condition arret
+	if (*quote == SQUOTE_STOP || *quote == DQUOTE_STOP)
 		return (0);
 	if (*quote == SQUOTE_START || *quote == DQUOTE_START)
 	{
@@ -142,11 +125,13 @@ static char	**strdup_tab(char *str, int nb_word)
 //			printf("arg=%s\n", arg[cpt]);
 			arg[cpt + 1] = NULL;
 //			printf("arg=%s\n", arg[cpt + 1]);
+			ft_free(&str); //
 			return (arg);
 		}
 		if (is_whitespace(str[i]) && quote == NO_QUOTE)
 		{
 			arg[cpt] = ft_substr(str, i_save, i - i_save);
+			//ft_free(&str);
 //			printf("arg=%s\n", arg[cpt]);
 			cpt++;
 			while (is_whitespace(str[i]))
@@ -156,7 +141,12 @@ static char	**strdup_tab(char *str, int nb_word)
 		else
 			i++;
 	}
-	return (NULL);
+	arg[cpt] = ft_substr(str, i_save, i - i_save);
+//	printf("arg=%s\n", arg[cpt]);
+	arg[cpt + 1] = NULL;
+//	printf("arg=%s\n", arg[cpt + 1]);
+	ft_free(&str); //
+	return (arg);
 }
 
 char	**split_quote(char *string)
@@ -167,6 +157,7 @@ char	**split_quote(char *string)
 
 	if (!string)
 		return (NULL);
+	printf("Split_line=%s\n", string);
 	str = ft_strtrim(string, WHITESPACE);
 	if (!str)
 		return (NULL);
@@ -180,8 +171,3 @@ char	**split_quote(char *string)
 		return (arg);
 	return (NULL);
 }
-
-/*
-Fonction qui suprime l'element de la list
-void strdel_index(char *str, int index);
-*/

@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:43:10 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/22 11:25:35 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 19:01:23 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_var_env(char *pt)
 
 	i = 1;
 	while (!is_whitespace(pt[i]) && pt[i] != '"' && pt[i] != '\'' && pt[i]
-		&& pt[i] != '$')
+		&& pt[i] != '$' && pt[i] != '/')
 		i++;
 	var = malloc(sizeof(char) * (i + 1));
 	if (!var)
@@ -45,11 +45,11 @@ char	*join_var_env(char *line, char *var, int dollar)
 		temp = ft_strjoin(line, get_env);
 	else
 		temp = ft_strjoin(line, "");
-	ft_free(line);
+	ft_free(&line);
 	printf("temp=%s\n", temp);
 	line = ft_strjoin(temp, end);
-	ft_free(end);
-	ft_free(temp);
+	ft_free(&end);
+	ft_free(&temp);
 	return (line);
 }
 
@@ -61,7 +61,7 @@ char	*parsing_dollar(char *line)
 
 	i = 0;
 	pt = ft_strchr2(line, '$', &i);
-	if (pt == NULL || is_whitespace(pt[1]))
+	if (pt == NULL /*|| is_whitespace(pt[1])*/)
 		return (line);
 	var = get_var_env(pt);
 	printf("var=%s\n", var);
@@ -69,7 +69,12 @@ char	*parsing_dollar(char *line)
 		return (NULL);
 	printf("--%s, $=%d\n", var, i);
 	line = join_var_env(line, var, i);
-	ft_free(var);
+	ft_free(&var);
 	line = parsing_dollar(line);
 	return (line);
 }
+
+
+/* Check si fermer avant donc apres simplifier
+faire jump_single_quote plus simple 
+*/

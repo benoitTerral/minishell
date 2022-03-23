@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:43:20 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/22 15:35:22 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 15:31:24 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,18 @@ char	*parsing_dollar(char *line); //Modif My_getenv()
 
 int		parsing(char *line);
 
+/*---parsing_utils.c---*/
+
+void	strdel_index(char **str, int index);
+
 /*---quote.c---*/
 
 char	**split_quote(char *str);
+
+/*---quote2.c---*/
+
+int		status_quote(int quote, char c);
+
+
 
 #endif
