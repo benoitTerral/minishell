@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 16:13:24 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/23 16:49:19 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/24 13:41:13 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	*ft_memmove(void *dest, const void *src, size_t size);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 char	*ft_strchr(char *str, int search_char);
-char	*ft_strchr2(char *str, int search_char, int *i); //AJOUT
 char	*ft_strrchr(char *str, int search_char);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:43:10 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/23 19:01:23 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/24 16:08:11 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,14 @@ char	*get_var_env(char *pt)
 	char	*var;
 
 	i = 1;
-	while (!is_whitespace(pt[i]) && pt[i] != '"' && pt[i] != '\'' && pt[i]
-		&& pt[i] != '$' && pt[i] != '/')
+	if (pt[i] == '?' || !ft_isalpha(pt[i]))
 		i++;
+	else
+	{
+		while (!is_whitespace(pt[i]) && pt[i] != '"' && pt[i] != '\'' && pt[i]
+			&& pt[i] != '$' && pt[i] != '/' && ft_isalnum(pt[i]))
+			i++;
+	}
 	var = malloc(sizeof(char) * (i + 1));
 	if (!var)
 		return (NULL);
@@ -58,9 +63,10 @@ char	*parsing_dollar(char *line)
 	char	*pt;
 	char	*var;
 	int		i;
+	int		quote;
 
-	i = 0;
-	pt = ft_strchr2(line, '$', &i);
+	quote = NO_QUOTE;
+	pt = ft_strchr2(line, '$', &i, &quote);
 	if (pt == NULL /*|| is_whitespace(pt[1])*/)
 		return (line);
 	var = get_var_env(pt);
@@ -73,8 +79,3 @@ char	*parsing_dollar(char *line)
 	line = parsing_dollar(line);
 	return (line);
 }
-
-
-/* Check si fermer avant donc apres simplifier
-faire jump_single_quote plus simple 
-*/

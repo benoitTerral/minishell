@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:43:20 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/24 11:42:05 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/24 13:39:00 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int		parsing(char *line);
 /*---parsing_utils.c---*/
 
 void	strdel_index(char **str, int index);
+char	*ft_strchr2(char *str, int search_char, int *i, int *quote);
 
 /*---quote.c---*/
 

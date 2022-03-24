@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/23 17:55:15 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/24 16:17:00 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,16 @@ int	is_whitespace(char c)
 	return (0);
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **env)
 {
 	char	*line;
 
+	(void) argv;
+	(void) env;
+	if (argc != 1)
+		return (-1);
 	while (1)
 	{
-		//print_prompter();
-		//line = get_next_line(STDIN_FILENO);
 		line = readline(MINISHELL);
 		if (!line)
 			return (0);
@@ -42,8 +44,6 @@ int	main(void)
 		{
 			if (!parsing(line))
 				printf("parsing = OK\n");
-			// else
-			// 	printf("Ligne Suivante\n");
 		}
 	}
 }
