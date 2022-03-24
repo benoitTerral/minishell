@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:43:20 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/23 15:31:24 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/24 11:42:05 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ typedef struct s_index
 {
 	int	i;
 	int	j;
-	int	k;
+	int	i_save;
+	int	quote;
 }				t_index;
 
 /*---dollar.c---*/
@@ -72,7 +73,8 @@ char	**split_quote(char *str);
 /*---quote2.c---*/
 
 int		status_quote(int quote, char c);
-
-
+int		check_error_quote(char *str);
+void	init_index(int *i, int *j, int *i_save, int *quote);
+int		jump_delquote(char **str, int *i, int *quote);
 
 #endif

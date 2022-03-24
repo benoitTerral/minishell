@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:33:06 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/23 19:39:43 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/24 11:42:22 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,20 @@
 static int	jump_quote(char *str, int *i, int *quote)
 {
 	*quote = status_quote(*quote, str[*i]);
-	if (*quote == SQUOTE_STOP || *quote == DQUOTE_STOP) //condition arret
+	if (*quote == SQUOTE_STOP || *quote == DQUOTE_STOP)
 		return (0);
 	if (*quote == SQUOTE_START || *quote == DQUOTE_START)
 	{
-//		printf(GREEN"Q_START=%d\n", *i);
 		*i += 1;
 		while (*quote != SQUOTE_STOP && *quote != DQUOTE_STOP)
 		{
 			*quote = status_quote(*quote, str[*i]);
-			if (*quote == QUOTE_ERROR)
-			{
-				dprintf(STDERR_FILENO, RED ERROR_QUOTE WHITE);
-				ft_free(&str);
-				return (QUOTE_ERROR);
-			}
 			*i += 1;
 		}
-//		printf(YELLOW"Q_STOP=%d\n"WHITE, *i - 1);
 		if (!str[*i])
 			return (0);
 		*quote = NO_QUOTE;
-		if (QUOTE_ERROR == jump_quote(str, i, quote))
-			return (QUOTE_ERROR);
+		jump_quote(str, i, quote);
 	}
 	return (0);
 }
@@ -53,8 +44,7 @@ static int	cpt_word(char *str)
 	cpt = 1;
 	while (str[i])
 	{
-		if (QUOTE_ERROR == jump_quote(str, &i, &quote))
-			return (QUOTE_ERROR);
+		jump_quote(str, &i, &quote);
 		if (!str[i])
 			return (cpt);
 		if (is_whitespace(str[i]) && quote == NO_QUOTE)
@@ -69,84 +59,38 @@ static int	cpt_word(char *str)
 	return (cpt);
 }
 
-static int	jump_delquote(char **str, int *i, int *quote)
+static char	**enddup_tab(t_index ind, char **arg, char *str)
 {
-	*quote = status_quote(*quote, str[0][*i]);
-	if (*quote == SQUOTE_STOP || *quote == DQUOTE_STOP)
-		return (0);
-	if (*quote == SQUOTE_START || *quote == DQUOTE_START)
-	{
-//		printf(GREEN"Q_START=%d\n", *i);
-		strdel_index(str, *i);
-		//*i += 1;
-		while (*quote != SQUOTE_STOP && *quote != DQUOTE_STOP)
-		{
-			*quote = status_quote(*quote, str[0][*i]);
-			if (*quote == QUOTE_ERROR)
-			{
-				dprintf(STDERR_FILENO, RED ERROR_QUOTE WHITE);
-				return (QUOTE_ERROR);
-			}
-			*i += 1;
-		}
-		*i -= 1;
-//		printf(YELLOW"Q_STOP=%d\n"WHITE, *i);
-		strdel_index(str, *i);
-		if (!str[0][*i])
-			return (0);
-		*quote = NO_QUOTE;
-		if (QUOTE_ERROR == jump_delquote(str, i, quote))
-			return (QUOTE_ERROR);
-	}
-	return (0);
+	arg[ind.j] = ft_substr(str, ind.i_save, ind.i - ind.i_save);
+	arg[ind.j + 1] = NULL;
+	ft_free(&str);
+	return (arg);
 }
 
 static char	**strdup_tab(char *str, int nb_word)
 {
-	int		quote;
-	int		i;
-	int		cpt;
-	int		i_save;
 	char	**arg;
+	t_index	ind;
 
-	quote = NO_QUOTE;
-	i = 0;
-	i_save = 0;
-	cpt = 0;
+	init_index(&ind.i, &ind.j, &ind.i_save, &ind.quote);
 	arg = malloc(sizeof(char *) * (nb_word + 1));
 	if (!arg)
 		return (NULL);
-	while (str[i])
+	while (str[ind.i])
 	{
-		jump_delquote(&str, &i, &quote);
-		if (!str[i])
+		jump_delquote(&str, &ind.i, &ind.quote);
+		if (!str[ind.i])
+			return (enddup_tab(ind, arg, str));
+		if (is_whitespace(str[ind.i]) && ind.quote == NO_QUOTE)
 		{
-			arg[cpt] = ft_substr(str, i_save, i - i_save);
-//			printf("arg=%s\n", arg[cpt]);
-			arg[cpt + 1] = NULL;
-//			printf("arg=%s\n", arg[cpt + 1]);
-			ft_free(&str); //
-			return (arg);
-		}
-		if (is_whitespace(str[i]) && quote == NO_QUOTE)
-		{
-			arg[cpt] = ft_substr(str, i_save, i - i_save);
-			//ft_free(&str);
-//			printf("arg=%s\n", arg[cpt]);
-			cpt++;
-			while (is_whitespace(str[i]))
-				i++;
-			i_save = i;
+			arg[ind.j++] = ft_substr(str, ind.i_save, ind.i - ind.i_save);
+			while (is_whitespace(str[ind.i]))
+				ind.i_save = ++ind.i;
 		}
 		else
-			i++;
+			ind.i++;
 	}
-	arg[cpt] = ft_substr(str, i_save, i - i_save);
-//	printf("arg=%s\n", arg[cpt]);
-	arg[cpt + 1] = NULL;
-//	printf("arg=%s\n", arg[cpt + 1]);
-	ft_free(&str); //
-	return (arg);
+	return (enddup_tab(ind, arg, str));
 }
 
 char	**split_quote(char *string)
@@ -161,9 +105,7 @@ char	**split_quote(char *string)
 	str = ft_strtrim(string, WHITESPACE);
 	if (!str)
 		return (NULL);
-//	printf("trim=%s|\n", str);
 	nb_word = cpt_word(str);
-//	printf("cpt_word=%d\n", nb_word);
 	if (nb_word == QUOTE_ERROR)
 		return (NULL);
 	arg = strdup_tab(str, nb_word);
