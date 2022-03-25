@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:43:20 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/24 13:39:00 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/25 11:18:32 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,6 @@
 
 /*---Struct---*/
 
-typedef struct s_data
-{
-	int		token;
-	char	**data;
-	int		nbr_arg;
-}				t_data;
-
 typedef struct s_index
 {
 	int	i;
@@ -60,7 +53,7 @@ char	*parsing_dollar(char *line); //Modif My_getenv()
 
 /*---parsing.c---*/
 
-int		parsing(char *line);
+char	**parsing(char *line);
 
 /*---parsing_utils.c---*/
 

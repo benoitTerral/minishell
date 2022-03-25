@@ -1,2 +1,3 @@
 echo $SHLVL$NOP | cmd1 > out1
 0"23""  x"   'cc'   slt "  |"    "a'pas"
+echo $SHLVL$NOP$USER=2'$USER'"' $PWD '" '' d BUG

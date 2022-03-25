@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 09:59:35 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/25 11:12:20 by laraujo          ###   ########lyon.fr   */
+/*   Created: 2022/03/25 11:03:36 by laraujo           #+#    #+#             */
+/*   Updated: 2022/03/25 16:37:29 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "lexer.h"
 
-# include "libft/libft.h"
-# include "libft/get_next_line.h"
-# include "alloc_mem/alloc_mem.h"
-# include "lexer/lexer.h"
-# include "print/print.h"
-# include "parsing/parsing.h"
+t_data	*lexer(char **arg)
+{
+	int		i;
+	t_data	*lexer;
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdbool.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-int	is_whitespace(char c);
-
-#endif
+	if (!arg)
+		return (NULL);
+	i = 0;
+	printf("parsing = OK\n");
+	while (arg[i] != NULL && *arg[i] != '|' && *arg[i] != '>' && *arg[i] != '<')
+		i++;
+	lexer = ft_lstnew(CMD, arg, i);
+	
+	//printsplit(lexer->data);
+	ft_free_split(arg);
+	return (lexer);
+}

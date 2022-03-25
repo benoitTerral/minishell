@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 09:59:35 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/25 11:12:20 by laraujo          ###   ########lyon.fr   */
+/*   Created: 2022/03/25 11:03:52 by laraujo           #+#    #+#             */
+/*   Updated: 2022/03/25 16:17:16 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef LEXER_H
+# define LEXER_H
 
-# include "libft/libft.h"
-# include "libft/get_next_line.h"
-# include "alloc_mem/alloc_mem.h"
-# include "lexer/lexer.h"
-# include "print/print.h"
-# include "parsing/parsing.h"
+# include "../minishell.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdbool.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+/*---Struct---*/
 
-int	is_whitespace(char c);
+typedef struct s_data
+{
+	int				token;
+	char			**data;
+	int				nbr_arg;
+	struct s_data	*next;
+}				t_data;
+
+/*---lexer.c---*/
+
+t_data	*lexer(char **arg);
+
+/*---lst.c---*/
+
+t_data	*ft_lstnew(int token, char **data, int nbr_arg);
+void	ft_lstclear(t_data **lst);
 
 #endif

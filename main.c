@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/24 16:17:00 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/25 16:17:44 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	is_whitespace(char c)
 int	main(int argc, char **argv, char **env)
 {
 	char	*line;
+	t_data	*lex;
 
 	(void) argv;
 	(void) env;
@@ -42,8 +43,9 @@ int	main(int argc, char **argv, char **env)
 		}
 		else
 		{
-			if (!parsing(line))
-				printf("parsing = OK\n");
+			lex = lexer(parsing(line));
+			printsplit(lex->data);
+			ft_lstclear(&lex);
 		}
 	}
 }
