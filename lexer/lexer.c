@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:03:36 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/25 16:37:29 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/28 18:14:28 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_data	*lexer(char **arg)
 	if (!arg)
 		return (NULL);
 	i = 0;
+	//check_operator
 	printf("parsing = OK\n");
 	while (arg[i] != NULL && *arg[i] != '|' && *arg[i] != '>' && *arg[i] != '<')
 		i++;

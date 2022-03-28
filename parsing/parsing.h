@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:43:20 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/25 11:18:32 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/28 18:09:04 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ typedef struct s_index
 	int	quote;
 }				t_index;
 
+/*---operator---*/
+
+char	*parsing_operator(char *line);
+
 /*---dollar.c---*/
 
 char	*get_var_env(char *pt);
@@ -58,6 +62,7 @@ char	**parsing(char *line);
 /*---parsing_utils.c---*/
 
 void	strdel_index(char **str, int index);
+void	stradd_index(char **str, int index, char c);
 char	*ft_strchr2(char *str, int search_char, int *i, int *quote);
 
 /*---quote.c---*/

@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 11:01:26 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/25 15:32:37 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/28 13:06:09 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	**parsing(char *line)
 	}
 	if (check_error_quote(line))
 		return (NULL);
+	line = parsing_operator(line);
 	line = parsing_dollar(line);
 	arg = split_quote(line);
 	if (!arg)
