@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:59:35 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/25 11:12:20 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 16:26:01 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,5 @@
 # include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-
-int	is_whitespace(char c);
 
 #endif

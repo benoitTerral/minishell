@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:43:20 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/28 18:09:04 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 16:19:07 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	**parsing(char *line);
 
 /*---parsing_utils.c---*/
 
+int		is_whitespace(char c);
 void	strdel_index(char **str, int index);
 void	stradd_index(char **str, int index, char c);
 char	*ft_strchr2(char *str, int search_char, int *i, int *quote);

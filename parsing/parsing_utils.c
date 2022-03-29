@@ -6,11 +6,19 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 15:28:55 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/28 18:07:00 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 16:18:35 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+int	is_whitespace(char c)
+{
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r')
+		return (1);
+	return (0);
+}
 
 void	strdel_index(char **str, int index)
 {

@@ -1,6 +1,6 @@
 CC= gcc
 CFLAGS= -Wall -Wextra -Werror
-#FFLAGS= -fsanitize=address -g
+FFLAGS= -fsanitize=address -g
 NAME= minishell
 SRC= main.c
 SRC_ALLOC= alloc_mem/ft_free.c

@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:03:52 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/25 16:17:16 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 15:56:50 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define LEXER_H
 
 # include "../minishell.h"
+
+/*---MSG_ERROR---*/
+
+# define ERROR_OP "MiniShell: bad operator\n"
 
 /*---Struct---*/
 
