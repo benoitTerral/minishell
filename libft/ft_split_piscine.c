@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 14:38:59 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/21 14:24:03 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/22 13:04:34 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,11 +114,4 @@ char	**ft_split_piscine(char *str, char *charset)
 	}
 	output[j] = 0;
 	return (output);
-}
-
-int main(void)
-{
-	ft_split_piscine("heelo fdsfds\n    fdsfds  ", " \n");
-	
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 14:52:13 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/18 14:49:16 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/26 12:03:44 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include <ctype.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
+# include <limits.h>
+
+# define UPPER "0123456789ABCDEF"
+# define LOWER "0123456789abcdef"
 
 typedef struct s_list
 {
@@ -74,5 +79,20 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 char		**ft_split_piscine(char *str, char *charset);
 int			ft_size_split(char *str, char *charset, int index);
+int			ft_strcmp(const char *str1, const char *str2);
+
+
+/// FT_DPRINTF.C ///
+
+int			ft_dprintf(int fd, const char *input, ...);
+int			get_print_size(const char *str, va_list args, int fd);
+int			handle_variable(char c, va_list	args, int fd);
+int			ft_putnbr_base_ll(unsigned long long nbr, char *base, int fd);
+int			ft_putnbr_base_uint(unsigned int nbr, char *base, int fd);
+int			handle_putint(int nb, int fd);
+int			handle_putunsignedint(unsigned int nb, int fd);
+int			handle_char(char c, int fd);
+int			handle_string(char *str, int fd);
+
 
 #endif
