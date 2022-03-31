@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:18:47 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/29 14:13:37 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/31 13:36:15 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ t_env	*ft_env_new(char *name, char *value)
 	{
 		new->name = name;
 		new->value = value;
-		// printf("new->value : %s\n", new->value);
 		new->next = NULL;
 	}
+	if (!new->name || (!new->value && value))
+		return (NULL);
 	return (new);
 }
 
@@ -79,5 +80,28 @@ void	ft_envdel(t_cmd *cmd, char *name)
 		}
 		previous = previous->next;
 		current  = current->next;
+	}
+}
+
+void	free_env(t_env **head)
+{
+	t_env	*current;
+	t_env	*next;
+
+	if (!(*head))
+		return ;
+	current = (*head);
+	while (current)
+	{
+		next = current->next;
+		free(current->name);
+		current->name = NULL;
+		if (current->value)
+		{
+			free(current->value);
+			current->value = NULL;
+		}
+		free(current);
+		current = next;
 	}
 }

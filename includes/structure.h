@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/28 17:55:58 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/30 12:48:06 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,11 @@ int		is_var_valid(t_env **head, char *str);
 t_env	*ft_env_new(char *name, char *value);
 void	ft_envadd_back(t_env **alst, t_env *new);
 t_env	*ft_envlast(t_env *lst);
-void	init_env_var(char **envp, t_env **head);
+int		init_env_var(char **envp, t_env **head);
 t_env	*free_env_lst(t_env *head);
 t_env	*add_env_element(t_env **head, char *str);
 void	ft_envdel(t_cmd *cmd, char *name);
+void	free_env(t_env **head);
 
 
 #endif
