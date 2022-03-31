@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/31 15:42:18 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/31 16:43:36 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,21 @@ typedef struct s_env
 }	t_env;
 
 /// to be classified ///
-
 int	is_whitespace(char c);
 
-/// BUILD IN FUNCTIONS not merged in master yet ///
-
-// int 	disable_option(char *str);
-// int 	is_build_in(t_cmd *cmd);
-// int		echo(t_cmd *cmd);
-// int 	cd(t_cmd *cmd);
-// int 	pwd(void);
-// int		unset(t_cmd *cmd);
-// int		env(t_cmd *cmd);
-// int		export(t_cmd *cmd);
-// int 	disable_option(char *str);
-// int 	ft_isalhpa_underscore(int c);
-// int 	ft_isalhpanum_underscore(int c);
-// int		is_var_valid(t_env **head, char *str);
+/// builtsins ///
+int 	disable_option(char *str);
+int 	is_build_in(t_cmd *cmd);
+int		echo(t_cmd *cmd);
+int 	cd(t_cmd *cmd);
+int 	pwd(void);
+int		unset(t_cmd *cmd);
+int		env(t_cmd *cmd);
+int		export(t_cmd *cmd);
+int 	disable_option(char *str);
+int 	ft_isalhpa_underscore(int c);
+int 	ft_isalhpanum_underscore(int c);
+int		is_var_valid(t_env **head, char *str);
 
 /// ENVIRONMENT VARIABLES ///
 
