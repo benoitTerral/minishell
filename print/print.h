@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   print.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:50:51 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/23 17:50:25 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 15:13:02 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRINT_H
 # define PRINT_H
 
-# include "../minishell.h"
+# include "../includes/minishell.h"
 
 /*---color---*/
 
