@@ -6,11 +6,11 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 10:51:15 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/26 11:41:42 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/31 13:57:43 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_dprintf.h"
+#include "libft.h"
 
 int	handle_char(char c, int fd)
 {

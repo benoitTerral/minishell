@@ -6,7 +6,7 @@
 #    By: bterral <bterral@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 12:47:43 by bterral           #+#    #+#              #
-#    Updated: 2022/03/26 11:40:01 by bterral          ###   ########.fr        #
+#    Updated: 2022/03/31 13:59:21 by bterral          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ RM = rm -f
 
 all: ${NAME}
 
-%.o: %.c libft.h ft_dprintf.h Makefile
+%.o: %.c libft.h Makefile
 	${CC} ${CFLAGS} -c $< -o $@
 
 bonus : ${OBJS} ${OBJS_BONUS}

@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 14:52:13 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/26 12:03:44 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/31 13:59:49 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ char		**ft_split_piscine(char *str, char *charset);
 int			ft_size_split(char *str, char *charset, int index);
 int			ft_strcmp(const char *str1, const char *str2);
 
-
 /// FT_DPRINTF.C ///
 
 int			ft_dprintf(int fd, const char *input, ...);
@@ -93,6 +92,5 @@ int			handle_putint(int nb, int fd);
 int			handle_putunsignedint(unsigned int nb, int fd);
 int			handle_char(char c, int fd);
 int			handle_string(char *str, int fd);
-
 
 #endif
