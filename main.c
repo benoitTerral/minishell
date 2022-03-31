@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/29 16:18:26 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 20:05:10 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int argc, char **argv, char **env)
 {
 	char	*line;
 	t_data	*lex;
+	t_data	*start;
 
 	(void) argv;
 	(void) env;
@@ -38,7 +39,22 @@ int	main(int argc, char **argv, char **env)
 			lex = lexer(parsing(line));
 			if (lex)
 			{
+				start = lex;
+				printf("\nTOKEN=%d", lex->token);
 				printsplit(lex->data);
+				printf("lex->next=%p\n", lex->next);
+				lex = lex->next;
+				printf("\nTOKEN=%d", lex->token);
+				printsplit(lex->data);
+				printf("lex->next=%p\n", lex->next);
+				if (lex)
+				{
+					lex = lex->next;
+					printf("\nTOKEN=%d", lex->token);
+					printsplit(lex->data);
+					printf("lex->next=%p\n", lex->next);
+				}
+				lex = start;
 				ft_lstclear(&lex);
 			}
 		}

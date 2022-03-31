@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 15:22:09 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/24 13:13:04 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 17:17:00 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,26 +88,23 @@ void	init_index(int *i, int *j, int *i_save, int *quote)
 	*quote = NO_QUOTE;
 }
 
-int	jump_delquote(char **str, int *i, int *quote)
+int	jump_delquote(char **str, int i, int quote)
 {
-	*quote = status_quote(*quote, str[0][*i]);
-	if (*quote == SQUOTE_STOP || *quote == DQUOTE_STOP)
+	quote = status_quote(quote, str[0][i]);
+	if (quote == SQUOTE_STOP || quote == DQUOTE_STOP)
 		return (0);
-	if (*quote == SQUOTE_START || *quote == DQUOTE_START)
+	if (quote == SQUOTE_START || quote == DQUOTE_START)
 	{
-//		printf(GREEN"Q_START=%d\n", *i);
-		strdel_index(str, *i);
-		while (*quote != SQUOTE_STOP && *quote != DQUOTE_STOP)
-		{
-			*quote = status_quote(*quote, str[0][*i]);
-			*i += 1;
-		}
-		*i -= 1;
-//		printf(YELLOW"Q_STOP=%d\n"WHITE, *i);
-		strdel_index(str, *i);
-		if (!str[0][*i])
+//		printf(GREEN"Q_START=%d\n", i);
+		strdel_index(str, i);
+		while (quote != SQUOTE_STOP && quote != DQUOTE_STOP)
+			quote = status_quote(quote, str[0][i++]);
+		i--;
+//		printf(YELLOW"Q_STOP=%d\n"WHITE, i);
+		strdel_index(str, i);
+		if (!str[0][i])
 			return (0);
-		*quote = NO_QUOTE;
+		quote = NO_QUOTE;
 		jump_delquote(str, i, quote);
 	}
 	return (0);

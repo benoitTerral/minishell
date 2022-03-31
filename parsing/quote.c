@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:33:06 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/24 11:42:22 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 17:15:42 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ static int	jump_quote(char *str, int *i, int *quote)
 	{
 		*i += 1;
 		while (*quote != SQUOTE_STOP && *quote != DQUOTE_STOP)
-		{
-			*quote = status_quote(*quote, str[*i]);
-			*i += 1;
-		}
+			*quote = status_quote(*quote, str[(*i)++]);
 		if (!str[*i])
 			return (0);
 		*quote = NO_QUOTE;
@@ -78,7 +75,8 @@ static char	**strdup_tab(char *str, int nb_word)
 		return (NULL);
 	while (str[ind.i])
 	{
-		jump_delquote(&str, &ind.i, &ind.quote);
+		//jump_delquote(&str, &ind.i, &ind.quote);
+		jump_quote(str, &ind.i, &ind.quote);
 		if (!str[ind.i])
 			return (enddup_tab(ind, arg, str));
 		if (is_whitespace(str[ind.i]) && ind.quote == NO_QUOTE)
