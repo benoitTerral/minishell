@@ -6,7 +6,7 @@
 #    By: bterral <bterral@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:42:02 by bterral           #+#    #+#              #
-#    Updated: 2022/03/31 14:52:28 by bterral          ###   ########.fr        #
+#    Updated: 2022/03/31 15:24:01 by bterral          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ FFLAGS			= -fsanitize=address -g
 
 NAME			= minishell
 
-headers			= ./includes
+HEADER			= ./includes/minishell.h
 
 SRC				= main.c
 
@@ -30,23 +30,31 @@ SRC_PARSING		= parsing/dollar.c parsing/quote.c parsing/parsing.c parsing/parsin
 SRC_PRINT		= print/print.c
 
 SRC_VAR_ENV		= ./srcs/environment_variables/environment.c \
-					./srcs/environment_variables/environment_variables.c
+					./srcs/environment_variables/environment_utils.c
 
-OBJ				= ${SRC:.c=.o} ${SRC_ALLOC:.c=.o} ${SRC_PARSING:.c=.o} \
-					 ${SRC_PRINT:.c=.o} ${SRC_VAR_ENV=.c=.o}
+OBJS			= $(SRC:.c=.o) $(SRC_ALLOC:.c=.o) $(SRC_PARSING:.c=.o) \
+					 $(SRC_PRINT:.c=.o) $(SRC_VAR_ENV:.c=.o)
 
-all: ${NAME}
+#OBJD			= ./objs/
 
-%.o: %.c ${HDR}
-	${CC} ${CFLAGS} ${FFLAGS} -c $< -o $@ -I./headers
+#OBJS			= $(addprefix $(OBJD), $(OBJ_FILES))
 
-${NAME}: ${OBJ} ${SRCLIB} ${HDR} Makefile
-	make all -C ./libft
-	${CC} ${CFLAGS} ${FFLAGS} -lreadline ${OBJ} ${LIB} -o ${NAME}
+LIBFT			= ./libft/libft.a
+
+all: $(NAME)
+
+%.o: %.c libft $(HEADER)
+	$(CC) $(CFLAGS) $(FFLAGS) -c $< -o $@ -I ./includes
+
+$(NAME): $(OBJS) $(HEADER) Makefile
+	${CC} $(CFLAGS) $(FFLAGS) -lreadline $(OBJS) $(LIBFT) -o $(NAME)
+
+libft:
+	$(MAKE) -C ./libft
 
 clean:
 	make clean -C ./libft
-	rm -rf ${OBJ}
+	rm -rf ${OBJS}
 
 fclean: clean
 	make fclean -C ./libft
@@ -54,4 +62,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean libft re
