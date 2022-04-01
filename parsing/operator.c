@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:02:34 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/31 18:05:54 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/01 15:16:45 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ char	*parsing_operator(char *line)
 	quote = NO_QUOTE;
 	while (line[i])
 	{
-		if (jump_quote(line, &i, &quote))
-			break ;
+		if (jump_quote(line, &i, &quote) || !line[i])
+			return (line);
 		if (line[i] == '|' || line[i] == '<' || line[i] == '>')
 		{
 			if (i > 0 && !is_whitespace(line[i - 1]) && line[i - 1] != line[i])

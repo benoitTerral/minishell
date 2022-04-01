@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:03:52 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/31 19:25:52 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/01 16:12:12 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int		strdup_token(int token, char **arg, int nbr_arg, t_data **newlist);
 
 /*---lst.c---*/
 
-void	ft_lstadd_back(t_data **alst, t_data *new);
+void	ft_lstadd_back(t_data ***alst, t_data *new);
 t_data	*ft_lstnew(int token, char **data, int nbr_arg);
-t_data	*ft_lstlast(t_data *lst);
+t_data	*ft_lstlast(t_data **lst);
 void	ft_lstclear(t_data **lst);
 
 #endif

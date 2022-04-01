@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 15:22:09 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/31 17:17:00 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/01 15:16:40 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,17 +95,19 @@ int	jump_delquote(char **str, int i, int quote)
 		return (0);
 	if (quote == SQUOTE_START || quote == DQUOTE_START)
 	{
-//		printf(GREEN"Q_START=%d\n", i);
+	//	printf(GREEN"Q_START=%d\n", i);
 		strdel_index(str, i);
 		while (quote != SQUOTE_STOP && quote != DQUOTE_STOP)
 			quote = status_quote(quote, str[0][i++]);
 		i--;
-//		printf(YELLOW"Q_STOP=%d\n"WHITE, i);
+	//	printf(YELLOW"Q_STOP=%d\n"WHITE, i);
 		strdel_index(str, i);
 		if (!str[0][i])
 			return (0);
 		quote = NO_QUOTE;
 		jump_delquote(str, i, quote);
 	}
+	else if (quote == 0 && str[0][i])
+		jump_delquote(str, i + 1, quote);
 	return (0);
 }

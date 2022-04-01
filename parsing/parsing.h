@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:43:20 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/31 18:06:26 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/01 13:29:40 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@
 
 /*---MSG_ERROR---*/
 
-# define ERROR_QUOTE "MiniShell: missing quote\n"
+# define ERROR_QUOTE	"MiniShell: missing quote\n"
+# define ERROR_TOKEN	"MiniShell: syntax error near unexpected token "
 
 /*---Struct---*/
 

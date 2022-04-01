@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 14:33:48 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/31 19:16:31 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/01 16:12:37 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,22 @@ t_data	*ft_lstnew(int token, char **arg, int nbr_arg)
 	return (newlist);
 }
 
-t_data	*ft_lstlast(t_data *lst)
+t_data	*ft_lstlast(t_data **lst)
 {	
 	if (!lst)
 		return (0);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	while ((*lst)->next)
+		*lst = (*lst)->next;
+	return (*lst);
 }
 
-void	ft_lstadd_back(t_data **alst, t_data *new)
+void	ft_lstadd_back(t_data ***alst, t_data *new)
 {
 	t_data	*lst;
 
-	if (!*alst)
+	if (!**alst)
 	{
-		*alst = new;
+		**alst = new;
 		return ;
 	}
 	lst = ft_lstlast(*alst);
