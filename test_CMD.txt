@@ -15,3 +15,4 @@ echo arg arg2 >
 bash: syntax error near unexpected token `newline'
 
 error -> >out    >o ut 
+
