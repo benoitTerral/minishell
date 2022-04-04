@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bterral <bterral@student.42.fr>            +#+  +:+       +#+         #
+#    By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:42:02 by bterral           #+#    #+#              #
-#    Updated: 2022/03/31 16:59:49 by bterral          ###   ########.fr        #
+#    Updated: 2022/04/04 17:23:06 by laraujo          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,14 +18,18 @@ FFLAGS			= -fsanitize=address -g
 
 NAME			= minishell
 
-HEADER			= ./includes/minishell.h
+HEADER			= ./includes/minishell.h parsing/parsing.h print/print.h alloc_mem/alloc_mem.h lexer/lexer.h
+
+#HDR= libft/libft.h libft/get_next_line.h parsing/parsing.h print/print.h alloc_mem/alloc_mem.h lexer/lexer.h
 
 SRC				= main.c
 
 SRC_ALLOC		= alloc_mem/ft_free.c
 
+SRC_LEXER		= lexer/lexer.c lexer/lst.c lexer/listdup_token.c
+
 SRC_PARSING		= parsing/dollar.c parsing/quote.c parsing/parsing.c parsing/parsing_utils.c \
-					parsing/quote2.c
+					parsing/quote2.c parsing/operator.c
 
 SRC_PRINT		= print/print.c
 
@@ -45,7 +49,7 @@ SRC_BUILT_INS	= $(addprefix $(SRCS_BUILT_INSD), built_ins.c) \
 					$(addprefix $(SRCS_BUILT_INSD), unset.c) \
 					$(addprefix $(SRCS_BUILT_INSD), variable_utils.c)
 
-OBJS			= $(SRC:.c=.o) $(SRC_ALLOC:.c=.o) $(SRC_PARSING:.c=.o) \
+OBJS			= $(SRC:.c=.o) $(SRC_ALLOC:.c=.o) ${SRC_LEXER:.c=.o} $(SRC_PARSING:.c=.o) \
 					 $(SRC_PRINT:.c=.o) $(SRC_VAR_ENV:.c=.o) $(SRC_BUILT_INS:.c=.o)
 
 #OBJD			= ./objs/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/31 17:01:15 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/04 17:12:25 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 # include "../libft/libft.h"
 # include "../alloc_mem/alloc_mem.h"
-# include "../print/print.h"
+# include "../lexer/lexer.h"
 # include "../parsing/parsing.h"
+# include "../print/print.h"
+
 # include <stdio.h>
 # include <unistd.h>
 # include <limits.h>

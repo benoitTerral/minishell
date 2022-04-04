@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:43:20 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/31 15:42:07 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/04 16:59:04 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,10 @@
 
 /*---MSG_ERROR---*/
 
-# define ERROR_QUOTE "MiniShell: missing quote\n"
+# define ERROR_QUOTE	"MiniShell: missing quote\n"
+# define ERROR_TOKEN	"MiniShell: syntax error near unexpected token "
 
 /*---Struct---*/
-
-typedef struct s_data
-{
-	int		token;
-	char	**data;
-	int		nbr_arg;
-}				t_data;
 
 typedef struct s_index
 {
@@ -52,6 +46,12 @@ typedef struct s_index
 	int	quote;
 }				t_index;
 
+/*---operator---*/
+
+char	*parsing_operator(char *line);
+int		is_operator(char c);
+int		is_redi(char c);
+
 /*---dollar.c---*/
 
 char	*get_var_env(char *pt);
@@ -60,11 +60,13 @@ char	*parsing_dollar(char *line); //Modif My_getenv()
 
 /*---parsing.c---*/
 
-int		parsing(char *line);
+char	**parsing(char *line);
 
 /*---parsing_utils.c---*/
 
+int		is_whitespace(char c);
 void	strdel_index(char **str, int index);
+void	stradd_index(char **str, int index, char c);
 char	*ft_strchr2(char *str, int search_char, int *i, int *quote);
 
 /*---quote.c---*/
@@ -76,6 +78,6 @@ char	**split_quote(char *str);
 int		status_quote(int quote, char c);
 int		check_error_quote(char *str);
 void	init_index(int *i, int *j, int *i_save, int *quote);
-int		jump_delquote(char **str, int *i, int *quote);
+int		jump_delquote(char **str, int i, int quote);
 
 #endif

@@ -6,23 +6,17 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/24 17:31:37 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/04 17:16:22 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_whitespace(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
-		|| c == '\r')
-		return (1);
-	return (0);
-}
-
 int	main(int argc, char **argv, char **env)
 {
 	char	*line;
+	t_data	*lex;
+	t_data	*start;
 
 	(void) argv;
 	(void) env;
@@ -42,8 +36,23 @@ int	main(int argc, char **argv, char **env)
 		}
 		else
 		{
-			if (!parsing(line))
-				printf("parsing = OK\n");
+			lex = lexer(parsing(line));
+			if (lex)
+			{
+				start = lex;
+				printf("\nTOKEN=%d", lex->token);
+				printsplit(lex->data);
+				printf("lex->next=%p\n", lex->next);
+				while (lex->next)
+				{
+					lex = lex->next;
+					printf("\nTOKEN=%d", lex->token);
+					printsplit(lex->data);
+					printf("lex->next=%p\n", lex->next);
+				}
+				lex = start;
+				ft_lstclear_data(&lex);
+			}
 		}
 	}
 }

@@ -1,2 +1,19 @@
 echo $SHLVL$NOP | cmd1 > out1
 0"23""  x"   'cc'   slt "  |"    "a'pas"
+echo $SHLVL$NOP$USER=2'$USER'"' $PWD '" '' d BUG
+
+< out (Created file);
+cat Makefile > out out !!!!!!
+echo < Makefile ebkbe
+echo > out ebkbe
+echo > out ebkbe | echo slt --> echo ebkbe > out | echo slt
+cat < Makefile > out out1 | cmd2
+cat gc < Makefile > out arg | cmd
+<< lim cat > out arg | cmd
+
+echo arg arg2 >
+bash: syntax error near unexpected token `newline'
+
+error -> >out    >o ut 
+
+cmd  << in << in  << in << in cmd  < in < in  < in < in  >>>
