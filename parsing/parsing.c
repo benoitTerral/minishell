@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 11:01:26 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/01 15:16:59 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/04 15:09:08 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_error_operator(char **arg)
 		else if (is_operator(*arg[i]) && arg[i + 1] != NULL
 			&& is_operator(*arg[i + 1]))
 		{
-			dprintf(STDERR_FILENO, RED ERROR_TOKEN WHITE);
+			dprintf(STDERR_FILENO, RED ERROR_TOKEN"`%c'\n" WHITE, *arg[i]);
 			return (1);
 		}
 		i++;
@@ -40,24 +40,18 @@ char	**parsing(char *line)
 	char	**arg;
 
 	if (!line || line[0] == '\0')
-	{
-		ft_free(&line);
-		return (NULL);
-	}
+		return (ft_free(&line));
 	if (check_error_quote(line))
 		return (NULL);
 	line = parsing_operator(line);
 	line = parsing_dollar(line);
 	arg = split_quote(line);
 	if (!arg)
-	{
-		ft_free(&line);
-		return (NULL);
-	}
+		return (ft_free(&line));
 	if (check_error_operator(arg))
 	{
-		ft_free(&line);
-		return (NULL);
+		ft_free_split(arg);
+		return (ft_free(&line));
 	}
 	printsplit(arg);
 	ft_free(&line);

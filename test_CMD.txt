@@ -16,3 +16,4 @@ bash: syntax error near unexpected token `newline'
 
 error -> >out    >o ut 
 
+cmd  << in << in  << in << in cmd  < in < in  < in < in  >>>

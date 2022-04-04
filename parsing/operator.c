@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:02:34 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/01 15:16:45 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/04 14:58:43 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ char	*parsing_operator(char *line)
 			i++;
 			if (line[i] == '\0' || line[i + 1] == '\0')
 				break ;
-			if (!is_whitespace(line[i + 1]) && (line[i + 1] != line[i]))
+			if (!is_whitespace(line[i]) && (line[i] != line[i - 1]))
 			{
-				stradd_index(&line, i + 1, ' ');
+				stradd_index(&line, i, ' ');
 			}
 		}
 		else
