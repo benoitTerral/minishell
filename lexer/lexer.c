@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:03:36 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/01 16:08:44 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/04 16:09:17 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,30 @@ int	strchr_op(char **arg, int *i)
 	return (0);
 }
 
-int	addnext_token(t_data **lexer, int i, char **arg)
+int	addnext_token(t_data **lexer, char **arg)
 {
+	int	i;
 	int	j;
 	int	op;
 
 	j = 0;
-	while (j < i)
+	i = 0;
+	while (arg[j] != NULL)
 	{
-		op = strchr_op(arg, &j);
-		if (!op || op == CMD)
-			break ;
-		ft_lstadd_back(&lexer, ft_lstnew(op, &arg[j], i));
-		j += 1;
+		j = i;
+		while (arg[i] != NULL && *arg[i] != '|')
+			i++;
+		if (j)
+			ft_lstadd_back(&lexer, ft_lstnew(CMD, &arg[j], i - j));
+		while (j < i)
+		{
+			op = strchr_op(arg, &j);
+			if (!op || op == CMD)
+				break ;
+			ft_lstadd_back(&lexer, ft_lstnew(op, &arg[j], i));
+			j += 1;
+		}
+		i++;
 	}
 	return (0);
 }
@@ -90,7 +101,7 @@ t_data	*lexer(char **arg)
 		i++;
 	lexer = ft_lstnew(CMD, arg, i);
 	first = lexer;
-	addnext_token(&lexer, i, arg);
+	addnext_token(&lexer, arg);
 	ft_free_split(arg);
 	return (first);
 }

@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 11:01:26 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/04 15:09:08 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/04 16:32:55 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ int	check_error_operator(char **arg)
 			return (1);
 		}
 		else if (is_operator(*arg[i]) && arg[i + 1] != NULL
+			&& *arg[i + 1] == '|')
+		{
+			dprintf(STDERR_FILENO, RED ERROR_TOKEN"`%c'\n" WHITE, *arg[i]);
+			return (1);
+		}
+		else if ((*arg[i] == '<' || *arg[i] == '>') && arg[i + 1] != NULL
 			&& is_operator(*arg[i + 1]))
 		{
 			dprintf(STDERR_FILENO, RED ERROR_TOKEN"`%c'\n" WHITE, *arg[i]);
