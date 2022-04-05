@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lst.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 14:33:48 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/04 17:16:22 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 15:12:51 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-t_data	*ft_lstnew_data(int token, char **arg, int nbr_arg)
+t_data	*ft_lstnew_data(int token, char **arg, int nbr_arg, t_env **head)
 {
 	t_data	*newlist;
 
@@ -20,6 +20,7 @@ t_data	*ft_lstnew_data(int token, char **arg, int nbr_arg)
 	if (!newlist)
 		return (0);
 	newlist->token = token;
+	newlist->head = *head;
 	if (strdup_token(token, arg, nbr_arg, &newlist))
 	{
 		free(newlist);
@@ -60,7 +61,7 @@ void	ft_lstclear_data(t_data **lst)
 	while (*lst)
 	{
 		tmplst = (*lst)->next;
-		ft_free_split((*lst)->data);
+		ft_free_split((*lst)->str);
 		free(*lst);
 		*lst = tmplst;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:03:36 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/04 17:15:41 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 15:14:46 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	strchr_op(char **arg, int *i)
 	return (0);
 }
 
-int	addnext_token(t_data **lexer, char **arg)
+int	addnext_token(t_data **lexer, char **arg, t_env **head)
 {
 	int	i;
 	int	j;
@@ -66,13 +66,13 @@ int	addnext_token(t_data **lexer, char **arg)
 		while (arg[i] != NULL && *arg[i] != '|')
 			i++;
 		if (j)
-			ft_lstadd_back_data(&lexer, ft_lstnew_data(CMD, &arg[j], i - j));
+			ft_lstadd_back_data(&lexer, ft_lstnew_data(CMD, &arg[j], i - j, head));
 		while (j < i)
 		{
 			op = strchr_op(arg, &j);
 			if (!op || op == CMD)
 				break ;
-			ft_lstadd_back_data(&lexer, ft_lstnew_data(op, &arg[j], i));
+			ft_lstadd_back_data(&lexer, ft_lstnew_data(op, &arg[j], i, head));
 			j += 1;
 		}
 		i++;
@@ -80,7 +80,7 @@ int	addnext_token(t_data **lexer, char **arg)
 	return (0);
 }
 
-t_data	*lexer(char **arg)
+t_data	*lexer(char **arg, t_env **head)
 {
 	int		i;
 	t_data	*lexer;
@@ -99,9 +99,9 @@ t_data	*lexer(char **arg)
 	i = 0;
 	while (arg[i] != NULL && *arg[i] != '|')
 		i++;
-	lexer = ft_lstnew_data(CMD, arg, i);
+	lexer = ft_lstnew_data(CMD, arg, i, head);
 	first = lexer;
-	addnext_token(&lexer, arg);
+	addnext_token(&lexer, arg, head);
 	ft_free_split(arg);
 	return (first);
 }

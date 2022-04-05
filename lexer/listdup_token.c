@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   listdup_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:57:13 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/04 16:34:29 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 14:33:05 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ int	dup_red(char **arg, t_data ***newlist)
 	int	i;
 
 	i = -1;
-	(**newlist)->data = malloc(sizeof(char *) * 3);
-	if (!(**newlist)->data)
+	(**newlist)->str = malloc(sizeof(char *) * 3);
+	if (!(**newlist)->str)
 		return (-1);
 	while (++i < 2)
 	{
 		jump_delquote(&(*arg), 0, NO_QUOTE);
-		(**newlist)->data[i] = ft_strdup(*arg++);
+		(**newlist)->str[i] = ft_strdup(*arg++);
 	}
-	(**newlist)->data[i] = NULL;
+	(**newlist)->str[i] = NULL;
 	(**newlist)->nbr_arg = 2;
 	return (0);
 }
@@ -61,8 +61,8 @@ int	dup_cmd(char **arg, t_data ***newlist, int nbr_arg)
 	i = 0;
 	j = 0;
 	count = counter_arg(arg, nbr_arg);
-	(**newlist)->data = malloc(sizeof(char *) * (count + 1));
-	if (!(**newlist)->data)
+	(**newlist)->str = malloc(sizeof(char *) * (count + 1));
+	if (!(**newlist)->str)
 		return (-1);
 	while (j < nbr_arg && count)
 	{
@@ -71,9 +71,9 @@ int	dup_cmd(char **arg, t_data ***newlist, int nbr_arg)
 		if (j >= nbr_arg)
 			break ;
 		jump_delquote(&arg[j], 0, NO_QUOTE);
-		(**newlist)->data[i++] = ft_strdup(arg[j++]);
+		(**newlist)->str[i++] = ft_strdup(arg[j++]);
 	}
-	(**newlist)->data[i] = NULL;
+	(**newlist)->str[i] = NULL;
 	(**newlist)->nbr_arg = nbr_arg;
 	return (0);
 }

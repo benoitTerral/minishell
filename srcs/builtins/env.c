@@ -6,27 +6,27 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 11:50:06 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/05 14:04:13 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/05 14:26:53 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	env(t_cmd *cmd)
+int	env(t_data *data)
 {
 	t_env	*current;
 
-	if (cmd->str[1])
+	if (data->str[1])
 	{
-		if (disable_option(cmd->str[1]))
+		if (disable_option(data->str[1]))
 			return (1);
 		else
 		{
-			ft_dprintf(2, "env: %s: no such file or directory\n", cmd->str[1]);
+			ft_dprintf(2, "env: %s: no such file or directory\n", data->str[1]);
 			return (1);
 		}
 	}
-	current = cmd->head;
+	current = data->head;
 	while (current)
 	{
 		if (current->value)

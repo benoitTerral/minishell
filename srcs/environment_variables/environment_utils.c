@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:18:47 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/31 15:15:32 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/05 14:29:24 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_envadd_back(t_env **alst, t_env *new)
 {
 	t_env	*lst;
 
+	lst = NULL;
 	if (*alst)
 	{
 		if (alst)
@@ -53,17 +54,17 @@ t_env	*ft_envlast(t_env *lst)
 	return (lst);
 }
 
-void	ft_envdel(t_cmd *cmd, char *name)
+void	ft_envdel(t_data *data, char *name)
 {
 	t_env	*previous;
 	t_env	*current;
 
-	previous = cmd->head;
+	previous = data->head;
 	if (ft_strcmp(previous->name, name))
 	{
 		previous->name = NULL;
 		previous->value = NULL;
-		cmd->head = previous->next;
+		data->head = previous->next;
 		free(previous);
 		return ;
 	}

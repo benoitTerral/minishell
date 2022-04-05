@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:03:52 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/04 17:16:22 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 15:16:25 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define LEXER_H
 
 # include "../includes/minishell.h"
+
+/*---Struct---*/
+
+typedef struct s_data t_data;
+typedef struct s_env t_env;
 
 /*---MSG_ERROR---*/
 
@@ -27,25 +32,15 @@
 # define REDOUT		4
 # define D_REDOUT	5
 
-/*---Struct---*/
-
-typedef struct s_data
-{
-	int				token;
-	char			**data;
-	int				nbr_arg;
-	struct s_data	*next;
-}				t_data;
-
 /*---lexer.c---*/
 
-t_data	*lexer(char **arg);
+t_data	*lexer(char **arg, t_env **head);
 int		strdup_token(int token, char **arg, int nbr_arg, t_data **newlist);
 
 /*---lst.c---*/
 
 void	ft_lstadd_back_data(t_data ***alst, t_data *new);
-t_data	*ft_lstnew_data(int token, char **data, int nbr_arg);
+t_data	*ft_lstnew_data(int token, char **data, int nbr_arg, t_env **head);
 t_data	*ft_lstlast_data(t_data **lst);
 void	ft_lstclear_data(t_data **lst);
 

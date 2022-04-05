@@ -6,64 +6,64 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:38:39 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/05 14:04:00 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/05 15:05:25 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	is_build_in(t_cmd *cmd)
+int	is_build_in(t_data *data)
 {
-	if (ft_strcmp(cmd->str[0], "echo"))
-		return (echo(cmd));
-	else if (ft_strcmp(cmd->str[0], "cd"))
-		return (cd(cmd));
-	else if (ft_strcmp(cmd->str[0], "pwd"))
+	if (ft_strcmp(data->str[0], "echo"))
+		return (echo(data));
+	else if (ft_strcmp(data->str[0], "cd"))
+		return (cd(data));
+	else if (ft_strcmp(data->str[0], "pwd"))
 		return (pwd());
-	else if (ft_strcmp(cmd->str[0], "export"))
-		return (export(cmd));
-	else if (ft_strcmp(cmd->str[0], "unset"))
-		return (unset(cmd));
-	else if (ft_strcmp(cmd->str[0], "env"))
-		return (env(cmd));
+	else if (ft_strcmp(data->str[0], "export"))
+		return (export(data));
+	else if (ft_strcmp(data->str[0], "unset"))
+		return (unset(data));
+	else if (ft_strcmp(data->str[0], "env"))
+		return (env(data));
 	return (0);
 }
 
-int main(int argc, char **argv, char **envp)
-{
-	t_cmd *cmd;
-	// t_env	*print_ptr;
+// int main(int argc, char **argv, char **envp)
+// {
+// 	t_data *data;
+// 	// t_env	*print_ptr;
 
-	(void)argc;
-	(void)argv;
+// 	(void)argc;
+// 	(void)argv;
 
-	cmd = (t_cmd *)malloc(sizeof(t_cmd));
-	cmd->head = NULL;
-	init_env_var(envp, &cmd->head);
-	cmd->str = ft_split_piscine("env", " \r\t");
-	// cmd->token = 0;
-	cmd->nb_of_arguments = ft_size_split("env", " \r\t", 0);
-	is_build_in(cmd);
+// 	data = (t_data *)malloc(sizeof(t_data));
+// 	data->head = NULL;
+	// init_env_var(envp, &data->head);
+// 	data->str = ft_split_piscine("env", " \r\t");
+// 	// data->token = 0;
+// 	data->nb_of_arguments = ft_size_split("env", " \r\t", 0);
+// 	is_build_in(data);
 
-	printf("\n\n");
+// 	printf("\n\n");
 
-	// free(cmd);
-	// cmd = (t_cmd *)malloc(sizeof(t_cmd));
-	// cmd->str = ft_split_piscine("cd .. srcs", " \r\t");
-	// cmd->token = 0;
-	// cmd->nb_of_arguments = ft_size_split("cd .. srcs", " \r\t", 0);
-	// is_build_in(cmd);
+// 	// free(data);
+// 	// data = (t_data *)malloc(sizeof(t_data));
+// 	// data->str = ft_split_piscine("cd .. srcs", " \r\t");
+// 	// data->token = 0;
+// 	// data->nb_of_arguments = ft_size_split("cd .. srcs", " \r\t", 0);
+// 	// is_build_in(data);
 
-	printf("\n\n");
+// 	printf("\n\n");
 
-	// free(cmd);
-	// cmd = (t_cmd *)malloc(sizeof(t_cmd));
-	// cmd->str = ft_split_piscine("env", " \r\t");
-	// cmd->token = 0;
-	// cmd->nb_of_arguments = ft_size_split("env", " \r\t", 0);
-	// is_build_in(cmd);
+// 	// free(data);
+// 	// data = (t_data *)malloc(sizeof(t_data));
+// 	// data->str = ft_split_piscine("env", " \r\t");
+// 	// data->token = 0;
+// 	// data->nb_of_arguments = ft_size_split("env", " \r\t", 0);
+// 	// is_build_in(data);
 
-	free_env(&cmd->head);
-	free(cmd);
-	return (0);
-}
+// 	free_env(&data->head);
+// 	free(data);
+// 	return (0);
+// }

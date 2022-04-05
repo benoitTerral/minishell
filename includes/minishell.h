@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/04 17:12:25 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 14:37:27 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@
 
 typedef struct s_env t_env;
 
-typedef struct s_cmd
+typedef struct s_data
 {
-	char	**str;
-	int		token;
-	int		nb_of_arguments;
-	t_env	*head;
-}	t_cmd;
+	int				token;
+	char			**str;
+	int				nbr_arg;
+	t_env			*head;
+	struct s_data	*next;
+}				t_data;
 
 typedef struct s_env
 {
@@ -49,17 +50,17 @@ int	is_whitespace(char c);
 
 /// builtsins ///
 int 	disable_option(char *str);
-int 	is_build_in(t_cmd *cmd);
-int		echo(t_cmd *cmd);
-int 	cd(t_cmd *cmd);
+int 	is_build_in(t_data *data);
+int		echo(t_data *data);
+int 	cd(t_data *data);
 int 	pwd(void);
-int		unset(t_cmd *cmd);
-int		env(t_cmd *cmd);
-int		export(t_cmd *cmd);
+int		unset(t_data *data);
+int		env(t_data *data);
+int		export(t_data *data);
 int 	disable_option(char *str);
 int 	ft_isalhpa_underscore(int c);
 int 	ft_isalhpanum_underscore(int c);
-int		is_var_valid(t_env **head, char *str);
+int		is_var_valid(char *str);
 
 /// ENVIRONMENT VARIABLES ///
 
@@ -69,7 +70,7 @@ t_env	*ft_envlast(t_env *lst);
 int		init_env_var(char **envp, t_env **head);
 t_env	*free_env_lst(t_env *head);
 t_env	*add_env_element(t_env **head, char *str);
-void	ft_envdel(t_cmd *cmd, char *name);
+void	ft_envdel(t_data *data, char *name);
 void	free_env(t_env **head);
 
 

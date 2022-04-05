@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:56:08 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/05 14:04:27 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/05 14:15:19 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int ft_isalhpanum_underscore(int c)
 	return (0);
 }
 
-int	is_var_valid(t_env **head, char *str)
+int	is_var_valid(char *str)
 {
 	if (ft_isalhpa_underscore(str[0]) == 0)
 		return (0);

@@ -6,17 +6,17 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 15:19:54 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/05 14:04:17 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/05 15:35:11 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int	print_export(t_cmd *cmd)
+static int	print_export(t_data *data)
 {
 	t_env	*current;
 	
-	current = cmd->head;
+	current = data->head;
 	while (current)
 	{
 		printf("declare -x %s", current->name);
@@ -52,36 +52,36 @@ int check_and_add_var(t_env **head, char *str)
 	t_env	*new;
 
 	split = ft_split(str, '=');
-	if (is_var_valid(head, split[0]) == 0)
+	if (is_var_valid(split[0]) == 0)
 	{
 		ft_dprintf(2, "export: %s : not a valid identifier\n", str);
-		free(split);
+		ft_free_split(split);
 		return (1);
 	}
 	if (is_var_modification(head, split) == 0)
 	{
 		new = add_env_element(head, str);
-		free(split);
+		ft_free_split(split);
 		return (1);
 	}
-	free(split);
+	ft_free_split(split);
 	return (0);
 }
 
-int	export(t_cmd *cmd)
+int	export(t_data *data)
 {
 	int		i;
 
-	if (cmd->nb_of_arguments == 1)
-		return (print_export(cmd));
-	else if (cmd->str[1] && disable_option(cmd->str[1]))
+	if (data->nbr_arg == 1)
+		return (print_export(data));
+	else if (data->str[1] && disable_option(data->str[1]))
 		return (1);
 	else
 	{
 		i = 1;
-		while (i < cmd->nb_of_arguments)
+		while (i < data->nbr_arg)
 		{
-			if (check_and_add_var(&cmd->head, cmd->str[i]))
+			if (check_and_add_var(&data->head, data->str[i]))
 				return (1);
 			i++;
 		}
