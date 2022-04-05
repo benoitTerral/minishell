@@ -6,11 +6,11 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 15:19:54 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/28 17:47:39 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/05 14:04:17 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structure.h"
+#include "../includes/minishell.h"
 
 static int	print_export(t_cmd *cmd)
 {

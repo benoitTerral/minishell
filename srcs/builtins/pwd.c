@@ -6,11 +6,11 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 11:51:07 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/26 11:51:13 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/05 14:04:20 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structure.h"
+#include "../includes/minishell.h"
 
 int pwd(void)
 {

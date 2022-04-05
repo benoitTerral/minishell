@@ -6,11 +6,11 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:56:08 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/28 17:49:31 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/05 14:04:27 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structure.h"
+#include "../includes/minishell.h"
 
 int disable_option(char *str)
 {

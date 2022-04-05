@@ -6,11 +6,11 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 11:50:39 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/28 17:54:45 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/05 14:04:24 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structure.h"
+#include "../includes/minishell.h"
 
 int	unset(t_cmd *cmd)
 {

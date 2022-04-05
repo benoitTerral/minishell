@@ -6,11 +6,11 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 11:49:31 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/30 11:46:43 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/05 14:04:49 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structure.h"
+#include "../includes/minishell.h"
 
 static void	update_var(t_cmd *cmd, char *str, char *var)
 {
@@ -42,7 +42,6 @@ static int	free_return1(char *str)
 int	cd(t_cmd *cmd)
 {
 	char	*str;
-	int		i;
 
 	str = getcwd(NULL, 0);
 	if (cmd->str[1])
