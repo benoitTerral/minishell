@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 15:19:54 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/06 11:59:29 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/06 16:30:52 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	print_export(t_data *data)
 {
 	t_env	*current;
-	
+
 	current = data->head;
 	while (current)
 	{
@@ -51,7 +51,7 @@ static int	is_var_modification(t_env **head, char **split)
 	return (0);
 }
 
-int check_and_add_var(t_env **head, char *str)
+int	check_and_add_var(t_env **head, char *str)
 {
 	char	**split;
 	t_env	*new;

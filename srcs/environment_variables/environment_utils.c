@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:18:47 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/06 11:09:49 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/06 16:40:05 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,16 @@ t_env	*ft_envlast(t_env *lst)
 	return (lst);
 }
 
+void	ft_envdel_node(t_env *env)
+{
+	free(env->name);
+	env->name = NULL;
+	free(env->value);
+	env->value = NULL;
+	env->next = NULL;
+	free(env);
+}
+
 void	ft_envdel(t_data *data, char *name)
 {
 	t_env	*previous;
@@ -62,10 +72,8 @@ void	ft_envdel(t_data *data, char *name)
 	previous = data->head;
 	if (ft_strcmp(previous->name, name))
 	{
-		previous->name = NULL;
-		previous->value = NULL;
 		data->head = previous->next;
-		free(previous);
+		ft_envdel_node(previous);
 		return ;
 	}
 	current = previous->next;
@@ -74,37 +82,10 @@ void	ft_envdel(t_data *data, char *name)
 		if (ft_strcmp(current->name, name))
 		{
 			previous->next = current->next;
-			free(current->name);
-			current->name = NULL;
-			free(current->value);
-			current->value = NULL;
-			free(current);
+			ft_envdel_node(current);
 			return ;
 		}
 		previous = previous->next;
-		current  = current->next;
-	}
-}
-
-void	free_env(t_env **head)
-{
-	t_env	*current;
-	t_env	*next;
-
-	if (!(*head))
-		return ;
-	current = (*head);
-	while (current)
-	{
-		next = current->next;
-		free(current->name);
-		current->name = NULL;
-		if (current->value)
-		{
-			free(current->value);
-			current->value = NULL;
-		}
-		free(current);
-		current = next;
+		current = current->next;
 	}
 }

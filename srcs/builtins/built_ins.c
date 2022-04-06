@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:38:39 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/06 11:39:20 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/06 16:31:06 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,42 +28,3 @@ int	is_build_in(t_data *data)
 		return (env(data));
 	return (0);
 }
-
-// int main(int argc, char **argv, char **envp)
-// {
-// 	t_data *data;
-// 	// t_env	*print_ptr;
-
-// 	(void)argc;
-// 	(void)argv;
-
-// 	data = (t_data *)malloc(sizeof(t_data));
-// 	data->head = NULL;
-	// init_env_var(envp, &data->head);
-// 	data->str = ft_split_piscine("env", " \r\t");
-// 	// data->token = 0;
-// 	data->nb_of_arguments = ft_size_split("env", " \r\t", 0);
-// 	is_build_in(data);
-
-// 	printf("\n\n");
-
-// 	// free(data);
-// 	// data = (t_data *)malloc(sizeof(t_data));
-// 	// data->str = ft_split_piscine("cd .. srcs", " \r\t");
-// 	// data->token = 0;
-// 	// data->nb_of_arguments = ft_size_split("cd .. srcs", " \r\t", 0);
-// 	// is_build_in(data);
-
-// 	printf("\n\n");
-
-// 	// free(data);
-// 	// data = (t_data *)malloc(sizeof(t_data));
-// 	// data->str = ft_split_piscine("env", " \r\t");
-// 	// data->token = 0;
-// 	// data->nb_of_arguments = ft_size_split("env", " \r\t", 0);
-// 	// is_build_in(data);
-
-// 	free_env(&data->head);
-// 	free(data);
-// 	return (0);
-// }

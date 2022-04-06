@@ -6,11 +6,34 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:16:52 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/05 14:29:40 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/06 16:35:14 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	free_env(t_env **head)
+{
+	t_env	*current;
+	t_env	*next;
+
+	if (!(*head))
+		return ;
+	current = (*head);
+	while (current)
+	{
+		next = current->next;
+		free(current->name);
+		current->name = NULL;
+		if (current->value)
+		{
+			free(current->value);
+			current->value = NULL;
+		}
+		free(current);
+		current = next;
+	}
+}
 
 t_env	*add_env_element(t_env **head, char *str)
 {
