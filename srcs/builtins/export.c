@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 15:19:54 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/05 15:35:11 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/06 11:59:29 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ static int	is_var_modification(t_env **head, char **split)
 		{
 			if (!(env->value) && split[1])
 				env->value = ft_strdup(split[1]);
+			else if (env->value && split[1])
+			{
+				free(env->value);
+				env->value = ft_strdup(split[1]);
+			}
 			return (1);
 		}
 		env = env->next;
@@ -74,7 +79,7 @@ int	export(t_data *data)
 
 	if (data->nbr_arg == 1)
 		return (print_export(data));
-	else if (data->str[1] && disable_option(data->str[1]))
+	else if (data->str[1] && disable_option(data->str[1], "export"))
 		return (1);
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:38:39 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/05 15:05:25 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/06 11:39:20 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_build_in(t_data *data)
 	else if (ft_strcmp(data->str[0], "cd"))
 		return (cd(data));
 	else if (ft_strcmp(data->str[0], "pwd"))
-		return (pwd());
+		return (pwd(data));
 	else if (ft_strcmp(data->str[0], "export"))
 		return (export(data));
 	else if (ft_strcmp(data->str[0], "unset"))

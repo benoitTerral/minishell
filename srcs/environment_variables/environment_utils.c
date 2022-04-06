@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:18:47 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/05 14:29:24 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/06 11:09:49 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,9 @@ void	ft_envdel(t_data *data, char *name)
 		if (ft_strcmp(current->name, name))
 		{
 			previous->next = current->next;
+			free(current->name);
 			current->name = NULL;
+			free(current->value);
 			current->value = NULL;
 			free(current);
 			return ;

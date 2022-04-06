@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/05 14:37:27 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/06 11:41:20 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,14 @@ typedef struct s_env
 int	is_whitespace(char c);
 
 /// builtsins ///
-int 	disable_option(char *str);
 int 	is_build_in(t_data *data);
 int		echo(t_data *data);
 int 	cd(t_data *data);
-int 	pwd(void);
+int 	pwd(t_data *data);
 int		unset(t_data *data);
 int		env(t_data *data);
 int		export(t_data *data);
-int 	disable_option(char *str);
+int		disable_option(char *str, char *funct);
 int 	ft_isalhpa_underscore(int c);
 int 	ft_isalhpanum_underscore(int c);
 int		is_var_valid(char *str);
