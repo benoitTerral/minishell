@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/06 16:40:52 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/07 13:05:24 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-typedef struct s_env t_env;
+typedef struct s_env	t_env;
 
 typedef struct s_data
 {
@@ -46,19 +46,19 @@ typedef struct s_env
 }	t_env;
 
 /// to be classified ///
-int	is_whitespace(char c);
+int		is_whitespace(char c);
 
 /// builtsins ///
-int 	is_build_in(t_data *data);
+int		is_build_in(t_data *data);
 int		echo(t_data *data);
-int 	cd(t_data *data);
-int 	pwd(t_data *data);
+int		cd(t_data *data);
+int		pwd(t_data *data);
 int		unset(t_data *data);
 int		env(t_data *data);
 int		export(t_data *data);
 int		disable_option(char *str, char *funct);
-int 	ft_isalhpa_underscore(int c);
-int 	ft_isalhpanum_underscore(int c);
+int		ft_isalhpa_underscore(int c);
+int		ft_isalhpanum_underscore(int c);
 int		is_var_valid(char *str);
 
 /// ENVIRONMENT VARIABLES ///
