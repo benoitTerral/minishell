@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/06 11:41:20 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/07 17:12:59 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <fcntl.h>
 
 typedef struct s_env t_env;
 
@@ -44,6 +45,19 @@ typedef struct s_env
 	char			*value;
 	struct s_env	*next;
 }	t_env;
+
+typedef struct s_cmd_info
+{
+	int				nbr_cmd;
+	struct s_cmd	**cmd;
+}	t_cmd_info;
+
+typedef struct s_cmd
+{
+	char	**args;
+	char	*infile;
+	char	*outfile;
+}	t_cmd;
 
 /// to be classified ///
 int	is_whitespace(char c);
@@ -72,5 +86,8 @@ t_env	*add_env_element(t_env **head, char *str);
 void	ft_envdel(t_data *data, char *name);
 void	free_env(t_env **head);
 
+/// EXECUTION ///
+
+int	execute_command(t_data **start, char **envp);
 
 #endif

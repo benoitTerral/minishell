@@ -6,7 +6,7 @@
 #    By: bterral <bterral@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:42:02 by bterral           #+#    #+#              #
-#    Updated: 2022/04/05 15:18:34 by bterral          ###   ########.fr        #
+#    Updated: 2022/04/07 17:19:51 by bterral          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,8 @@ VAR_ENV_D		= srcs/environment_variables/
 
 SRCS_BUILT_INSD	= srcs/builtins/
 
+EXEC_D			= srcs/execution/
+
 SRC_VAR_ENV		= $(addprefix $(VAR_ENV_D), environment.c) \
 					$(addprefix $(VAR_ENV_D), environment_utils.c)
 
@@ -49,8 +51,11 @@ SRC_BUILT_INS	= $(addprefix $(SRCS_BUILT_INSD), built_ins.c) \
 					$(addprefix $(SRCS_BUILT_INSD), unset.c) \
 					$(addprefix $(SRCS_BUILT_INSD), variable_utils.c)
 
-OBJS			= $(SRC:.c=.o) $(SRC_ALLOC:.c=.o) ${SRC_LEXER:.c=.o} $(SRC_PARSING:.c=.o) \
-					 $(SRC_PRINT:.c=.o) $(SRC_VAR_ENV:.c=.o) $(SRC_BUILT_INS:.c=.o)
+SRC_EXEC		= $(addprefix $(EXEC_D), command_table.c)
+
+OBJS			= $(SRC:.c=.o) $(SRC_ALLOC:.c=.o) ${SRC_LEXER:.c=.o} \
+					$(SRC_PARSING:.c=.o) $(SRC_PRINT:.c=.o) $(SRC_VAR_ENV:.c=.o) \
+					$(SRC_BUILT_INS:.c=.o) $(SRC_EXEC:.c=.o)
 
 #OBJD			= ./objs/
 
