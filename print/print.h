@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:50:51 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/31 15:13:02 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/08 12:36:43 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@
 // "%sMin%siS", BLUE, WHITE
 // "h%sell%s $ ", RED, WHITE
 
+typedef struct s_data	t_data;
+
 /*---print.c---*/
 
 void	print_prompter(void);
 void	printsplit(char **split);
+void	printdata(t_data *lexer);
 
 #endif

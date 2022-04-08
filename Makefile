@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bterral <bterral@student.42.fr>            +#+  +:+       +#+         #
+#    By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:42:02 by bterral           #+#    #+#              #
-#    Updated: 2022/04/05 15:18:34 by bterral          ###   ########.fr        #
+#    Updated: 2022/04/08 13:52:04 by laraujo          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,9 @@ NAME			= minishell
 HEADER			= ./includes/minishell.h parsing/parsing.h print/print.h alloc_mem/alloc_mem.h lexer/lexer.h
 
 #HDR= libft/libft.h libft/get_next_line.h parsing/parsing.h print/print.h alloc_mem/alloc_mem.h lexer/lexer.h
+
+RL_LIB			= -L ~/.brew/opt/readline/lib
+RL_INC			= -I ~/.brew/opt/readline/include
 
 SRC				= main.c
 
@@ -61,10 +64,10 @@ LIBFT			= ./libft/libft.a
 all: $(NAME)
 
 %.o: %.c libft $(HEADER)
-	$(CC) $(CFLAGS) $(FFLAGS) -c $< -o $@ -I ./includes
+	$(CC) $(CFLAGS) $(FFLAGS) $(RL_INC) -c $< -o $@ -I ./includes
 
 $(NAME): $(OBJS) $(HEADER) Makefile
-	${CC} $(CFLAGS) $(FFLAGS) -lreadline $(OBJS) $(LIBFT) -o $(NAME)
+	${CC} $(CFLAGS) $(FFLAGS) -lreadline $(RL_INC) $(RL_LIB) $(OBJS) $(LIBFT) -o $(NAME)
 
 libft:
 	$(MAKE) -C ./libft

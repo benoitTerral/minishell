@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:03:52 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/05 15:16:25 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/08 12:36:23 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 /*---Struct---*/
 
-typedef struct s_data t_data;
-typedef struct s_env t_env;
+typedef struct s_data	t_data;
+typedef struct s_env	t_env;
 
 /*---MSG_ERROR---*/
 
