@@ -6,17 +6,11 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:50:33 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/08 12:37:17 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 14:34:41 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
-
-void	print_prompter(void)
-{
-	dprintf(STDOUT_FILENO, "%sMin%siS", BLUE, WHITE);
-	dprintf(STDOUT_FILENO, "h%sell%s $ ", RED, WHITE);
-}
 
 void	printsplit(char **split)
 {

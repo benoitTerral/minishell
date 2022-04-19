@@ -6,12 +6,11 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/08 16:50:33 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 15:00:55 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <termios.h>
 
 int	prompt(t_env **head)
 {
@@ -57,6 +56,16 @@ void	sig_handler(int sig)
 	}
 }
 
+void	init_termios(void)
+{
+	struct termios	old_term;
+	struct termios	new_term;
+
+	tcgetattr(ttyslot(), &old_term);
+	new_term = old_term;
+	new_term.c_lflag &= ~(ICANON | ECHOCTL);
+	tcsetattr(ttyslot(), TCSANOW, &new_term);
+}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -67,14 +76,7 @@ int	main(int argc, char **argv, char **env)
 	if (argc != 1)
 		return (-1);
 	init_env_var(env, &head);
-	
-	struct termios old_term;
-    struct termios new_term;
-	tcgetattr(STDIN_FILENO, &old_term);
-	new_term = old_term;
-	new_term.c_lflag &= ~(ICANON | ECHOCTL);
-	tcsetattr(STDIN_FILENO, TCSANOW, &new_term);
-	
+	init_termios();
 	signal(SIGINT, &sig_handler);
 	signal(SIGQUIT, &sig_handler);
 	while (1)

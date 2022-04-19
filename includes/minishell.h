@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/08 14:09:59 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 14:34:24 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+# include <termios.h>
 
 typedef struct s_env	t_env;
 
@@ -73,6 +74,5 @@ t_env	*add_env_element(t_env **head, char *str);
 void	ft_envdel(t_data *data, char *name);
 void	free_env(t_env **head);
 void	ft_envdel_node(t_env *env);
-
 
 #endif
