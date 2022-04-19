@@ -6,7 +6,7 @@
 #    By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:42:02 by bterral           #+#    #+#              #
-#    Updated: 2022/04/08 13:52:04 by laraujo          ###   ########lyon.fr    #
+#    Updated: 2022/04/19 16:24:09 by laraujo          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRC_BUILT_INS	= $(addprefix $(SRCS_BUILT_INSD), built_ins.c) \
 					$(addprefix $(SRCS_BUILT_INSD), export.c) \
 					$(addprefix $(SRCS_BUILT_INSD), pwd.c) \
 					$(addprefix $(SRCS_BUILT_INSD), unset.c) \
+					$(addprefix $(SRCS_BUILT_INSD), exit.c) \
 					$(addprefix $(SRCS_BUILT_INSD), variable_utils.c)
 
 OBJS			= $(SRC:.c=.o) $(SRC_ALLOC:.c=.o) ${SRC_LEXER:.c=.o} $(SRC_PARSING:.c=.o) \

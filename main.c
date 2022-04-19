@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/19 15:00:55 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 18:56:35 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,13 @@ int	prompt(t_env **head)
 		free_env(head);
 		return (-1);
 	}
-	if (!ft_strncmp(line, "exit", ft_strlen("exit")))
-	{
-		free(line);
-		free_env(head);
-		dprintf(STDOUT_FILENO, "%se%sxi%st%s\n", BLUE, WHITE, RED, WHITE);
-		return (-1);
-	}
 	else
 	{
 		add_history(line);
 		lex = lexer(parsing(line), head);
 		printdata(lex);
+		if (lex)
+			is_build_in(&lex);
 		ft_lstclear_data(&lex);
 	}
 	return (0);
