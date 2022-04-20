@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: bterral <bterral@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:42:02 by bterral           #+#    #+#              #
-#    Updated: 2022/04/20 13:23:13 by laraujo          ###   ########lyon.fr    #
+#    Updated: 2022/04/20 13:39:33 by bterral          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,9 +58,9 @@ OBJS			= $(SRC:.c=.o) $(SRC_ALLOC:.c=.o) ${SRC_LEXER:.c=.o} $(SRC_PARSING:.c=.o)
 
 LIBFT			= ./libft/libft.a
 
-all: $(NAME)
+all: libft $(NAME)
 	
-$(NAME): $(OBJS) libft Makefile
+$(NAME): $(OBJS) Makefile
 	${CC} $(CFLAGS) $(FFLAGS) -lreadline $(RL_INC) $(RL_LIB) $(OBJS) $(LIBFT) -o $(NAME)
 
 %.o: %.c $(HEADER)
