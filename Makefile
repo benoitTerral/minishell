@@ -6,7 +6,7 @@
 #    By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:42:02 by bterral           #+#    #+#              #
-#    Updated: 2022/04/19 16:24:09 by laraujo          ###   ########lyon.fr    #
+#    Updated: 2022/04/20 13:23:13 by laraujo          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,19 +56,15 @@ SRC_BUILT_INS	= $(addprefix $(SRCS_BUILT_INSD), built_ins.c) \
 OBJS			= $(SRC:.c=.o) $(SRC_ALLOC:.c=.o) ${SRC_LEXER:.c=.o} $(SRC_PARSING:.c=.o) \
 					 $(SRC_PRINT:.c=.o) $(SRC_VAR_ENV:.c=.o) $(SRC_BUILT_INS:.c=.o)
 
-#OBJD			= ./objs/
-
-#OBJS			= $(addprefix $(OBJD), $(OBJ_FILES))
-
 LIBFT			= ./libft/libft.a
 
 all: $(NAME)
-
-%.o: %.c libft $(HEADER)
-	$(CC) $(CFLAGS) $(FFLAGS) $(RL_INC) -c $< -o $@ -I ./includes
-
-$(NAME): $(OBJS) $(HEADER) Makefile
+	
+$(NAME): $(OBJS) libft Makefile
 	${CC} $(CFLAGS) $(FFLAGS) -lreadline $(RL_INC) $(RL_LIB) $(OBJS) $(LIBFT) -o $(NAME)
+
+%.o: %.c $(HEADER)
+	$(CC) $(CFLAGS) $(FFLAGS) $(RL_INC) -c $< -o $@ -I ./includes
 
 libft:
 	$(MAKE) -C ./libft
