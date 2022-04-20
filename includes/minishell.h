@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/19 16:44:56 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 12:44:37 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <termios.h>
+# include <errno.h>
 
 typedef struct s_env	t_env;
 

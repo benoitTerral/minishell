@@ -6,12 +6,11 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 15:59:21 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/19 19:17:38 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 12:45:26 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include "errno.h"
 
 #define ERROR_EXIT_NUM "MiniShell: exit: numeric argument required\n"
 
@@ -59,7 +58,7 @@ int	my_exit(t_data **data)
 	if ((*data)->nbr_arg == 1)
 	{
 		ft_lstclear_data(data);
-		exit (EXIT_SUCCESS);
+		exit (errno);
 	}
 	ft_atoi2((*data)->str[1], &res);
 	buf = res % 256;

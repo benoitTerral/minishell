@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:50:33 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/19 16:41:41 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 19:20:41 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	printdata(t_data *lexer)
 {
 	if (lexer)
 	{
-		
 		printf("\nTOKEN=%d", lexer->token);
 		printsplit(lexer->str);
 		printf("lexer->next=%p\n", lexer->next);
