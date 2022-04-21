@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/21 14:30:22 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/21 17:40:09 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,46 @@ int	populate_exec(t_exec *exec, t_data **data)
 	// 	(*data) = (*data)->next;
 	// }
 	(void)data;
+	return (0);
+}
+
+int	child_process(t_exec *exec, int nbr_cmd, char **envp)
+{
+	int i;
+	int	j;
+
+	i = 0;
+	while (i < nbr_cmd)
+	{
+		exec[i].pid = fork();
+		if (exec[i].pid)
+		{
+			ft_dprintf(STDERR_FILENO, "pipe failed");
+			return (1);
+		}
+		//child process
+		if (exec[i].pid == 0)
+		{
+			//process input
+			if (exec[i].fd_in)
+				dup2(exec[i].fd_in, STDIN_FILENO);
+			else if (i != 0)
+				dup2(exec[i].pipe.fd[0], STDIN_FILENO);
+			//process output
+			if (exec[i].fd_out)
+				dup2(exec[i].fd_out, STDOUT_FILENO);
+			else
+				dup2(exec[i].pipe.fd[1], STDOUT_FILENO);
+			j = 0;
+			while (j < nbr_cmd)
+			{
+				close(exec[j].pipe.fd[0]);
+				close(exec[j].pipe.fd[1]);
+				j++;
+			}
+			execve(exec[i].cmd_full_path, exec[i].cmd[0], envp);
+		}
+	}
 	return (0);
 }
 
@@ -136,6 +176,9 @@ int	execute_command(t_data **start)
 		printf("exec[%d].cmd_full_path: %s\n", i, exec[i].cmd_full_path);
 		i++;
 	}
+
+	//execution of the command
+	child_process(exec, nbr_cmd, envp);
 
 	return (0);
 }

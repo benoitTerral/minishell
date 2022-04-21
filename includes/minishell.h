@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/21 13:49:31 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/21 17:42:22 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_exec
 {
 	char		***cmd;
 	t_pipe		pipe;
+	int			fd[2];
 	int			fd_in;
 	int			fd_out;
 	pid_t		pid;
@@ -94,5 +95,6 @@ int		execute_command(t_data **start);
 int 	populate_exec(t_exec *exec, t_data **data);
 char	**get_paths(t_env **head);
 char	*get_cmd(t_exec	exec, char **envp);
+int		child_process(t_exec *exec, int nbr_cmd, char **envp);
 
 #endif
