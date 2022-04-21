@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/21 13:19:11 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/21 14:30:22 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,24 @@ int	execute_command(t_data **start)
 	i = 0;
 	while (envp[i])
 	{
-		printf("envp[%d]: %s", i, envp[i]);
+		printf("envp[%d]: %s\n", i, envp[i]);
 		i++;
 	}
 
+	//Check or populate command full path
+	i = 0;
+	while (i < nbr_cmd)
+	{
+		exec[i].cmd_full_path = get_cmd(exec[i], envp);
+		i++;
+	}
+	// print cmd_full_path
+	i = 0;
+	while (i < nbr_cmd)
+	{
+		printf("exec[%d].cmd_full_path: %s\n", i, exec[i].cmd_full_path);
+		i++;
+	}
 
 	return (0);
 }
