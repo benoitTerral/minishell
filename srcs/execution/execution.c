@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/21 13:10:08 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/21 13:19:11 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	execute_command(t_data **start)
 	// int		i;
 	t_exec	*exec;
 	t_data	*data;
+	char	**envp;
 
 	nbr_cmd = 0;
 	data = *start;
@@ -93,7 +94,6 @@ int	execute_command(t_data **start)
 		i++;
 	}
 
-
 	//print tables
 	printf("\n Execution table \n");
 	i = 0;
@@ -108,6 +108,17 @@ int	execute_command(t_data **start)
 		}
 		printf("fd_in: %d\n", exec[i].fd_in);
 		printf("fd_out: %d\n", exec[i].fd_out);
+		i++;
+	}
+
+	// retrieve environment variables
+	envp = get_paths(&(*start)->head);
+	if (!envp)
+		ft_dprintf(2, "Error retrieving environment paths\n");
+	i = 0;
+	while (envp[i])
+	{
+		printf("envp[%d]: %s", i, envp[i]);
 		i++;
 	}
 

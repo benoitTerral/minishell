@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/19 17:32:58 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/21 13:19:46 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ void	free_env(t_env **head);
 
 /// EXECUTION ///
 
-int	execute_command(t_data **start);
-int populate_exec(t_exec *exec, t_data **data);
-int nbr_of_commands(t_data **start);
+int		execute_command(t_data **start);
+int 	populate_exec(t_exec *exec, t_data **data);
+char	**get_paths(t_env **head);
 
 #endif
