@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/21 17:42:22 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/26 10:49:25 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,15 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-typedef struct s_pipe
-{
-	int	fd[2];
-}			t_pipe;
-
 typedef struct s_exec
 {
 	char		***cmd;
-	t_pipe		pipe;
-	int			fd[2];
 	int			fd_in;
 	int			fd_out;
 	pid_t		pid;
 	char		*cmd_full_path;
+	int			fd[2];
+	int			fd_test1[2];
 }	t_exec;
 
 /// to be classified ///

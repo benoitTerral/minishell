@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/21 17:40:09 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/26 11:19:02 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	populate_exec(t_exec *exec, t_data **data)
 {
-	if (pipe(exec->pipe.fd) == -1)
-	{
-		ft_dprintf(STDERR_FILENO, "pipe failed");
-		//free everything ??
-	}
+	// if (pipe(exec->pipe.fd) == -1)
+	// {
+	// 	ft_dprintf(STDERR_FILENO, "pipe failed");
+	// 	//free everything ??
+	// }
 	exec->cmd = &((*data)->str);
 	printf("exec->cmd : %s\n", ((*data)->str)[0]);
 	// int i;
@@ -51,12 +51,14 @@ int	child_process(t_exec *exec, int nbr_cmd, char **envp)
 	i = 0;
 	while (i < nbr_cmd)
 	{
+		printf("fd[0] of %d: %d\n", i, exec[i].fd[0]);
+		printf("fd[1]: of %d: %d\n", i, exec[i].fd[1]);
 		exec[i].pid = fork();
-		if (exec[i].pid)
-		{
-			ft_dprintf(STDERR_FILENO, "pipe failed");
-			return (1);
-		}
+		// if (exec[i].pid)
+		// {
+		// 	ft_dprintf(STDERR_FILENO, "fork failed");
+		// 	return (1);
+		// }
 		//child process
 		if (exec[i].pid == 0)
 		{
@@ -64,22 +66,50 @@ int	child_process(t_exec *exec, int nbr_cmd, char **envp)
 			if (exec[i].fd_in)
 				dup2(exec[i].fd_in, STDIN_FILENO);
 			else if (i != 0)
-				dup2(exec[i].pipe.fd[0], STDIN_FILENO);
+			{
+				// dup2(exec[i].pipe.fd[0], STDIN_FILENO);
+				dup2(exec[i - 1].fd[0], STDIN_FILENO);
+				ft_dprintf(2, "hello %d\n", exec[i - 1].fd[0]);
+			}
+			close(exec[i].fd[0]);
 			//process output
 			if (exec[i].fd_out)
-				dup2(exec[i].fd_out, STDOUT_FILENO);
-			else
-				dup2(exec[i].pipe.fd[1], STDOUT_FILENO);
-			j = 0;
-			while (j < nbr_cmd)
 			{
-				close(exec[j].pipe.fd[0]);
-				close(exec[j].pipe.fd[1]);
-				j++;
+				dup2(exec[i].fd_out, STDOUT_FILENO);
+				ft_dprintf(2, "value of i in exec[i].fd_out: %d\n", i);
 			}
+			else if (i == (nbr_cmd - 1)) 
+			{
+				dup2(1, STDOUT_FILENO);
+				ft_dprintf(2, "value of i in (i == (nbr_cmd - 1)) : %d\n", i);
+			}
+			else
+			{
+				// dup2(exec[i].pipe.fd[1], STDOUT_FILENO);
+				dup2(exec[i].fd[1], STDOUT_FILENO);
+				ft_dprintf(2, "hello else %d\n", i);
+			}
+			j = 0;
+			// while (j < nbr_cmd)
+			// {
+			// 	// close(exec[j].pipe.fd[0]);
+			// 	// close(exec[j].pipe.fd[1]);
+			// 	close(exec[j].fd[0]);
+			// 	close(exec[j].fd[1]);
+			// 	j++;
+			// }
+
 			execve(exec[i].cmd_full_path, exec[i].cmd[0], envp);
 		}
+		close(exec[i].fd[1]);
+		// close(exec[i].fd[1]);
+		if (i != 0)
+			close(exec[i - 1].fd[0]);
+		else if (i == 0 && nbr_cmd == 1)
+			close(exec[i].fd[0]);
+		i++;
 	}
+	ft_dprintf(2, "finish\n");
 	return (0);
 }
 
@@ -90,6 +120,7 @@ int	execute_command(t_data **start)
 	t_exec	*exec;
 	t_data	*data;
 	char	**envp;
+
 
 	nbr_cmd = 0;
 	data = *start;
@@ -108,7 +139,7 @@ int	execute_command(t_data **start)
 	data  = *start;
 	while (i < nbr_cmd)
 	{
-		if (pipe(exec[i].pipe.fd) == -1)
+		if (pipe(exec[i].fd) == -1)
 		{
 			ft_dprintf(STDERR_FILENO, "pipe failed");
 			// free everything
@@ -179,6 +210,13 @@ int	execute_command(t_data **start)
 
 	//execution of the command
 	child_process(exec, nbr_cmd, envp);
+
+	i = 0;
+	while (i < nbr_cmd)
+	{
+		waitpid(exec[i].pid, NULL, 0);
+		i++;
+	}
 
 	return (0);
 }
