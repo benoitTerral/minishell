@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/19 17:36:34 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/27 16:53:35 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,14 @@ int	main(int argc, char **argv, char **env)
 		{
 			lex = lexer(parsing(line), &head);
 			start = lex;
-			execute_command(&start);
+			if (lex)
+				execute_command(&start);
 			while (lex)
 			{
 				is_build_in(lex);
-				printf("\nTOKEN=%d", lex->token);
-				printsplit(lex->str);
-				printf("lex->next=%p\n", lex->next);
+				// printf("\nTOKEN=%d", lex->token);
+				// printsplit(lex->str);
+				// printf("lex->next=%p\n", lex->next);
 				lex = lex->next;
 			}
 			ft_lstclear_data(&lex);

@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/26 10:49:25 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/27 16:51:39 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_exec
 	pid_t		pid;
 	char		*cmd_full_path;
 	int			fd[2];
-	int			fd_test1[2];
 }	t_exec;
 
 /// to be classified ///
@@ -91,5 +90,10 @@ int 	populate_exec(t_exec *exec, t_data **data);
 char	**get_paths(t_env **head);
 char	*get_cmd(t_exec	exec, char **envp);
 int		child_process(t_exec *exec, int nbr_cmd, char **envp);
+int		nbr_of_cmd(t_data **start);
+int		populate_execution_table(t_data *data, t_exec *exec, int nbr_cmd);
+void	print_execution_table(t_exec *exec, int nbr_cmd);
+void	get_abs_path_cmd(t_exec *exec, int nbr_cmd, char **envp);
+int		wait_all_pid(t_exec *exec, int nbr_cmd);
 
 #endif

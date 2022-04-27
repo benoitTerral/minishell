@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/26 11:19:02 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/27 17:01:49 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,43 +113,63 @@ int	child_process(t_exec *exec, int nbr_cmd, char **envp)
 	return (0);
 }
 
-int	execute_command(t_data **start)
+int	get_here_doc(char *delim)
 {
-	int		nbr_cmd;
-	// int		i;
-	t_exec	*exec;
+	char	*line;
+	int		len;
+	int		fd[2];
+
+	if (pipe(fd) == -1)
+		//perror_exit(PIPE_ERROR);
+		ft_dprintf(2, "error here_doc error");
+	line = NULL;
+	len = ft_strlen(delim);
+	while (1)
+	{
+		ft_putstr_fd("> ", 1);
+		line = get_next_line(STDIN_FILENO);
+		if (!line)
+			break ;
+		if (!ft_strncmp(line, delim, len) && line[len] == '\n')
+			break ;
+		if (write(fd[1], line, ft_strlen(line)) == -1)
+			ft_dprintf(2, "Error reading the here_doc");
+		free(line);
+	}
+	free(line);
+	close(fd[1]);
+	return (fd[0]);
+}
+
+int	nbr_of_cmd(t_data **start)
+{
 	t_data	*data;
-	char	**envp;
+	int		nbr_cmd;
 
-
-	nbr_cmd = 0;
 	data = *start;
+	nbr_cmd = 0;
 	while (data)
 	{
 		if (data->token == 1)
 			nbr_cmd++;
 		data = data->next;
 	}
-	exec = ft_calloc(nbr_cmd, sizeof(t_exec));
+	return (nbr_cmd);
+}
 
-
-	//populate execution tables
+int	populate_execution_table(t_data *data, t_exec *exec, int nbr_cmd)
+{
 	int	i;
+
 	i = 0;
-	data  = *start;
 	while (i < nbr_cmd)
 	{
 		if (pipe(exec[i].fd) == -1)
 		{
 			ft_dprintf(STDERR_FILENO, "pipe failed");
-			// free everything
+			return (1);
 		}
 		exec[i].cmd = &(data->str);
-		// while (exec[i].cmd[0][j])
-		// {
-		// 	printf("exec[i].cmd[0][j]: %s\n", exec[i].cmd[0][j]);
-		// 	j++;
-		// }
 		data = data->next;
 		while (data && data->token != 1)
 		{
@@ -160,14 +180,21 @@ int	execute_command(t_data **start)
 				exec[i].fd_out = open(data->str[1], O_CREAT | O_RDWR| O_TRUNC, 0644);
 			else if (data->token == 5)
 				exec[i].fd_out = open(data->str[1], O_CREAT | O_RDWR | O_APPEND, 0644);
+			else if (data->token == 3)
+				exec[i].fd_in = get_here_doc(data->str[1]);
 			data = data->next;
 		}
 		i++;
 	}
+	return (0);
+}
 
-	//print tables
-	printf("\n Execution table \n");
+void	print_execution_table(t_exec *exec, int nbr_cmd)
+{
+	int	i;
+
 	i = 0;
+	printf("\n Execution table \n");
 	while (i < nbr_cmd)
 	{
 		printf("\nCommand number : %d\n", i);
@@ -181,42 +208,53 @@ int	execute_command(t_data **start)
 		printf("fd_out: %d\n", exec[i].fd_out);
 		i++;
 	}
+}
 
-	// retrieve environment variables
-	envp = get_paths(&(*start)->head);
-	if (!envp)
-		ft_dprintf(2, "Error retrieving environment paths\n");
-	i = 0;
-	while (envp[i])
-	{
-		printf("envp[%d]: %s\n", i, envp[i]);
-		i++;
-	}
+void	get_abs_path_cmd(t_exec *exec, int nbr_cmd, char **envp)
+{
+	int	i;
 
-	//Check or populate command full path
 	i = 0;
 	while (i < nbr_cmd)
 	{
 		exec[i].cmd_full_path = get_cmd(exec[i], envp);
 		i++;
 	}
-	// print cmd_full_path
+}
+
+int	wait_all_pid(t_exec *exec, int nbr_cmd)
+{
+	int	i;
+	int	status;
+
 	i = 0;
 	while (i < nbr_cmd)
 	{
-		printf("exec[%d].cmd_full_path: %s\n", i, exec[i].cmd_full_path);
+		waitpid(exec[i].pid, &status, 0);
 		i++;
 	}
+	free(exec);
+	return (status);
+}
 
-	//execution of the command
+int	execute_command(t_data **start)
+{
+	int		nbr_cmd;
+	t_exec	*exec;
+	char	**envp;
+	int		i;
+
+	nbr_cmd = nbr_of_cmd(start);
+	exec = ft_calloc(nbr_cmd, sizeof(t_exec));
+	if (populate_execution_table(*start, exec, nbr_cmd))
+		return (1);
+	print_execution_table(exec, nbr_cmd);
+	envp = get_paths(&(*start)->head);
+	if (!envp)
+		ft_dprintf(2, "Error retrieving environment paths\n");
+	get_abs_path_cmd(exec, nbr_cmd, envp);
 	child_process(exec, nbr_cmd, envp);
-
 	i = 0;
-	while (i < nbr_cmd)
-	{
-		waitpid(exec[i].pid, NULL, 0);
-		i++;
-	}
-
+	printf("pid status : %d\n", wait_all_pid(exec, nbr_cmd));
 	return (0);
 }

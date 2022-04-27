@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:30:35 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/21 14:31:34 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/27 16:28:13 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ char	*get_cmd(t_exec	exec, char **envp)
 		i++;
 	}
 	if (path_bool == -1)
-	{
-		//free
 		perror("Command not found");
-	}
 	return (cmd_path);
 }
 
@@ -61,10 +58,5 @@ char	**get_paths(t_env **head)
 		output = ft_split(env->value, ':');
 	else
 		output = NULL;
-	// while (*output)
-	// {
-	// 	printf("*output: %s\n", *output);
-	// 	output++;
-	// }
 	return (output);
 }
