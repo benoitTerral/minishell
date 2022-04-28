@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:54:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/28 11:00:50 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/28 12:00:33 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	manage_fd_out(t_exec *exec, int nbr_cmd, int i)
 {
 	if (exec[i].fd_out)
 		dup2(exec[i].fd_out, STDOUT_FILENO);
-	else if (i == (nbr_cmd - 1)) 
+	else if (i == (nbr_cmd - 1))
 		dup2(1, STDOUT_FILENO);
 	else
 		dup2(exec[i].fd[1], STDOUT_FILENO);
@@ -33,7 +33,7 @@ void	manage_fd_out(t_exec *exec, int nbr_cmd, int i)
 
 int	child_process(t_exec *exec, int nbr_cmd, char **envp)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < nbr_cmd)

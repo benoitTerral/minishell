@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/28 10:41:57 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/28 11:58:35 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ typedef struct s_exec
 	int			is_builtin;
 	t_data		*data;
 }	t_exec;
-
-/// to be classified ///
-int	is_whitespace(char c);
 
 /// builtsins ///
 int 	is_build_in(t_data *data);
