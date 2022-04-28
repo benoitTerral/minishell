@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/20 12:58:19 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/28 15:57:45 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ int	prompt(t_env **head, char **env)
 		add_history(line);
 		lex = lexer(parsing(line), head);
 		printdata(lex);
+		// if (lex)
+		// 	is_build_in(&lex);
 		if (lex)
-			is_build_in(&lex);
+			execute_command(&lex);
 		ft_lstclear_data(&lex);
 	}
 	return (0);
@@ -38,14 +40,14 @@ int	prompt(t_env **head, char **env)
 
 void	sig_handler(int sig)
 {
-	if (sig == 2)
+	if (sig == SIGINT)
 	{
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else if (sig == 3)
+	else if (sig == SIGQUIT)
 	{
 		rl_on_new_line();
 		rl_redisplay();
@@ -59,7 +61,7 @@ void	init_termios(void)
 
 	tcgetattr(ttyslot(), &old_term);
 	new_term = old_term;
-	new_term.c_lflag &= ~(ICANON | ECHOCTL);
+	new_term.c_lflag &= ~(ECHOCTL);
 	tcsetattr(ttyslot(), TCSANOW, &new_term);
 }
 
