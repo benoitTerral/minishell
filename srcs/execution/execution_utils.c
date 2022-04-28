@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:38:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/27 17:43:37 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/28 10:42:03 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ int	populate_execution_table(t_data *data, t_exec *exec, int nbr_cmd)
 				exec[i].fd_out = open(data->str[1], O_CREAT | O_RDWR | O_APPEND, 0644);
 			else if (data->token == 3)
 				exec[i].fd_in = get_here_doc(data->str[1]);
+			else if (data->token == 0)
+			{
+				exec[i].is_builtin = is_build_in_bool(data->str[0]);
+				exec[i].data = data;
+			}
 			data = data->next;
 		}
 		i++;

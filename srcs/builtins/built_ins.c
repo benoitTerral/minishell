@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:38:39 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/27 18:00:32 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/28 10:35:53 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,41 +29,19 @@ int	is_build_in(t_data *data)
 	return (0);
 }
 
-// int main(int argc, char **argv, char **envp)
-// {
-// 	t_data *data;
-// 	// t_env	*print_ptr;
-
-// 	(void)argc;
-// 	(void)argv;
-
-// 	data = (t_data *)malloc(sizeof(t_data));
-// 	data->head = NULL;
-	// init_env_var(envp, &data->head);
-// 	data->str = ft_split_piscine("env", " \r\t");
-// 	// data->token = 0;
-// 	data->nb_of_arguments = ft_size_split("env", " \r\t", 0);
-// 	is_build_in(data);
-
-// 	printf("\n\n");
-
-// 	// free(data);
-// 	// data = (t_data *)malloc(sizeof(t_data));
-// 	// data->str = ft_split_piscine("cd .. srcs", " \r\t");
-// 	// data->token = 0;
-// 	// data->nb_of_arguments = ft_size_split("cd .. srcs", " \r\t", 0);
-// 	// is_build_in(data);
-
-// 	printf("\n\n");
-
-// 	// free(data);
-// 	// data = (t_data *)malloc(sizeof(t_data));
-// 	// data->str = ft_split_piscine("env", " \r\t");
-// 	// data->token = 0;
-// 	// data->nb_of_arguments = ft_size_split("env", " \r\t", 0);
-// 	// is_build_in(data);
-
-// 	free_env(&data->head);
-// 	free(data);
-// 	return (0);
-// }
+int	is_build_in_bool(char *cmd)
+{
+	if (ft_strcmp(cmd, "echo"))
+		return (1);
+	else if (ft_strcmp(cmd, "cd"))
+		return (1);
+	else if (ft_strcmp(cmd, "pwd"))
+		return (1);
+	else if (ft_strcmp(cmd, "export"))
+		return (1);
+	else if (ft_strcmp(cmd, "unset"))
+		return (1);
+	else if (ft_strcmp(cmd, "env"))
+		return (1);
+	return (0);
+}

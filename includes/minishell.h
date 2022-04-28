@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/27 17:44:31 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/28 10:41:57 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct s_exec
 	pid_t		pid;
 	char		*cmd_full_path;
 	int			fd[2];
+	int			is_builtin;
+	t_data		*data;
 }	t_exec;
 
 /// to be classified ///
@@ -61,6 +63,7 @@ int	is_whitespace(char c);
 
 /// builtsins ///
 int 	is_build_in(t_data *data);
+int		is_build_in_bool(char *cmd);
 int		echo(t_data *data);
 int 	cd(t_data *data);
 int 	pwd(t_data *data);
@@ -97,5 +100,7 @@ void	get_abs_path_cmd(t_exec *exec, int nbr_cmd, char **envp);
 int		wait_all_pid(t_exec *exec, int nbr_cmd);
 void	free_paths(char **strings);
 int		get_here_doc(char *delim);
+void	manage_fd_in(t_exec *exec, int i);
+void	manage_fd_out(t_exec *exec, int nbr_cmd, int i);
 
 #endif
