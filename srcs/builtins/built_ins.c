@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:38:39 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/19 16:45:01 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/28 13:29:54 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,22 @@ int	is_build_in(t_data **data)
 		return (env(*data));
 	else if (ft_strcmp((*data)->str[0], "exit"))
 		return (my_exit(data));
+	return (0);
+}
+
+int	is_build_in_bool(char *cmd)
+{
+	if (ft_strcmp(cmd, "echo"))
+		return (1);
+	else if (ft_strcmp(cmd, "cd"))
+		return (1);
+	else if (ft_strcmp(cmd, "pwd"))
+		return (1);
+	else if (ft_strcmp(cmd, "export"))
+		return (1);
+	else if (ft_strcmp(cmd, "unset"))
+		return (1);
+	else if (ft_strcmp(cmd, "env"))
+		return (1);
 	return (0);
 }

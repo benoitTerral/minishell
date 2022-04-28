@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 14:52:13 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/04 17:00:44 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 16:07:53 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 # define UPPER "0123456789ABCDEF"
 # define LOWER "0123456789abcdef"
+# define BUFFER_SIZE 1
 
 typedef struct s_list
 {
@@ -92,5 +93,10 @@ int			handle_putint(int nb, int fd);
 int			handle_putunsignedint(unsigned int nb, int fd);
 int			handle_char(char c, int fd);
 int			handle_string(char *str, int fd);
+
+/// GET_NEXT_LINE ///
+
+char		*get_next_line(int fd);
+char		*free_static(char **str);
 
 #endif

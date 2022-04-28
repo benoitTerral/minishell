@@ -6,7 +6,7 @@
 #    By: bterral <bterral@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:42:02 by bterral           #+#    #+#              #
-#    Updated: 2022/04/20 13:39:33 by bterral          ###   ########.fr        #
+#    Updated: 2022/04/28 13:22:35 by bterral          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ CFLAGS			= -Wall -Wextra -Werror
 
 NAME			= minishell
 
-HEADER			= ./includes/minishell.h parsing/parsing.h print/print.h alloc_mem/alloc_mem.h lexer/lexer.h
+HEADER			= ./includes/minishell.h parsing/parsing.h \
+					print/print.h alloc_mem/alloc_mem.h \
+					lexer/lexer.h
 
 #HDR= libft/libft.h libft/get_next_line.h parsing/parsing.h print/print.h alloc_mem/alloc_mem.h lexer/lexer.h
 
@@ -40,6 +42,8 @@ VAR_ENV_D		= srcs/environment_variables/
 
 SRCS_BUILT_INSD	= srcs/builtins/
 
+EXEC_D			= srcs/execution/
+
 SRC_VAR_ENV		= $(addprefix $(VAR_ENV_D), environment.c) \
 					$(addprefix $(VAR_ENV_D), environment_utils.c)
 
@@ -53,8 +57,14 @@ SRC_BUILT_INS	= $(addprefix $(SRCS_BUILT_INSD), built_ins.c) \
 					$(addprefix $(SRCS_BUILT_INSD), exit.c) \
 					$(addprefix $(SRCS_BUILT_INSD), variable_utils.c)
 
-OBJS			= $(SRC:.c=.o) $(SRC_ALLOC:.c=.o) ${SRC_LEXER:.c=.o} $(SRC_PARSING:.c=.o) \
-					 $(SRC_PRINT:.c=.o) $(SRC_VAR_ENV:.c=.o) $(SRC_BUILT_INS:.c=.o)
+SRC_EXEC		= $(addprefix $(EXEC_D), execution.c) \
+					$(addprefix $(EXEC_D), get_env_var.c) \
+					$(addprefix $(EXEC_D), execution_utils.c) \
+					$(addprefix $(EXEC_D), child_execution.c)
+
+OBJS			= $(SRC:.c=.o) $(SRC_ALLOC:.c=.o) ${SRC_LEXER:.c=.o} \
+					$(SRC_PARSING:.c=.o) $(SRC_PRINT:.c=.o) $(SRC_VAR_ENV:.c=.o) \
+					$(SRC_BUILT_INS:.c=.o) $(SRC_EXEC:.c=.o)
 
 LIBFT			= ./libft/libft.a
 
