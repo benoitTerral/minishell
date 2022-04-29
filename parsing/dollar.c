@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:43:10 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/24 16:08:11 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/29 14:57:30 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*get_var_env(char *pt)
 	return (var);
 }
 
-char	*join_var_env(char *line, char *var, int dollar)
+char	*join_var_env(char *line, char *var, int dollar, t_env **head)
 {
 	char	*end;
 	char	*temp;
@@ -45,7 +45,7 @@ char	*join_var_env(char *line, char *var, int dollar)
 	printf("end=%s\n", end);
 	line[dollar] = '\0';
 	printf("line=%s\n", line);
-	get_env = getenv(&var[1]);
+	get_env = my_getenv(&var[1], head);
 	if (get_env)
 		temp = ft_strjoin(line, get_env);
 	else
@@ -58,7 +58,7 @@ char	*join_var_env(char *line, char *var, int dollar)
 	return (line);
 }
 
-char	*parsing_dollar(char *line)
+char	*parsing_dollar(char *line, t_env **head)
 {
 	char	*pt;
 	char	*var;
@@ -74,8 +74,8 @@ char	*parsing_dollar(char *line)
 	if (!var)
 		return (NULL);
 	printf("--%s, $=%d\n", var, i);
-	line = join_var_env(line, var, i);
+	line = join_var_env(line, var, i, head);
 	ft_free(&var);
-	line = parsing_dollar(line);
+	line = parsing_dollar(line, head);
 	return (line);
 }

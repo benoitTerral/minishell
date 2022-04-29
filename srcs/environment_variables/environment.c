@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:16:52 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/08 14:08:40 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/29 15:00:59 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+char	*my_getenv(char *var_name, t_env **head)
+{
+	t_env	*ptr;
+	char	*var_value;
+
+	var_value = NULL;
+	ptr = *(head);
+	while (ptr)
+	{
+		if (ft_strcmp(var_name, ptr->name))
+			return (ptr->value);
+		ptr = ptr->next;
+	}
+	return (var_value);
+}
 
 void	free_env(t_env **head)
 {

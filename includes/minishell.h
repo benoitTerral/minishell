@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/28 13:38:07 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/29 14:58:10 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ t_env	*add_env_element(t_env **head, char *str);
 void	ft_envdel(t_data *data, char *name);
 void	free_env(t_env **head);
 void	ft_envdel_node(t_env *env);
+char	*my_getenv(char *var_name, t_env **head);
 
 /// EXECUTION ///
 

@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:38:39 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/28 13:29:54 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/29 11:31:00 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	is_build_in_bool(char *cmd)
 	else if (ft_strcmp(cmd, "unset"))
 		return (1);
 	else if (ft_strcmp(cmd, "env"))
+		return (1);
+	else if (ft_strcmp(cmd, "exit"))
 		return (1);
 	return (0);
 }

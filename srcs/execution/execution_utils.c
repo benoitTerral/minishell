@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:38:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/28 13:09:57 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/29 13:48:34 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@ int	nbr_of_cmd(t_data **start)
 	return (nbr_cmd);
 }
 
+void	error_permission_files(int fd, char *file_name)
+{
+	if (fd == -1)
+	{
+		ft_dprintf(2, "minishell: ");
+		perror(file_name);
+	}
+}
+
 void	populate_exec_addinfo(t_exec *exec, t_data *data, int i)
 {
 	if (data->token == 2)
@@ -43,6 +52,10 @@ void	populate_exec_addinfo(t_exec *exec, t_data *data, int i)
 		exec[i].is_builtin = is_build_in_bool(data->str[0]);
 		exec[i].data = data;
 	}
+	if (data->token == 2)
+		error_permission_files(exec[i].fd_in, data->str[1]);
+	else if (data->token == 4 || data->token == 5)
+		error_permission_files(exec[i].fd_out, data->str[1]);
 }
 
 int	populate_execution_table(t_data *data, t_exec *exec, int nbr_cmd)

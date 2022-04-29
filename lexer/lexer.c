@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:03:36 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/05 15:14:46 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/29 10:53:22 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_data	*lexer(char **arg, t_env **head)
 		ft_free_split(arg);
 		return (0);
 	}
-	printf("parsing = OK\n");
+	// printf("parsing = OK\n");
 	i = 0;
 	while (arg[i] != NULL && *arg[i] != '|')
 		i++;

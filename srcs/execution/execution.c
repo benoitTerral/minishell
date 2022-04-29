@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/28 16:42:20 by bterral          ###   ########.fr       */
+/*   Updated: 2022/04/29 15:19:07 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	get_here_doc(char *delim)
 	char	*line;
 	int		len;
 	int		fd[2];
+	pid_t	pid;
 
 	if (pipe(fd) == -1)
 		//perror_exit(PIPE_ERROR);
@@ -49,10 +50,9 @@ int	wait_all_pid(t_exec *exec, int nbr_cmd)
 	while (i < nbr_cmd)
 	{
 		waitpid(exec[i].pid, &status, 0);
-		// free(exec[i].cmd_full_path);
+		free(exec[i].cmd_full_path);
 		i++;
 	}
-	// free(exec);
 	return (status);
 }
 
@@ -69,6 +69,14 @@ void	free_paths(char **strings)
 	free(strings);
 }
 
+void	free_all(char **envp, t_exec *exec)
+{
+	if (envp)
+		free_paths(envp);
+	if (exec)
+		free(exec);
+}
+
 int	execute_command(t_data **start)
 {
 	int		nbr_cmd;
@@ -77,15 +85,15 @@ int	execute_command(t_data **start)
 
 	nbr_cmd = nbr_of_cmd(start);
 	exec = ft_calloc(nbr_cmd, sizeof(t_exec));
+	if (!exec)
+		exit(1);
 	if (populate_execution_table(*start, exec, nbr_cmd))
 		return (1);
 	// print_execution_table(exec, nbr_cmd);
 	envp = get_paths(&(*start)->head);
-	if (!envp)
-		ft_dprintf(2, "Error retrieving environment paths\n");
 	get_abs_path_cmd(exec, nbr_cmd, envp);
 	child_process(exec, nbr_cmd, envp);
 	printf("pid status : %d\n", wait_all_pid(exec, nbr_cmd));
-	// free_paths(envp);
+	free_all(envp, exec);
 	return (0);
 }

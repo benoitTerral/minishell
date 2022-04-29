@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:43:20 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/04 16:59:04 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/29 14:57:43 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PARSING_H
 
 # include "../includes/minishell.h"
+
+typedef struct s_env	t_env;
 
 /*---define---*/
 
@@ -55,12 +57,12 @@ int		is_redi(char c);
 /*---dollar.c---*/
 
 char	*get_var_env(char *pt);
-char	*join_var_env(char *line, char *var, int dollar);
-char	*parsing_dollar(char *line); //Modif My_getenv()
+char	*join_var_env(char *line, char *var, int dollar, t_env **head);
+char	*parsing_dollar(char *line, t_env **head);
 
 /*---parsing.c---*/
 
-char	**parsing(char *line);
+char	**parsing(char *line, t_env **head);
 
 /*---parsing_utils.c---*/
 

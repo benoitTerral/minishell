@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 11:01:26 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/04 16:32:55 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/04/29 14:48:03 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_error_operator(char **arg)
 	return (0);
 }
 
-char	**parsing(char *line)
+char	**parsing(char *line, t_env **head)
 {
 	char	**arg;
 
@@ -50,7 +50,7 @@ char	**parsing(char *line)
 	if (check_error_quote(line))
 		return (NULL);
 	line = parsing_operator(line);
-	line = parsing_dollar(line);
+	line = parsing_dollar(line, head);
 	arg = split_quote(line);
 	if (!arg)
 		return (ft_free(&line));
@@ -59,7 +59,7 @@ char	**parsing(char *line)
 		ft_free_split(arg);
 		return (ft_free(&line));
 	}
-	printsplit(arg);
+	// printsplit(arg);
 	ft_free(&line);
 	return (arg);
 }
