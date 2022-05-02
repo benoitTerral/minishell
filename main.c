@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/02 15:45:05 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/02 17:54:02 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	prompt(t_env **head, char **env)
 	if (!line)
 	{
 		free_env(head);
-		return (-1);
+		printf("%se%sxi%st%s\n", BLUE, WHITE, RED, WHITE);
+		exit(g_ret_sig);
 	}
 	else
 	{
