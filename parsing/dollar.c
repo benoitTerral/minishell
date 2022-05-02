@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:43:10 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/29 14:57:30 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/02 16:09:03 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ char	*parsing_dollar(char *line, t_env **head)
 	int		quote;
 
 	quote = NO_QUOTE;
+	if (!line)
+		return (NULL);
 	pt = ft_strchr2(line, '$', &i, &quote);
 	if (pt == NULL /*|| is_whitespace(pt[1])*/)
 		return (line);

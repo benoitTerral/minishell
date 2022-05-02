@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 15:59:21 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/20 12:45:26 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/02 16:25:09 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int	my_exit(t_data **data)
 	if ((*data)->nbr_arg == 1)
 	{
 		ft_lstclear_data(data);
-		exit (errno);
+		printf("g_ret_sig=%d\n", g_ret_sig);
+		exit (g_ret_sig);
 	}
 	ft_atoi2((*data)->str[1], &res);
 	buf = res % 256;

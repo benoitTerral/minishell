@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 11:50:06 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/06 11:42:47 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/02 16:26:05 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	env(t_data *data)
 		else
 		{
 			ft_dprintf(2, "env: %s: no such file or directory\n", data->str[1]);
-			return (1);
+			return (g_ret_sig = 127);
 		}
 	}
 	current = data->head;

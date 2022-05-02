@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/02 10:46:35 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/02 15:45:05 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	g_ret_sig;
 
 int	prompt(t_env **head, char **env)
 {
@@ -29,7 +31,7 @@ int	prompt(t_env **head, char **env)
 		add_history(line);
 		lex = lexer(parsing(line, head), head);
 		if (lex && is_build_in_bool(lex->str[0]) && lex->next == NULL)
-			is_build_in(&lex);
+			g_ret_sig = is_build_in(&lex);
 		else if (lex)
 			execute_command(&lex, head);
 		ft_lstclear_data(&lex);
@@ -45,6 +47,7 @@ void	sig_handler(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		g_ret_sig = 1;
 	}
 	else if (sig == SIGQUIT)
 	{

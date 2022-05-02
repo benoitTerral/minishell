@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/02 10:53:36 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/02 16:28:46 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # include <termios.h>
 # include <errno.h>
 # include <fcntl.h>
+
+extern int				g_ret_sig;
 
 typedef struct s_env	t_env;
 
@@ -62,7 +64,7 @@ typedef struct s_exec
 }	t_exec;
 
 /// builtsins ///
-int 	is_build_in(t_data **data);
+int		is_build_in(t_data **data);
 int		is_build_in_bool(char *cmd);
 int		echo(t_data *data);
 int		cd(t_data *data);
@@ -92,7 +94,7 @@ char	*my_getenv(char *var_name, t_env **head);
 /// EXECUTION ///
 
 int		execute_command(t_data **start, t_env **env);
-int 	populate_exec(t_exec *exec, t_data **data);
+int		populate_exec(t_exec *exec, t_data **data);
 char	**get_paths(t_env **head);
 char	*get_cmd(t_exec	exec, char **envp);
 int		child_process(t_exec *exec, int nbr_cmd, char **envp);

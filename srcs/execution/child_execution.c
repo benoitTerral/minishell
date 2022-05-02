@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:54:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/29 14:16:24 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/02 15:27:52 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	child_process(t_exec *exec, int nbr_cmd, char **envp)
 			else
 			{
 				if (execve(exec[i].cmd_full_path, exec[i].cmd[0], envp) == -1)
-					exit(1);
+					exit(127);
 			}
 		}
 		close(exec[i].fd[1]);
