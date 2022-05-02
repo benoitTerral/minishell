@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:38:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/02 10:53:08 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/02 17:13:16 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,6 @@ void	populate_exec_addinfo(t_exec *exec, t_data *data, int i, t_env **env)
 		exec[i].fd_out = open(data->str[1], O_CREAT | O_RDWR | O_APPEND, 0644);
 	else if (data->token == 3)
 		exec[i].fd_in = get_here_doc(data->str[1], env);
-	else if (data->token == 0)
-	{
-		exec[i].is_builtin = is_build_in_bool(data->str[0]);
-		exec[i].data = data;
-	}
 	if (data->token == 2)
 		error_permission_files(exec[i].fd_in, data->str[1]);
 	else if (data->token == 4 || data->token == 5)
@@ -70,6 +65,8 @@ int	populate_exec_table(t_data *data, t_exec *exec, int nbr_cmd, t_env **env)
 			ft_dprintf(STDERR_FILENO, "pipe failed");
 			return (1);
 		}
+		exec[i].is_builtin = is_build_in_bool(data->str[0]);
+		exec[i].data = data;
 		exec[i].cmd = &(data->str);
 		data = data->next;
 		while (data && data->token != 1)
