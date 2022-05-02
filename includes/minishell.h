@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/29 14:58:10 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/02 10:53:36 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,18 +91,19 @@ char	*my_getenv(char *var_name, t_env **head);
 
 /// EXECUTION ///
 
-int		execute_command(t_data **start);
+int		execute_command(t_data **start, t_env **env);
 int 	populate_exec(t_exec *exec, t_data **data);
 char	**get_paths(t_env **head);
 char	*get_cmd(t_exec	exec, char **envp);
 int		child_process(t_exec *exec, int nbr_cmd, char **envp);
 int		nbr_of_cmd(t_data **start);
-int		populate_execution_table(t_data *data, t_exec *exec, int nbr_cmd);
+int		populate_exec_table(t_data *data, t_exec *exec, int nbr_cmd, t_env **env);
 void	print_execution_table(t_exec *exec, int nbr_cmd);
+int		populate_exec_table(t_data *data, t_exec *exec, int nbr_cmd, t_env **env);
 void	get_abs_path_cmd(t_exec *exec, int nbr_cmd, char **envp);
 int		wait_all_pid(t_exec *exec, int nbr_cmd);
 void	free_paths(char **strings);
-int		get_here_doc(char *delim);
+int		get_here_doc(char *delim, t_env **env);
 void	manage_fd_in(t_exec *exec, int i);
 void	manage_fd_out(t_exec *exec, int nbr_cmd, int i);
 

@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:38:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/29 13:48:34 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/02 10:53:08 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	error_permission_files(int fd, char *file_name)
 	}
 }
 
-void	populate_exec_addinfo(t_exec *exec, t_data *data, int i)
+void	populate_exec_addinfo(t_exec *exec, t_data *data, int i, t_env **env)
 {
 	if (data->token == 2)
 		exec[i].fd_in = open(data->str[1], O_RDONLY);
@@ -46,7 +46,7 @@ void	populate_exec_addinfo(t_exec *exec, t_data *data, int i)
 	else if (data->token == 5)
 		exec[i].fd_out = open(data->str[1], O_CREAT | O_RDWR | O_APPEND, 0644);
 	else if (data->token == 3)
-		exec[i].fd_in = get_here_doc(data->str[1]);
+		exec[i].fd_in = get_here_doc(data->str[1], env);
 	else if (data->token == 0)
 	{
 		exec[i].is_builtin = is_build_in_bool(data->str[0]);
@@ -58,7 +58,7 @@ void	populate_exec_addinfo(t_exec *exec, t_data *data, int i)
 		error_permission_files(exec[i].fd_out, data->str[1]);
 }
 
-int	populate_execution_table(t_data *data, t_exec *exec, int nbr_cmd)
+int	populate_exec_table(t_data *data, t_exec *exec, int nbr_cmd, t_env **env)
 {
 	int	i;
 
@@ -74,7 +74,7 @@ int	populate_execution_table(t_data *data, t_exec *exec, int nbr_cmd)
 		data = data->next;
 		while (data && data->token != 1)
 		{
-			populate_exec_addinfo(exec, data, i);
+			populate_exec_addinfo(exec, data, i, env);
 			data = data->next;
 		}
 		i++;
