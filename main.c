@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/02 17:54:02 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 10:04:01 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	prompt(t_env **head, char **env)
 		add_history(line);
 		lex = lexer(parsing(line, head), head);
 		if (lex && is_build_in_bool(lex->str[0]) && lex->next == NULL)
-			g_ret_sig = is_build_in(&lex);
+			g_ret_sig = is_build_in(&lex, 1);
 		else if (lex)
 			execute_command(&lex, head);
 		ft_lstclear_data(&lex);

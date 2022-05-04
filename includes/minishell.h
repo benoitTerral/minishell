@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/02 16:28:46 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 10:04:40 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_exec
 }	t_exec;
 
 /// builtsins ///
-int		is_build_in(t_data **data);
+int		is_build_in(t_data **data, int nbr_cmd);
 int		is_build_in_bool(char *cmd);
 int		echo(t_data *data);
 int		cd(t_data *data);

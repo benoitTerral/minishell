@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 15:59:21 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/02 16:25:09 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 09:58:20 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ int	my_exit(t_data **data)
 
 	if ((*data)->nbr_arg > 2)
 	{
-		dprintf(STDERR_FILENO, RED"MiniShell: exit: too many arguments\n"WHITE);
+		ft_dprintf(STDERR_FILENO, RED"MiniShell: exit: too many arguments\n"WHITE);
 		return (-1);
 	}
-	dprintf(STDOUT_FILENO, "%se%sxi%st%s\n", BLUE, WHITE, RED, WHITE);
+	ft_dprintf(STDOUT_FILENO, "%se%sxi%st%s\n", BLUE, WHITE, RED, WHITE);
 	free_env(&(*data)->head);
 	if ((*data)->nbr_arg == 1)
 	{

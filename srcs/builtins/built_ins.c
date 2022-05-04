@@ -6,13 +6,13 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:38:39 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/29 11:31:00 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/04 10:17:03 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	is_build_in(t_data **data)
+int	is_build_in(t_data **data, int nbr_cmd)
 {
 	if (ft_strcmp((*data)->str[0], "echo"))
 		return (echo(*data));
@@ -26,7 +26,7 @@ int	is_build_in(t_data **data)
 		return (unset(*data));
 	else if (ft_strcmp((*data)->str[0], "env"))
 		return (env(*data));
-	else if (ft_strcmp((*data)->str[0], "exit"))
+	else if (ft_strcmp((*data)->str[0], "exit") && nbr_cmd == 1)
 		return (my_exit(data));
 	return (0);
 }

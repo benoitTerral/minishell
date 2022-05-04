@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:38:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/02 17:13:16 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/04 10:16:38 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ void	get_abs_path_cmd(t_exec *exec, int nbr_cmd, char **envp)
 	i = 0;
 	while (i < nbr_cmd)
 	{
-		exec[i].cmd_full_path = get_cmd(exec[i], envp);
+		if (!exec[i].is_builtin)
+			exec[i].cmd_full_path = get_cmd(exec[i], envp);
 		i++;
 	}
 }

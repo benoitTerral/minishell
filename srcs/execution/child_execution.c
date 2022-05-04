@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:54:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/02 15:27:52 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 10:06:18 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	child_process(t_exec *exec, int nbr_cmd, char **envp)
 			manage_fd_in(exec, i);
 			manage_fd_out(exec, nbr_cmd, i);
 			if (exec[i].is_builtin)
-				exit(is_build_in(&(exec[i].data)));
+				exit(is_build_in(&(exec[i].data), nbr_cmd));
 			else
 			{
 				if (execve(exec[i].cmd_full_path, exec[i].cmd[0], envp) == -1)
