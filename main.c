@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/04 11:33:08 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/04 13:12:25 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_ret_sig;
 
-int	prompt(t_env **head, char **env)
+int	prompt(t_env **head, char **env, t_termios *term)
 {
 	t_data	*lex;
 	char	*line;
@@ -34,7 +34,7 @@ int	prompt(t_env **head, char **env)
 		if (lex && is_build_in_bool(lex->str[0]) && lex->next == NULL)
 			g_ret_sig = is_build_in(&lex, 1);
 		else if (lex)
-			execute_command(&lex, head);
+			execute_command(&lex, head, term);
 		ft_lstclear_data(&lex);
 	}
 	return (0);
@@ -57,32 +57,31 @@ void	sig_handler(int sig)
 	}
 }
 
-void	init_termios(void)
+void	init_termios(t_termios *term)
 {
-	struct termios	old_term;
-	struct termios	new_term;
-
-	tcgetattr(ttyslot(), &old_term);
-	new_term = old_term;
-	new_term.c_lflag &= ~(ECHOCTL);
-	tcsetattr(ttyslot(), TCSANOW, &new_term);
+	tcgetattr(ttyslot(), &term->old_term);
+	term->new_term = term->old_term;
+	term->new_term.c_lflag &= ~(ECHOCTL);
+	tcsetattr(ttyslot(), TCSANOW, &term->new_term);
 }
 
 int	main(int argc, char **argv, char **env)
 {
-	t_env	*head;
-	int		ret;
+	t_env		*head;
+	t_termios	term;
+	int			ret;
 
 	(void) argv;
 	if (argc != 1)
 		return (-1);
 	init_env_var(env, &head);
-	init_termios();
+	init_termios(&term);
 	signal(SIGINT, &sig_handler);
 	signal(SIGQUIT, &sig_handler);
 	while (1)
 	{
-		ret = prompt(&head, env);
+		tcsetattr(ttyslot(), TCSANOW, &term.new_term);
+		ret = prompt(&head, env, &term);
 		if (ret)
 			return (0);
 	}

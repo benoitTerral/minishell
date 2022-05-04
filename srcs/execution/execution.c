@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/04 11:44:11 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/04 12:27:27 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	free_all(char **envp, t_exec *exec)
 		free(exec);
 }
 
-int	execute_command(t_data **start, t_env **env)
+int	execute_command(t_data **start, t_env **env, t_termios *term)
 {
 	int		nbr_cmd;
 	t_exec	*exec;
@@ -121,7 +121,7 @@ int	execute_command(t_data **start, t_env **env)
 	// print_execution_table(exec, nbr_cmd);
 	envp = get_paths(&(*start)->head);
 	get_abs_path_cmd(exec, nbr_cmd, envp);
-	child_process(exec, nbr_cmd, envp);
+	child_process(exec, nbr_cmd, envp, term);
 	ft_dprintf(1, "pid status : %d\n", wait_all_pid(exec, nbr_cmd));
 	free_all(envp, exec);
 	return (0);

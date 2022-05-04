@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:54:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/04 11:18:24 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/04 12:29:14 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,12 @@ void	manage_fd_out(t_exec *exec, int nbr_cmd, int i)
 		dup2(exec[i].fd[1], STDOUT_FILENO);
 }
 
-int	child_process(t_exec *exec, int nbr_cmd, char **envp)
+void	reset_term(t_termios *term)
+{
+	tcsetattr(ttyslot(), TCSANOW, &term->old_term);
+}
+
+int	child_process(t_exec *exec, int nbr_cmd, char **envp, t_termios *term)
 {
 	int	i;
 
@@ -48,6 +53,7 @@ int	child_process(t_exec *exec, int nbr_cmd, char **envp)
 			ft_dprintf(2, "minishell: fork: Resource temporarily unavailable\n");
 			exit(1);
 		}
+		reset_term(term);
 		if (exec[i].pid == 0)
 		{
 			manage_fd_in(exec, i);
