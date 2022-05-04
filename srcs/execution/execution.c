@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/04 12:27:27 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 14:58:41 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,11 @@ int	wait_all_pid(t_exec *exec, int nbr_cmd)
 	i = 0;
 	while (i < nbr_cmd)
 	{
-		waitpid(exec[i].pid, &g_ret_sig, 0);
-		free(exec[i].cmd_full_path);
+		if (exec[i].is_cmd)
+		{
+			waitpid(exec[i].pid, &g_ret_sig, 0);
+			free(exec[i].cmd_full_path);
+		}
 		i++;
 	}
 	if (WIFEXITED(g_ret_sig))
@@ -108,21 +111,21 @@ void	free_all(char **envp, t_exec *exec)
 
 int	execute_command(t_data **start, t_env **env, t_termios *term)
 {
-	int		nbr_cmd;
+	int		nbr_pipes;
 	t_exec	*exec;
 	char	**envp;
 
-	nbr_cmd = nbr_of_cmd(start);
-	exec = ft_calloc(nbr_cmd, sizeof(t_exec));
+	nbr_pipes = nbr_of_cmd(start);
+	exec = ft_calloc(nbr_pipes, sizeof(t_exec));
 	if (!exec)
 		exit(1);
-	if (populate_exec_table(*start, exec, nbr_cmd, env))
+	if (populate_exec_table(*start, exec, nbr_pipes, env))
 		return (1);
 	// print_execution_table(exec, nbr_cmd);
 	envp = get_paths(&(*start)->head);
-	get_abs_path_cmd(exec, nbr_cmd, envp);
-	child_process(exec, nbr_cmd, envp, term);
-	ft_dprintf(1, "pid status : %d\n", wait_all_pid(exec, nbr_cmd));
+	get_abs_path_cmd(exec, nbr_pipes, envp);
+	child_process(exec, nbr_pipes, envp, term);
+	ft_dprintf(1, "pid status : %d\n", wait_all_pid(exec, nbr_pipes));
 	free_all(envp, exec);
 	return (0);
 }

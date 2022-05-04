@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:38:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/04 11:49:05 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/04 14:51:19 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,27 @@ void	populate_exec_addinfo(t_exec *exec, t_data *data, int i, t_env **env)
 		error_permission_files(exec[i].fd_out, data->str[1]);
 }
 
-int	populate_exec_table(t_data *data, t_exec *exec, int nbr_cmd, t_env **env)
+int	populate_exec_table(t_data *data, t_exec *exec, int nbr_pipes, t_env **env)
 {
 	int	i;
 
 	i = 0;
-	while (i < nbr_cmd)
+	while (i < nbr_pipes)
 	{
-		if (pipe(exec[i].fd) == -1)
+		if (data->token == 1 && data->str[0])
 		{
-			ft_dprintf(STDERR_FILENO, "pipe failed");
-			return (1);
+			if (pipe(exec[i].fd) == -1)
+			{
+				ft_dprintf(STDERR_FILENO, "pipe failed");
+				return (1);
+			}
+			exec[i].is_builtin = is_build_in_bool(data->str[0]);
+			exec[i].cmd = &(data->str);
+			exec[i].is_cmd = 1;
 		}
-		exec[i].is_builtin = is_build_in_bool(data->str[0]);
+		else
+			exec[i].is_cmd = 0;
 		exec[i].data = data;
-		exec[i].cmd = &(data->str);
 		data = data->next;
 		while (data && data->token != 1)
 		{
@@ -108,7 +114,7 @@ void	get_abs_path_cmd(t_exec *exec, int nbr_cmd, char **envp)
 	i = 0;
 	while (i < nbr_cmd)
 	{
-		if (!exec[i].is_builtin)
+		if (!exec[i].is_builtin && exec[i].is_cmd)
 			exec[i].cmd_full_path = get_cmd(exec[i], envp);
 		i++;
 	}

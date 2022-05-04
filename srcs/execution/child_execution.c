@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:54:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/04 12:29:14 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 14:59:08 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,37 +40,40 @@ void	reset_term(t_termios *term)
 	tcsetattr(ttyslot(), TCSANOW, &term->old_term);
 }
 
-int	child_process(t_exec *exec, int nbr_cmd, char **envp, t_termios *term)
+int	child_process(t_exec *exec, int nbr_pipes, char **envp, t_termios *term)
 {
 	int	i;
 
 	i = 0;
-	while (i < nbr_cmd)
+	while (i < nbr_pipes)
 	{
-		exec[i].pid = fork();
-		if (exec[i].pid == -1)
+		if (exec[i].is_cmd)
 		{
-			ft_dprintf(2, "minishell: fork: Resource temporarily unavailable\n");
-			exit(1);
-		}
-		reset_term(term);
-		if (exec[i].pid == 0)
-		{
-			manage_fd_in(exec, i);
-			manage_fd_out(exec, nbr_cmd, i);
-			if (exec[i].is_builtin)
-				exit(is_build_in(&(exec[i].data), nbr_cmd));
-			else
+			exec[i].pid = fork();
+			if (exec[i].pid == -1)
 			{
-				if (execve(exec[i].cmd_full_path, exec[i].cmd[0], envp) == -1)
-					exit(127);
+				ft_dprintf(2, "minishell: fork: Resource temporarily unavailable\n");
+				exit(1);
 			}
+			reset_term(term);
+			if (exec[i].pid == 0)
+			{
+				manage_fd_in(exec, i);
+				manage_fd_out(exec, nbr_pipes, i);
+				if (exec[i].is_builtin)
+					exit(is_build_in(&(exec[i].data), nbr_pipes));
+				else
+				{
+					if (execve(exec[i].cmd_full_path, exec[i].cmd[0], envp) == -1)
+						exit(127);
+				}
+			}
+			close(exec[i].fd[1]);
+			if (i != 0)
+				close(exec[i - 1].fd[0]);
+			else if (i == 0 && nbr_pipes == 1)
+				close(exec[i].fd[0]);
 		}
-		close(exec[i].fd[1]);
-		if (i != 0)
-			close(exec[i - 1].fd[0]);
-		else if (i == 0 && nbr_cmd == 1)
-			close(exec[i].fd[0]);
 		i++;
 	}
 	return (0);
