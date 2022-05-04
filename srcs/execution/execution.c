@@ -6,24 +6,11 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/04 12:27:27 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 17:02:16 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static void	sig_handler_here(int sig)
-{
-	if (sig == SIGINT)
-	{
-		exit(1);
-		g_ret_sig = 1;
-	}
-	else if (sig == SIGQUIT)
-	{
-		exit(0); //Probleme
-	}
-}
 
 int	get_here_doc(char *delim, t_env **env)
 {
@@ -78,8 +65,7 @@ int	wait_all_pid(t_exec *exec, int nbr_cmd)
 		free(exec[i].cmd_full_path);
 		i++;
 	}
-	if (WIFEXITED(g_ret_sig))
-		g_ret_sig = WEXITSTATUS(g_ret_sig);
+	if (WIFEXITED(g_ret_sig))	g_ret_sig = WEXITSTATUS(g_ret_sig);
 	if (WIFSIGNALED(g_ret_sig))
 		g_ret_sig = WTERMSIG(g_ret_sig);
 	return (g_ret_sig);
@@ -112,6 +98,7 @@ int	execute_command(t_data **start, t_env **env, t_termios *term)
 	t_exec	*exec;
 	char	**envp;
 
+	(void) term;
 	nbr_cmd = nbr_of_cmd(start);
 	exec = ft_calloc(nbr_cmd, sizeof(t_exec));
 	if (!exec)
@@ -119,10 +106,12 @@ int	execute_command(t_data **start, t_env **env, t_termios *term)
 	if (populate_exec_table(*start, exec, nbr_cmd, env))
 		return (1);
 	// print_execution_table(exec, nbr_cmd);
+	signal(SIGINT, &sig_handler_m);
+	signal(SIGQUIT, &sig_handler_m);
 	envp = get_paths(&(*start)->head);
 	get_abs_path_cmd(exec, nbr_cmd, envp);
-	child_process(exec, nbr_cmd, envp, term);
-	ft_dprintf(1, "pid status : %d\n", wait_all_pid(exec, nbr_cmd));
+	child_process(exec, nbr_cmd, envp);
+	wait_all_pid(exec, nbr_cmd);
 	free_all(envp, exec);
 	return (0);
 }

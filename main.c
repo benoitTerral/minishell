@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/04 13:12:25 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 17:00:46 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	prompt(t_env **head, char **env, t_termios *term)
 	}
 	else
 	{
+		signal(SIGQUIT, &sig_handler_disable);
+		signal(SIGINT, &sig_handler_disable);
 		add_history(line);
 		lex = lexer(parsing(line, head), head);
 		if (lex && is_build_in_bool(lex->str[0]) && lex->next == NULL)
@@ -40,23 +42,6 @@ int	prompt(t_env **head, char **env, t_termios *term)
 	return (0);
 }
 
-void	sig_handler(int sig)
-{
-	if (sig == SIGINT)
-	{
-		ft_dprintf(1, "\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-		g_ret_sig = 1;
-	}
-	else if (sig == SIGQUIT)
-	{
-		rl_on_new_line();
-		rl_redisplay();
-	}
-}
-
 void	init_termios(t_termios *term)
 {
 	tcgetattr(ttyslot(), &term->old_term);
@@ -64,6 +49,11 @@ void	init_termios(t_termios *term)
 	term->new_term.c_lflag &= ~(ECHOCTL);
 	tcsetattr(ttyslot(), TCSANOW, &term->new_term);
 }
+
+// void	reset_term(t_termios *term)
+// {
+// 	tcsetattr(ttyslot(), TCSANOW, &term->old_term);
+// }
 
 int	main(int argc, char **argv, char **env)
 {
@@ -76,11 +66,11 @@ int	main(int argc, char **argv, char **env)
 		return (-1);
 	init_env_var(env, &head);
 	init_termios(&term);
-	signal(SIGINT, &sig_handler);
-	signal(SIGQUIT, &sig_handler);
 	while (1)
 	{
-		tcsetattr(ttyslot(), TCSANOW, &term.new_term);
+	//	tcsetattr(ttyslot(), TCSANOW, &term.new_term);
+		signal(SIGINT, &sig_handler_prompt);
+		signal(SIGQUIT, &sig_handler_prompt);
 		ret = prompt(&head, env, &term);
 		if (ret)
 			return (0);

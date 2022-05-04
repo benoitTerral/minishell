@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/04 12:28:50 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 17:02:18 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int		execute_command(t_data **start, t_env **env, t_termios *term);
 int		populate_exec(t_exec *exec, t_data **data);
 char	**get_paths(t_env **head);
 char	*get_cmd(t_exec	exec, char **envp);
-int		child_process(t_exec *exec, int nbr_cmd, char **envp, t_termios *term);
+int		child_process(t_exec *exec, int nbr_cmd, char **envp);
 int		nbr_of_cmd(t_data **start);
 int		populate_exec_table(t_data *data, t_exec *exec, int nbr_cmd, t_env **env);
 void	print_execution_table(t_exec *exec, int nbr_cmd);
@@ -114,5 +114,13 @@ void	free_paths(char **strings);
 int		get_here_doc(char *delim, t_env **env);
 void	manage_fd_in(t_exec *exec, int i);
 void	manage_fd_out(t_exec *exec, int nbr_cmd, int i);
+
+/// SIGNAUX ///
+
+void	sig_handler_prompt(int sig);
+void	sig_handler_here(int sig);
+void	sig_handler_child(int sig);
+void	sig_handler_disable(int sig);
+void	sig_handler_m(int sig);
 
 #endif

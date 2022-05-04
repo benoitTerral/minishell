@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bterral <bterral@student.42.fr>            +#+  +:+       +#+         #
+#    By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:42:02 by bterral           #+#    #+#              #
-#    Updated: 2022/05/04 10:46:32 by bterral          ###   ########.fr        #
+#    Updated: 2022/05/04 16:39:28 by laraujo          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,8 @@ SRCS_BUILT_INSD	= srcs/builtins/
 
 EXEC_D			= srcs/execution/
 
+SRC_SIG			= srcs/signal.c
+
 SRC_VAR_ENV		= $(addprefix $(VAR_ENV_D), environment.c) \
 					$(addprefix $(VAR_ENV_D), environment_utils.c)
 
@@ -64,7 +66,7 @@ SRC_EXEC		= $(addprefix $(EXEC_D), execution.c) \
 
 OBJS			= $(SRC:.c=.o) $(SRC_ALLOC:.c=.o) ${SRC_LEXER:.c=.o} \
 					$(SRC_PARSING:.c=.o) $(SRC_PRINT:.c=.o) $(SRC_VAR_ENV:.c=.o) \
-					$(SRC_BUILT_INS:.c=.o) $(SRC_EXEC:.c=.o)
+					$(SRC_BUILT_INS:.c=.o) $(SRC_EXEC:.c=.o) $(SRC_SIG:.c=.o)
 
 LIBFT			= ./libft/libft.a
 
