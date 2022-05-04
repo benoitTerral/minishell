@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:03:36 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/29 10:53:22 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/04 11:42:38 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_data	*lexer(char **arg, t_env **head)
 	i = 0;
 	if (check_operator(arg))
 	{
-		dprintf(STDERR_FILENO, RED ERROR_OP WHITE);
+		ft_dprintf(STDERR_FILENO, RED ERROR_OP WHITE);
 		ft_free_split(arg);
 		return (0);
 	}

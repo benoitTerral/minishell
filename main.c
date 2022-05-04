@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/04 10:04:01 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/04 11:33:08 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	prompt(t_env **head, char **env)
 	if (!line)
 	{
 		free_env(head);
-		printf("%se%sxi%st%s\n", BLUE, WHITE, RED, WHITE);
+		ft_dprintf(1, "%se%sxi%st%s\n", BLUE, WHITE, RED, WHITE);
 		exit(g_ret_sig);
 	}
 	else
@@ -44,7 +44,7 @@ void	sig_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		printf("\n");
+		ft_dprintf(1, "\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();

@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 11:48:57 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/05 14:26:08 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/04 11:36:08 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	echo_argument(t_data *data)
 		i = 2;
 		while (data->str[i])
 		{
-			printf("%s", data->str[i]);
+			ft_dprintf(1, "%s", data->str[i]);
 			if (i < (data->nbr_arg - 1))
-				printf(" ");
+				ft_dprintf(1, " ");
 			i++;
 		}
 		return (1);
@@ -47,11 +47,11 @@ int	echo(t_data *data)
 	i = 1;
 	while (data->str[i])
 	{
-		printf("%s", data->str[i]);
+		ft_dprintf(1, "%s", data->str[i]);
 		if (i == (data->nbr_arg - 1))
-			printf("\n");
+			ft_dprintf(1, "\n");
 		else
-			printf(" ");
+			ft_dprintf(1, " ");
 		i++;
 	}
 	return (1);

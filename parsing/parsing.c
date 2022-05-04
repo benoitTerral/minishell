@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 11:01:26 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/29 14:48:03 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/04 11:34:24 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ int	check_error_operator(char **arg)
 	{
 		if (is_operator(*arg[i]) && arg[i + 1] == NULL)
 		{
-			dprintf(STDERR_FILENO, RED ERROR_TOKEN"`%c'\n" WHITE, *arg[i]);
+			ft_dprintf(STDERR_FILENO, RED ERROR_TOKEN"`%c'\n" WHITE, *arg[i]);
 			return (1);
 		}
 		else if (is_operator(*arg[i]) && arg[i + 1] != NULL
 			&& *arg[i + 1] == '|')
 		{
-			dprintf(STDERR_FILENO, RED ERROR_TOKEN"`%c'\n" WHITE, *arg[i]);
+			ft_dprintf(STDERR_FILENO, RED ERROR_TOKEN"`%c'\n" WHITE, *arg[i]);
 			return (1);
 		}
 		else if ((*arg[i] == '<' || *arg[i] == '>') && arg[i + 1] != NULL
 			&& is_operator(*arg[i + 1]))
 		{
-			dprintf(STDERR_FILENO, RED ERROR_TOKEN"`%c'\n" WHITE, *arg[i]);
+			ft_dprintf(STDERR_FILENO, RED ERROR_TOKEN"`%c'\n" WHITE, *arg[i]);
 			return (1);
 		}
 		i++;

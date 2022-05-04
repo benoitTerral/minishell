@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 15:22:09 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/01 15:16:40 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 11:34:37 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	jump_quote(char *str, int *i, int *quote)
 			*quote = status_quote(*quote, str[*i]);
 			if (*quote == QUOTE_ERROR)
 			{
-				dprintf(STDERR_FILENO, RED ERROR_QUOTE WHITE);
+				ft_dprintf(STDERR_FILENO, RED ERROR_QUOTE WHITE);
 				ft_free(&str);
 				return (QUOTE_ERROR);
 			}

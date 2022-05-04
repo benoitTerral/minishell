@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:38:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/04 10:16:38 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/04 11:49:05 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,18 +85,18 @@ void	print_execution_table(t_exec *exec, int nbr_cmd)
 	int	j;
 
 	i = 0;
-	printf("\n Execution table \n");
+	ft_dprintf(1, "\n Execution table \n");
 	while (i < nbr_cmd)
 	{
-		printf("\nCommand number : %d\n", i);
+		ft_dprintf(1, "\nCommand number : %d\n", i);
 		j = 0;
 		while (exec[i].cmd[0][j])
 		{
-			printf("exec[i].cmd[0][%d]: %s\n", j, exec[i].cmd[0][j]);
+			ft_dprintf(1, "exec[i].cmd[0][%d]: %s\n", j, exec[i].cmd[0][j]);
 			j++;
 		}
-		printf("fd_in: %d\n", exec[i].fd_in);
-		printf("fd_out: %d\n", exec[i].fd_out);
+		ft_dprintf(1, "fd_in: %d\n", exec[i].fd_in);
+		ft_dprintf(1, "fd_out: %d\n", exec[i].fd_out);
 		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 11:50:06 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/02 16:26:05 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 11:36:16 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	env(t_data *data)
 	while (current)
 	{
 		if (current->value)
-			printf("%s=%s\n", current->name, current->value);
+			ft_dprintf(1, "%s=%s\n", current->name, current->value);
 		current = current->next;
 	}
 	return (0);

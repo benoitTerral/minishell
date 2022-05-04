@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 15:59:21 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/04 09:58:20 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/04 11:36:34 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_atoi2(char *str, long long *result)
 	}
 	if (*str != '\0' && !is_whitespace(*str) && !ft_isdigit(*str))
 	{
-		dprintf(STDERR_FILENO, RED ERROR_EXIT_NUM WHITE);
+		ft_dprintf(STDERR_FILENO, RED ERROR_EXIT_NUM WHITE);
 		*result = -1;
 		return (-1);
 	}
@@ -58,7 +58,7 @@ int	my_exit(t_data **data)
 	if ((*data)->nbr_arg == 1)
 	{
 		ft_lstclear_data(data);
-		printf("g_ret_sig=%d\n", g_ret_sig);
+		ft_dprintf(1, "g_ret_sig=%d\n", g_ret_sig);
 		exit (g_ret_sig);
 	}
 	ft_atoi2((*data)->str[1], &res);

@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 15:19:54 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/06 16:30:52 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/04 11:43:25 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static int	print_export(t_data *data)
 	current = data->head;
 	while (current)
 	{
-		printf("declare -x %s", current->name);
+		ft_dprintf(1, "declare -x %s", current->name);
 		if (current->value)
-			printf("=\"%s\"", current->value);
-		printf("\n");
+			ft_dprintf(1, "=\"%s\"", current->value);
+		ft_dprintf(1, "\n");
 		current = current->next;
 	}
 	return (0);

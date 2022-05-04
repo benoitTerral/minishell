@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:43:10 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/02 16:09:03 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 11:34:09 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,16 @@ char	*join_var_env(char *line, char *var, int dollar, t_env **head)
 
 	end_var = ft_strlen(var) + dollar;
 	end = ft_substr(line, end_var, ft_strlen(&line[end_var]));
-	printf("end=%s\n", end);
+	ft_dprintf(1, "end=%s\n", end);
 	line[dollar] = '\0';
-	printf("line=%s\n", line);
+	ft_dprintf(1, "line=%s\n", line);
 	get_env = my_getenv(&var[1], head);
 	if (get_env)
 		temp = ft_strjoin(line, get_env);
 	else
 		temp = ft_strjoin(line, "");
 	ft_free(&line);
-	printf("temp=%s\n", temp);
+	ft_dprintf(1, "temp=%s\n", temp);
 	line = ft_strjoin(temp, end);
 	ft_free(&end);
 	ft_free(&temp);
@@ -72,10 +72,10 @@ char	*parsing_dollar(char *line, t_env **head)
 	if (pt == NULL /*|| is_whitespace(pt[1])*/)
 		return (line);
 	var = get_var_env(pt);
-	printf("var=%s\n", var);
+	ft_dprintf(1, "var=%s\n", var);
 	if (!var)
 		return (NULL);
-	printf("--%s, $=%d\n", var, i);
+	ft_dprintf(1, "--%s, $=%d\n", var, i);
 	line = join_var_env(line, var, i, head);
 	ft_free(&var);
 	line = parsing_dollar(line, head);

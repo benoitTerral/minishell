@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 11:49:31 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/06 11:42:16 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/04 11:35:36 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	update_var(t_data *data, char *str, char *var)
 		ft_envdel(data, "OLDPWD");
 		env = ft_env_new(var_name, str);
 		ft_envadd_back(&data->head, env);
-		printf("OLDPWD\n");
+		ft_dprintf(1, "OLDPWD\n");
 	}
 	else if (ft_strcmp(var, "PWD"))
 	{
@@ -32,7 +32,7 @@ static void	update_var(t_data *data, char *str, char *var)
 		ft_envdel(data, "PWD");
 		env = ft_env_new(var_name, str);
 		ft_envadd_back(&data->head, env);
-		printf("PWD\n");
+		ft_dprintf(1, "PWD\n");
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/04 10:16:08 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/04 11:44:11 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	get_here_doc(char *delim, t_env **env)
 
 	if (pipe(fd) == -1)
 		//perror_exit(PIPE_ERROR);
-		ft_dprintf(2, "error here_doc error");
+		ft_dprintf(2, "here_doc error");
 	pid = fork();
 	if (pid == 0)
 	{
@@ -48,7 +48,9 @@ int	get_here_doc(char *delim, t_env **env)
 			ft_putstr_fd("> ", 1);
 			line = parsing_dollar(get_next_line(STDIN_FILENO), env);
 			ft_dprintf(2, "line : %s", line);
-			if (!line || line[0] == '\0' || (!ft_strncmp(line, delim, len) && line[len] == '\n'))
+			if (!ft_strncmp(line, delim, len) && line[len] == '\n')
+				break;
+			if (!line || line[0] == '\0')
 				break ;
 			if (write(fd[1], line, ft_strlen(line)) == -1)
 				ft_dprintf(2, "Error reading the here_doc");
@@ -60,7 +62,7 @@ int	get_here_doc(char *delim, t_env **env)
 	}
 	close(fd[1]);
 	waitpid(pid, &status, 0);
-	printf("staus=%d\n", status);
+	ft_dprintf(1, "staus=%d\n", status);
 	return (fd[0]);
 }
 
@@ -120,7 +122,7 @@ int	execute_command(t_data **start, t_env **env)
 	envp = get_paths(&(*start)->head);
 	get_abs_path_cmd(exec, nbr_cmd, envp);
 	child_process(exec, nbr_cmd, envp);
-	printf("pid status : %d\n", wait_all_pid(exec, nbr_cmd));
+	ft_dprintf(1, "pid status : %d\n", wait_all_pid(exec, nbr_cmd));
 	free_all(envp, exec);
 	return (0);
 }
