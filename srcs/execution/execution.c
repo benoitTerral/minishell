@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/04 14:58:41 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/05 11:00:48 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,16 @@ int	get_here_doc(char *delim, t_env **env)
 	return (fd[0]);
 }
 
-int	wait_all_pid(t_exec *exec, int nbr_cmd)
+int	wait_all_pid(t_exec *exec, int nbr_pipes)
 {
 	int	i;
-	//int	status;
 
 	i = 0;
-	while (i < nbr_cmd)
+	while (i < nbr_pipes)
 	{
+		waitpid(exec[i].pid, &g_ret_sig, 0);
 		if (exec[i].is_cmd)
-		{
-			waitpid(exec[i].pid, &g_ret_sig, 0);
 			free(exec[i].cmd_full_path);
-		}
 		i++;
 	}
 	if (WIFEXITED(g_ret_sig))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/04 13:12:25 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 10:38:02 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ int	prompt(t_env **head, char **env, t_termios *term)
 	t_data	*lex;
 	char	*line;
 
-	(void) env;
+	(void)env;
 	line = readline(MINISHELL);
+	ft_dprintf(2, "line : %s\n", line);
 	if (!line)
 	{
 		free_env(head);
@@ -31,7 +32,8 @@ int	prompt(t_env **head, char **env, t_termios *term)
 	{
 		add_history(line);
 		lex = lexer(parsing(line, head), head);
-		if (lex && is_build_in_bool(lex->str[0]) && lex->next == NULL)
+		printdata(lex);
+		if (lex && lex->str[0] && is_build_in_bool(lex->str[0]) && lex->next == NULL)
 			g_ret_sig = is_build_in(&lex, 1);
 		else if (lex)
 			execute_command(&lex, head, term);
