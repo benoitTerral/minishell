@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:54:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/04 17:00:49 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 12:22:01 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,6 @@ void	manage_fd_out(t_exec *exec, int nbr_cmd, int i)
 		dup2(exec[i].fd[1], STDOUT_FILENO);
 }
 
-// void	reset_term(t_termios *term)
-// {
-// 	tcsetattr(ttyslot(), TCSANOW, &term->old_term);
-// }
-
 int	child_process(t_exec *exec, int nbr_cmd, char **envp)
 {
 	int	i;
@@ -55,9 +50,7 @@ int	child_process(t_exec *exec, int nbr_cmd, char **envp)
 		}
 		if (exec[i].pid == 0)
 		{
-//			reset_term(term);
-			signal(SIGQUIT, &sig_handler_child);
-			signal(SIGINT, &sig_handler_child);
+			set_sig(&sig_handler_child);
 			manage_fd_in(exec, i);
 			manage_fd_out(exec, nbr_cmd, i);
 			if (exec[i].is_builtin)

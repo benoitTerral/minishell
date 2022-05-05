@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/04 17:02:18 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 12:11:26 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*my_getenv(char *var_name, t_env **head);
 
 /// EXECUTION ///
 
-int		execute_command(t_data **start, t_env **env, t_termios *term);
+int		execute_command(t_data **start, t_env **env);
 int		populate_exec(t_exec *exec, t_data **data);
 char	**get_paths(t_env **head);
 char	*get_cmd(t_exec	exec, char **envp);
@@ -117,6 +117,7 @@ void	manage_fd_out(t_exec *exec, int nbr_cmd, int i);
 
 /// SIGNAUX ///
 
+void	set_sig(void (*sig_fonction)(int));
 void	sig_handler_prompt(int sig);
 void	sig_handler_here(int sig);
 void	sig_handler_child(int sig);

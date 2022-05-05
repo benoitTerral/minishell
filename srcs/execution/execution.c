@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/04 17:02:16 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 12:17:48 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int	get_here_doc(char *delim, t_env **env)
 	pid = fork();
 	if (pid == 0)
 	{
-		signal(SIGINT, &sig_handler_here);
-		signal(SIGQUIT, &sig_handler_here);
+		set_sig(&sig_handler_here);
 		line = NULL;
 		len = ft_strlen(delim);
 		while (1)
@@ -36,7 +35,7 @@ int	get_here_doc(char *delim, t_env **env)
 			line = parsing_dollar(get_next_line(STDIN_FILENO), env);
 			ft_dprintf(2, "line : %s", line);
 			if (!ft_strncmp(line, delim, len) && line[len] == '\n')
-				break;
+				break ;
 			if (!line || line[0] == '\0')
 				break ;
 			if (write(fd[1], line, ft_strlen(line)) == -1)
@@ -56,7 +55,6 @@ int	get_here_doc(char *delim, t_env **env)
 int	wait_all_pid(t_exec *exec, int nbr_cmd)
 {
 	int	i;
-	//int	status;
 
 	i = 0;
 	while (i < nbr_cmd)
@@ -65,7 +63,8 @@ int	wait_all_pid(t_exec *exec, int nbr_cmd)
 		free(exec[i].cmd_full_path);
 		i++;
 	}
-	if (WIFEXITED(g_ret_sig))	g_ret_sig = WEXITSTATUS(g_ret_sig);
+	if (WIFEXITED(g_ret_sig))
+		g_ret_sig = WEXITSTATUS(g_ret_sig);
 	if (WIFSIGNALED(g_ret_sig))
 		g_ret_sig = WTERMSIG(g_ret_sig);
 	return (g_ret_sig);
@@ -92,13 +91,12 @@ void	free_all(char **envp, t_exec *exec)
 		free(exec);
 }
 
-int	execute_command(t_data **start, t_env **env, t_termios *term)
+int	execute_command(t_data **start, t_env **env)
 {
 	int		nbr_cmd;
 	t_exec	*exec;
 	char	**envp;
 
-	(void) term;
 	nbr_cmd = nbr_of_cmd(start);
 	exec = ft_calloc(nbr_cmd, sizeof(t_exec));
 	if (!exec)
@@ -106,8 +104,7 @@ int	execute_command(t_data **start, t_env **env, t_termios *term)
 	if (populate_exec_table(*start, exec, nbr_cmd, env))
 		return (1);
 	// print_execution_table(exec, nbr_cmd);
-	signal(SIGINT, &sig_handler_m);
-	signal(SIGQUIT, &sig_handler_m);
+	set_sig(&sig_handler_m);
 	envp = get_paths(&(*start)->head);
 	get_abs_path_cmd(exec, nbr_cmd, envp);
 	child_process(exec, nbr_cmd, envp);
