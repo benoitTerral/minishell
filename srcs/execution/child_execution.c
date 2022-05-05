@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:54:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/05 11:09:01 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/05 11:50:17 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	child_process(t_exec *exec, int nbr_pipes, char **envp, t_termios *term)
 		exec[i].pid = fork();
 		if (exec[i].pid == -1)
 		{
-			ft_dprintf(2, "minishell: fork: Resource temporarily unavailable\n");
+			ft_dprintf(2, RED "minishell: fork: Resource temporarily unavailable\n" WHITE);
 			exit(1);
 		}
 		reset_term(term);

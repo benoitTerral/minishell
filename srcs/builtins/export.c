@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 15:19:54 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/04 11:43:25 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/05 11:31:04 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	check_and_add_var(t_env **head, char *str)
 	split = ft_split(str, '=');
 	if (is_var_valid(split[0]) == 0)
 	{
-		ft_dprintf(2, "export: %s : not a valid identifier\n", str);
+		ft_dprintf(2, RED "export: %s : not a valid identifier\n" WHITE, str);
 		ft_free_split(split);
 		return (1);
 	}
