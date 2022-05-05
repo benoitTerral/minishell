@@ -6,11 +6,13 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:54:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/05 13:11:58 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 13:19:26 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+#define ERROR_FORK "minishell: fork: Resource temporarily unavailable\n"
 
 void	manage_fd_in(t_exec *exec, int i)
 {
@@ -35,7 +37,7 @@ void	manage_fd_out(t_exec *exec, int nbr_cmd, int i)
 		dup2(exec[i].fd[1], STDOUT_FILENO);
 }
 
-int	child_process(t_exec *exec, int nbr_cmd, char **envp)
+int	child_process(t_exec *exec, int nbr_pipes, char **envp)
 {
 	int	i;
 
@@ -45,7 +47,7 @@ int	child_process(t_exec *exec, int nbr_cmd, char **envp)
 		exec[i].pid = fork();
 		if (exec[i].pid == -1)
 		{
-			ft_dprintf(2, "minishell: fork: Resource temporarily unavailable\n");
+			ft_dprintf(2, RED ERROR_FORK WHITE);
 			exit(1);
 		}
 		if (exec[i].pid == 0)

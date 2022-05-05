@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 12:56:08 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/06 16:32:24 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/05 11:30:37 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	disable_option(char *str, char *funct)
 {
 	if (str[0] == '-')
 	{
-		ft_dprintf(2, "%s: -%c : invalid option", funct, str[1]);
+		ft_dprintf(2, RED "%s: -%c : invalid option" WHITE, funct, str[1]);
 		return (1);
 	}
 	else

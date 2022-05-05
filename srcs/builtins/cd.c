@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 11:49:31 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/04 11:35:36 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/05 11:29:45 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	cd(t_data *data)
 			free_return1(str);
 		else if (chdir(data->str[1]))
 		{
-			ft_dprintf(2, "cd : %s: No such file or directory\n", data->str[1]);
+			ft_dprintf(2, RED "cd : %s: No such file or directory\n" WHITE, data->str[1]);
 			free_return1(str);
 		}
 		else

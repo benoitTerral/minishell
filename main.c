@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/05 13:09:23 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 13:17:39 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	prompt(t_env **head, char **env)
 
 	(void)env;
 	line = readline(MINISHELL);
-	ft_dprintf(2, "line : %s\n", line);
 	if (!line)
 	{
 		free_env(head);
@@ -33,8 +32,8 @@ int	prompt(t_env **head, char **env)
 		set_sig(&sig_handler_disable);
 		add_history(line);
 		lex = lexer(parsing(line, head), head);
-		printdata(lex);
-		if (lex && lex->str[0] && is_build_in_bool(lex->str[0]) && lex->next == NULL)
+		if (lex && lex->str[0] && is_build_in_bool(lex->str[0])
+			&& lex->next == NULL)
 			g_ret_sig = is_build_in(&lex, 1);
 		else if (lex)
 			execute_command(&lex, head);

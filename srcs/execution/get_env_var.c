@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:30:35 by bterral           #+#    #+#             */
-/*   Updated: 2022/04/29 14:27:16 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/05 11:33:35 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*get_cmd(t_exec	exec, char **envp)
 	i = 0;
 	if (!envp)
 	{
-		ft_dprintf(2, "minishell: %s: No such file or directory\n", exec.cmd[0][0]);
+		ft_dprintf(2, RED "minishell: %s: No such file or directory\n" WHITE, exec.cmd[0][0]);
 		return (cmd_path);
 	}
 	while (envp[i++])
@@ -43,7 +43,7 @@ char	*get_cmd(t_exec	exec, char **envp)
 		else
 			free(cmd_path);
 	}
-	ft_dprintf(2, "minishell: %s: command not found\n", exec.cmd[0][0]);
+	ft_dprintf(2, RED "minishell: %s: command not found\n" WHITE, exec.cmd[0][0]);
 	return (cmd_path);
 }
 

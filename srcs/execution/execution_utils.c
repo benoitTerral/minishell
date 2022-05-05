@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:38:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/05 10:55:27 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/05 11:33:48 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	populate_exec_table(t_data *data, t_exec *exec, int nbr_pipes, t_env **env)
 	{
 		if (pipe(exec[i].fd) == -1)
 		{
-			ft_dprintf(STDERR_FILENO, "pipe failed");
+			ft_dprintf(STDERR_FILENO, RED "pipe failed" WHITE);
 			return (1);
 		}
 		if (data->token == 1 && data->str[0])
