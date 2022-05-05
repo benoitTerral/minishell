@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/05 15:57:01 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 16:02:18 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	init_termios(t_termios *term)
 	tcgetattr(ttyslot(), &term->old_term);
 	term->new_term = term->old_term;
 	term->new_term.c_lflag &= ~(ICANON | ECHOCTL);
-	VQUIT
 	tcsetattr(ttyslot(), TCSANOW, &term->new_term);
 }
 
