@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/05 13:17:39 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 15:17:24 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_ret_sig;
 
-int	prompt(t_env **head, char **env)
+int	prompt(t_env **head, char **env, t_termios *term)
 {
 	t_data	*lex;
 	char	*line;
@@ -23,6 +23,7 @@ int	prompt(t_env **head, char **env)
 	line = readline(MINISHELL);
 	if (!line)
 	{
+		tcsetattr(0, TCSANOW, &term->old_term);
 		free_env(head);
 		ft_dprintf(1, "%se%sxi%st%s\n", BLUE, WHITE, RED, WHITE);
 		exit(g_ret_sig);
@@ -34,9 +35,9 @@ int	prompt(t_env **head, char **env)
 		lex = lexer(parsing(line, head), head);
 		if (lex && lex->str[0] && is_build_in_bool(lex->str[0])
 			&& lex->next == NULL)
-			g_ret_sig = is_build_in(&lex, 1);
+			g_ret_sig = is_build_in(&lex, 1, term);
 		else if (lex)
-			execute_command(&lex, head);
+			execute_command(&lex, head, term);
 		ft_lstclear_data(&lex);
 	}
 	return (0);
@@ -46,7 +47,7 @@ void	init_termios(t_termios *term)
 {
 	tcgetattr(ttyslot(), &term->old_term);
 	term->new_term = term->old_term;
-	term->new_term.c_lflag &= ~(ECHOCTL);
+	term->new_term.c_lflag &= ~(ICANON | ECHOCTL);
 	tcsetattr(ttyslot(), TCSANOW, &term->new_term);
 }
 
@@ -63,9 +64,8 @@ int	main(int argc, char **argv, char **env)
 	init_termios(&term);
 	while (1)
 	{
+		tcsetattr(0, TCSANOW, &term.new_term);
 		set_sig(&sig_handler_prompt);
-		ret = prompt(&head, env);
-		if (ret)
-			return (0);
+		ret = prompt(&head, env, &term);
 	}
 }

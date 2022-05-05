@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/05 13:12:53 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 15:24:32 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_termios
 }	t_termios;
 
 /// builtsins ///
-int		is_build_in(t_data **data, int nbr_cmd);
+int		is_build_in(t_data **data, int nbr_cmd, t_termios *term);
 int		is_build_in_bool(char *cmd);
 int		echo(t_data *data);
 int		cd(t_data *data);
@@ -100,11 +100,12 @@ char	*my_getenv(char *var_name, t_env **head);
 
 /// EXECUTION ///
 
-int		execute_command(t_data **start, t_env **env);
+int		execute_command(t_data **start, t_env **env, t_termios *term);
 int		populate_exec(t_exec *exec, t_data **data);
 char	**get_paths(t_env **head);
 char	*get_cmd(t_exec	exec, char **envp);
-int		child_process(t_exec *exec, int nbr_pipes, char **envp);
+int		child_process(t_exec *exec, int nbr_pipes, char **envp,
+			t_termios *term);
 int		nbr_of_cmd(t_data **start);
 int		populate_exec_table(t_data *data, t_exec *exec, int nbr_pipes,
 			t_env **env);

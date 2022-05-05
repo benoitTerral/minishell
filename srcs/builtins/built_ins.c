@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:38:39 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/04 10:17:03 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:18:00 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	is_build_in(t_data **data, int nbr_cmd)
+int	is_build_in(t_data **data, int nbr_cmd, t_termios *term)
 {
+	tcsetattr(0, TCSANOW, &term->old_term);
 	if (ft_strcmp((*data)->str[0], "echo"))
 		return (echo(*data));
 	else if (ft_strcmp((*data)->str[0], "cd"))

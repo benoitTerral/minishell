@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:25:58 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/05 12:11:04 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 15:24:58 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	sig_handler_here(int sig)
 {
 	if (sig == SIGINT)
 	{
-		exit(1);
 		g_ret_sig = 1;
+		exit(1);
 	}
 	else if (sig == SIGQUIT)
 	{
@@ -52,11 +52,13 @@ void	sig_handler_child(int sig)
 {
 	if (sig == SIGINT)
 	{
-		exit(1);
+		g_ret_sig = 130;
+		exit(130);
 	}
 	else if (sig == SIGQUIT)
 	{
-		exit(1);
+		g_ret_sig = 3;
+		exit(3);
 	}
 }
 
@@ -64,12 +66,11 @@ void	sig_handler_m(int sig)
 {
 	if (sig == SIGINT)
 	{
-		dprintf(2, "^C\n");
 		return ;
 	}
 	else if (sig == SIGQUIT)
 	{
-		dprintf(2, "^\\Quit: 3\n");
+		dprintf(2, " Quit: 3\n");
 		return ;
 	}
 }

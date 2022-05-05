@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/05 13:11:22 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 15:19:17 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	free_all(char **envp, t_exec *exec)
 		free(exec);
 }
 
-int	execute_command(t_data **start, t_env **env)
+int	execute_command(t_data **start, t_env **env, t_termios *term)
 {
 	int		nbr_pipes;
 	t_exec	*exec;
@@ -105,10 +105,11 @@ int	execute_command(t_data **start, t_env **env)
 	if (populate_exec_table(*start, exec, nbr_pipes, env))
 		return (1);
 	// print_execution_table(exec, nbr_cmd);
+	tcsetattr(0, TCSANOW, &term->old_term);
 	set_sig(&sig_handler_m);
 	envp = get_paths(&(*start)->head);
 	get_abs_path_cmd(exec, nbr_pipes, envp);
-	child_process(exec, nbr_pipes, envp);
+	child_process(exec, nbr_pipes, envp, term);
 	ft_dprintf(1, "pid status : %d\n", wait_all_pid(exec, nbr_pipes));
 	free_all(envp, exec);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:54:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/05 13:19:26 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 15:19:31 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	manage_fd_out(t_exec *exec, int nbr_cmd, int i)
 		dup2(exec[i].fd[1], STDOUT_FILENO);
 }
 
-int	child_process(t_exec *exec, int nbr_pipes, char **envp)
+int	child_process(t_exec *exec, int nbr_pipes, char **envp, t_termios *term)
 {
 	int	i;
 
@@ -56,7 +56,7 @@ int	child_process(t_exec *exec, int nbr_pipes, char **envp)
 			manage_fd_in(exec, i);
 			manage_fd_out(exec, nbr_pipes, i);
 			if (exec[i].is_cmd && exec[i].is_builtin)
-				exit(is_build_in(&(exec[i].data), nbr_pipes));
+				exit(is_build_in(&(exec[i].data), nbr_pipes, term));
 			else if (exec[i].is_cmd)
 			{
 				if (execve(exec[i].cmd_full_path, exec[i].cmd[0], envp) == -1)
