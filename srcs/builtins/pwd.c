@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 11:51:07 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/04 11:43:32 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/04 13:31:22 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ int	pwd(t_data *data)
 		return (1);
 	getcwd(path, PATH_MAX);
 	ft_dprintf(1, "%s\n", path);
-	return (1);
+	return (0);
 }
