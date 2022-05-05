@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:33:06 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/04 11:34:33 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:49:52 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ char	**split_quote(char *string)
 
 	if (!string)
 		return (NULL);
-	ft_dprintf(1, "Split_line=%s\n", string);
 	str = ft_strtrim(string, WHITESPACE);
 	if (!str)
 		return (NULL);

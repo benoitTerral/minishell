@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/05 15:19:17 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 15:46:44 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,10 @@ int	get_here_doc(char *delim, t_env **env)
 		len = ft_strlen(delim);
 		while (1)
 		{
-			ft_putstr_fd("> ", 1);
-			line = parsing_dollar(get_next_line(STDIN_FILENO), env);
-			ft_dprintf(2, "line : %s", line);
-			if (!ft_strncmp(line, delim, len) && line[len] == '\n')
+			line = parsing_dollar(readline("> "), env);
+			if (ft_strcmp(line, delim))
 				break ;
-			if (!line || line[0] == '\0')
+			if (!line /*|| line[0] == '\0'*/)
 				break ;
 			if (write(fd[1], line, ft_strlen(line)) == -1)
 				ft_dprintf(2, "Error reading the here_doc");
@@ -48,7 +46,6 @@ int	get_here_doc(char *delim, t_env **env)
 	}
 	close(fd[1]);
 	waitpid(pid, &status, 0);
-	ft_dprintf(1, "staus=%d\n", status);
 	return (fd[0]);
 }
 
@@ -110,7 +107,7 @@ int	execute_command(t_data **start, t_env **env, t_termios *term)
 	envp = get_paths(&(*start)->head);
 	get_abs_path_cmd(exec, nbr_pipes, envp);
 	child_process(exec, nbr_pipes, envp, term);
-	ft_dprintf(1, "pid status : %d\n", wait_all_pid(exec, nbr_pipes));
+	wait_all_pid(exec, nbr_pipes);
 	free_all(envp, exec);
 	return (0);
 }

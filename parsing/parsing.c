@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 11:01:26 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/04 11:34:24 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:49:44 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ char	**parsing(char *line, t_env **head)
 		ft_free_split(arg);
 		return (ft_free(&line));
 	}
-	// printsplit(arg);
 	ft_free(&line);
 	return (arg);
 }
