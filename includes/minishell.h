@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/05 15:24:32 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 13:45:50 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 # include <termios.h>
 # include <errno.h>
 # include <fcntl.h>
+
+# include <term.h>
+# include <curses.h>
 
 extern int				g_ret_sig;
 
@@ -73,7 +76,7 @@ typedef struct s_termios
 /// builtsins ///
 int		is_build_in(t_data **data, int nbr_cmd, t_termios *term);
 int		is_build_in_bool(char *cmd);
-int		echo(t_data *data);
+int		echo_t(t_data *data);
 int		cd(t_data *data);
 int		pwd(t_data *data);
 int		unset(t_data *data);
