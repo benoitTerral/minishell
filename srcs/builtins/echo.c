@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 11:48:57 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/06 11:16:57 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/06 17:39:48 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	echo_argument(t_data *data)
 	return (0);
 }
 
-int	echo_t(t_data *data)
+int	echo(t_data *data)
 {
 	int	i;
 
