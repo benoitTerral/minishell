@@ -3,10 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: bterral <bterral@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:42:02 by bterral           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2022/05/06 17:08:01 by laraujo          ###   ########lyon.fr    #
+=======
+#    Updated: 2022/05/06 17:31:13 by bterral          ###   ########.fr        #
+>>>>>>> getent
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +51,8 @@ EXEC_D			= srcs/execution/
 SRC_SIG			= srcs/signal.c srcs/signal2.c
 
 SRC_VAR_ENV		= $(addprefix $(VAR_ENV_D), environment.c) \
-					$(addprefix $(VAR_ENV_D), environment_utils.c)
+					$(addprefix $(VAR_ENV_D), environment_utils.c) \
+					$(addprefix $(VAR_ENV_D), shell_level.c)
 
 SRC_BUILT_INS	= $(addprefix $(SRCS_BUILT_INSD), built_ins.c) \
 					$(addprefix $(SRCS_BUILT_INSD), cd.c) \

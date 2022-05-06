@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/05/06 17:07:28 by laraujo          ###   ########lyon.fr   */
+=======
+/*   Updated: 2022/05/06 17:28:52 by bterral          ###   ########.fr       */
+>>>>>>> getent
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +34,9 @@
 # include <termios.h>
 # include <errno.h>
 # include <fcntl.h>
+
+// # include <term.h>
+// # include <curses.h>
 
 extern int				g_ret_sig;
 
@@ -97,6 +104,10 @@ void	ft_envdel(t_data *data, char *name);
 void	free_env(t_env **head);
 void	ft_envdel_node(t_env *env);
 char	*my_getenv(char *var_name, t_env **head);
+int		init_from_bash(char **envp, t_env **head);
+int		update_SHLVL(t_env **head);
+int		error_free_env(t_env **head);
+char	**env_lst_to_char(t_env *head);
 
 /// EXECUTION ///
 
@@ -104,8 +115,7 @@ int		execute_command(t_data **start, t_env **env, t_termios *term);
 int		populate_exec(t_exec *exec, t_data **data);
 char	**get_paths(t_env **head);
 char	*get_cmd(t_exec	exec, char **envp);
-int		child_process(t_exec *exec, int nbr_pipes, char **envp,
-			t_termios *term);
+int		child_process(t_exec *exec, int nbr_pipes, t_termios *term);
 int		nbr_of_cmd(t_data **start);
 int		populate_exec_table(t_data *data, t_exec *exec, int nbr_pipes,
 			t_env **env);
