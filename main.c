@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/05 16:02:18 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 10:08:40 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	prompt(t_env **head, char **env, t_termios *term)
 	if (!line)
 	{
 		tcsetattr(0, TCSANOW, &term->old_term);
+		// tcsetattr(ttyslot(), TCSANOW, &term->old_term);
 		free_env(head);
 		ft_dprintf(1, "%se%sxi%st%s\n", BLUE, WHITE, RED, WHITE);
 		exit(g_ret_sig);
@@ -65,6 +66,7 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		tcsetattr(0, TCSANOW, &term.new_term);
+		// tcsetattr(ttyslot(), TCSANOW, &term.new_term);
 		set_sig(&sig_handler_prompt);
 		ret = prompt(&head, env, &term);
 	}

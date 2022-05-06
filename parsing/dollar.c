@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:43:10 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/05 15:49:15 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 09:53:45 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,22 @@ char	*join_var_env(char *line, char *var, int dollar, t_env **head)
 	char	*end;
 	char	*temp;
 	char	*get_env;
+	char	*dollar_zero;
 	int		end_var;
 
 	end_var = ft_strlen(var) + dollar;
 	end = ft_substr(line, end_var, ft_strlen(&line[end_var]));
 	line[dollar] = '\0';
 	get_env = my_getenv(&var[1], head);
+	if (!get_env && ft_strcmp(&var[1], "?"))
+		dollar_zero = ft_itoa(g_ret_sig);
 	if (get_env)
 		temp = ft_strjoin(line, get_env);
+	else if (dollar_zero)
+	{
+		temp = ft_strjoin(line, dollar_zero);
+		free(dollar_zero);
+	}
 	else
 		temp = ft_strjoin(line, "");
 	ft_free(&line);

@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:16:52 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/02 16:57:15 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/06 10:07:49 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ char	*my_getenv(char *var_name, t_env **head)
 			return (ptr->value);
 		ptr = ptr->next;
 	}
-	if (ft_strcmp(var_name, "?"))
-		return (ft_itoa(g_ret_sig));
 	return (var_value);
 }
 
