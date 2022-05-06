@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:16:52 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/06 10:07:49 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/06 17:20:53 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_env	*add_env_element(t_env **head, char *str)
 	return (new);
 }
 
-static int	error_free_env(t_env **head)
+int	error_free_env(t_env **head)
 {
 	t_env	*current;
 	t_env	*next;
@@ -85,25 +85,31 @@ static int	error_free_env(t_env **head)
 	return (1);
 }
 
-int	init_env_var(char **envp, t_env **head)
+char	**env_lst_to_char(t_env *head)
 {
-	char	**split;
-	t_env	*env_ptr;
+	int		i;
+	int		j;
+	t_env	*ptr;
+	char	**output;
+	char	*tmp1;
 
-	while (*envp)
+	i = 0;
+	ptr = head;
+	while (ptr)
 	{
-		split = ft_split(*envp, '=');
-		if (!split)
-			return (1);
-		env_ptr = ft_env_new(split[0], split[1]);
-		free(split);
-		if (!env_ptr)
-			error_free_env(head);
-		if (*head == NULL)
-			*head = env_ptr;
-		else
-			ft_envadd_back(head, env_ptr);
-		envp++;
+		i++;
+		ptr = ptr->next;
 	}
-	return (0);
+	output = (char **)malloc(sizeof(char *) * (i + 1));
+	j = 0;
+	ptr = head;
+	while (j < i)
+	{
+		tmp1 = ft_strjoin(ptr->name, "=");
+		output[j] = ft_strjoin(tmp1, ptr->value);
+		free(tmp1);
+		ptr = ptr->next;
+		j++;
+	}
+	return (output);
 }

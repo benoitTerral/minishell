@@ -6,7 +6,7 @@
 #    By: bterral <bterral@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:42:02 by bterral           #+#    #+#              #
-#    Updated: 2022/05/06 13:56:29 by bterral          ###   ########.fr        #
+#    Updated: 2022/05/06 17:31:13 by bterral          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ EXEC_D			= srcs/execution/
 SRC_SIG			= srcs/signal.c
 
 SRC_VAR_ENV		= $(addprefix $(VAR_ENV_D), environment.c) \
-					$(addprefix $(VAR_ENV_D), environment_utils.c)
+					$(addprefix $(VAR_ENV_D), environment_utils.c) \
+					$(addprefix $(VAR_ENV_D), shell_level.c)
 
 SRC_BUILT_INS	= $(addprefix $(SRCS_BUILT_INSD), built_ins.c) \
 					$(addprefix $(SRCS_BUILT_INSD), cd.c) \
@@ -73,7 +74,7 @@ LIBFT			= ./libft/libft.a
 all: libft $(NAME)
 	
 $(NAME): $(OBJS) Makefile
-	${CC} $(CFLAGS) -lreadline -ltermcap $(RL_INC) $(RL_LIB) $(OBJS) $(LIBFT) -o $(NAME)
+	${CC} $(CFLAGS) -lreadline $(RL_INC) $(RL_LIB) $(OBJS) $(LIBFT) -o $(NAME)
 
 %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) $(RL_INC) -c $< -o $@ -I ./includes

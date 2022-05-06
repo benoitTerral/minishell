@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:54:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/05 15:19:31 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 17:25:47 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ void	manage_fd_out(t_exec *exec, int nbr_cmd, int i)
 		dup2(exec[i].fd[1], STDOUT_FILENO);
 }
 
-int	child_process(t_exec *exec, int nbr_pipes, char **envp, t_termios *term)
+int	child_process(t_exec *exec, int nbr_pipes, t_termios *term)
 {
-	int	i;
+	int		i;
+	char	**env;
 
 	i = 0;
 	while (i < nbr_pipes)
@@ -59,7 +60,8 @@ int	child_process(t_exec *exec, int nbr_pipes, char **envp, t_termios *term)
 				exit(is_build_in(&(exec[i].data), nbr_pipes, term));
 			else if (exec[i].is_cmd)
 			{
-				if (execve(exec[i].cmd_full_path, exec[i].cmd[0], envp) == -1)
+				env = env_lst_to_char(exec[i].data->head);
+				if (execve(exec[i].cmd_full_path, exec[i].cmd[0], env) == -1)
 					exit(127);
 			}
 			else

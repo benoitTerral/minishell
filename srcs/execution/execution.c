@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/05 15:46:44 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 17:26:26 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	execute_command(t_data **start, t_env **env, t_termios *term)
 	set_sig(&sig_handler_m);
 	envp = get_paths(&(*start)->head);
 	get_abs_path_cmd(exec, nbr_pipes, envp);
-	child_process(exec, nbr_pipes, envp, term);
+	child_process(exec, nbr_pipes, term);
 	wait_all_pid(exec, nbr_pipes);
 	free_all(envp, exec);
 	return (0);
