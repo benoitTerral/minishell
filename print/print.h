@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:50:51 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/06 15:16:51 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 15:44:03 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_data	t_data;
 
 /*---print.c---*/
 
-void	print_prompter(void);
-void	printsplit(char **split);
-void	printdata(t_data *lexer);
+// void	printsplit(char **split);
+// void	printdata(t_data *lexer);
+// void	print_execution_table(t_exec *exec, int nbr_cmd);
 
 #endif

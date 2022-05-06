@@ -6,7 +6,7 @@
 #    By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:42:02 by bterral           #+#    #+#              #
-#    Updated: 2022/05/06 15:19:41 by laraujo          ###   ########lyon.fr    #
+#    Updated: 2022/05/06 17:08:01 by laraujo          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,8 @@ SRC_BUILT_INS	= $(addprefix $(SRCS_BUILT_INSD), built_ins.c) \
 SRC_EXEC		= $(addprefix $(EXEC_D), execution.c) \
 					$(addprefix $(EXEC_D), get_env_var.c) \
 					$(addprefix $(EXEC_D), execution_utils.c) \
-					$(addprefix $(EXEC_D), child_execution.c)
+					$(addprefix $(EXEC_D), child_execution.c) \
+					$(addprefix $(EXEC_D), ft_free_exec.c)
 
 OBJS			= $(SRC:.c=.o) $(SRC_ALLOC:.c=.o) ${SRC_LEXER:.c=.o} \
 					$(SRC_PARSING:.c=.o) $(SRC_PRINT:.c=.o) $(SRC_VAR_ENV:.c=.o) \

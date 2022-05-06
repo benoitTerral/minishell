@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   ft_free_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/26 11:50:39 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/06 15:37:33 by laraujo          ###   ########lyon.fr   */
+/*   Created: 2022/05/06 17:06:24 by laraujo           #+#    #+#             */
+/*   Updated: 2022/05/06 17:07:31 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-int	unset(t_data *data)
+void	free_paths(char **strings)
 {
 	int	i;
 
-	if (data->str[1] && disable_option(data->str[1], "unset"))
-		return (1);
-	i = 1;
-	if (!data->str[i])
-		return (0);
-	while (data->str[i])
+	i = 0;
+	while (strings[i])
 	{
-		if (is_var_valid(data->str[i]) == 0)
-			ft_dprintf(2, RED "unset: %s : not a valid identifier\n" WHITE,
-				data->str[i]);
-		ft_envdel(data, data->str[i]);
+		free(strings[i]);
 		i++;
 	}
-	return (0);
+	free(strings);
+}
+
+void	free_all(char **envp, t_exec *exec)
+{
+	if (envp)
+		free_paths(envp);
+	if (exec)
+		free(exec);
 }

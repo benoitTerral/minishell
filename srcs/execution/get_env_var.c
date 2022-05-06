@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   get_env_var.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:30:35 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/05 11:33:35 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/06 16:41:02 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+#define ERROR_DIR "minishell: %s: No such file or directory\n"
+#define ERROR_CMD_NOT "minishell: %s: command not found\n"
+
+char	*return_err_null(char *str)
+{
+	ft_dprintf(2, RED ERROR_DIR WHITE, str);
+	return (NULL);
+}
 
 char	*get_cmd(t_exec	exec, char **envp)
 {
@@ -18,20 +27,13 @@ char	*get_cmd(t_exec	exec, char **envp)
 	char	*tmp;
 	int		path_bool;
 	int		i;
-	
-	path_bool = -1;
+
 	cmd_path = NULL;
 	if (access(exec.cmd[0][0], X_OK) == 0)
-	{
-		cmd_path = ft_strdup(exec.cmd[0][0]);
-		return (cmd_path);
-	}
+		return (ft_strdup(exec.cmd[0][0]));
 	i = 0;
 	if (!envp)
-	{
-		ft_dprintf(2, RED "minishell: %s: No such file or directory\n" WHITE, exec.cmd[0][0]);
-		return (cmd_path);
-	}
+		return (return_err_null(exec.cmd[0][0]));
 	while (envp[i++])
 	{
 		tmp = ft_strjoin(envp[i], "/");
@@ -43,7 +45,7 @@ char	*get_cmd(t_exec	exec, char **envp)
 		else
 			free(cmd_path);
 	}
-	ft_dprintf(2, RED "minishell: %s: command not found\n" WHITE, exec.cmd[0][0]);
+	ft_dprintf(2, RED ERROR_CMD_NOT WHITE, exec.cmd[0][0]);
 	return (cmd_path);
 }
 

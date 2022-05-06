@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 11:49:31 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/06 09:54:15 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/06 15:36:09 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int	cd(t_data *data)
 			free_return1(str);
 		else if (chdir(data->str[1]))
 		{
-			ft_dprintf(2, RED "cd : %s: No such file or directory\n" WHITE, data->str[1]);
+			ft_dprintf(2, RED "cd : %s: No such file or directory\n" WHITE,
+				data->str[1]);
 			free_return1(str);
 		}
 		else

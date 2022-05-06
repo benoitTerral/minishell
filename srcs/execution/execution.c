@@ -6,16 +6,38 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/06 14:56:23 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 17:07:01 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	get_here_doc(char *delim, t_env **env)
+void	child_here_doc(char *delim, int fd[2], t_env **env)
 {
 	char	*line;
 	int		len;
+
+	set_sig(&sig_handler_here);
+	line = NULL;
+	len = ft_strlen(delim);
+	while (1)
+	{
+		line = parsing_dollar(readline("> "), env);
+		if (ft_strcmp(line, delim))
+			break ;
+		if (!line)
+			break ;
+		if (write(fd[1], line, ft_strlen(line)) == -1)
+			ft_dprintf(2, "Error reading the here_doc");
+		free(line);
+	}
+	free(line);
+	close(fd[1]);
+	exit(0);
+}
+
+int	get_here_doc(char *delim, t_env **env)
+{
 	int		fd[2];
 	pid_t	pid;
 	int		status;
@@ -24,25 +46,7 @@ int	get_here_doc(char *delim, t_env **env)
 		ft_dprintf(2, "here_doc error");
 	pid = fork();
 	if (pid == 0)
-	{
-		set_sig(&sig_handler_here);
-		line = NULL;
-		len = ft_strlen(delim);
-		while (1)
-		{
-			line = parsing_dollar(readline("> "), env);
-			if (ft_strcmp(line, delim))
-				break ;
-			if (!line)
-				break ;
-			if (write(fd[1], line, ft_strlen(line)) == -1)
-				ft_dprintf(2, "Error reading the here_doc");
-			free(line);
-		}
-		free(line);
-		close(fd[1]);
-		exit(0);
-	}
+		child_here_doc(delim, fd, env);
 	close(fd[1]);
 	waitpid(pid, &status, 0);
 	return (fd[0]);
@@ -65,27 +69,6 @@ int	wait_all_pid(t_exec *exec, int nbr_pipes)
 	if (WIFSIGNALED(g_ret_sig))
 		g_ret_sig = WTERMSIG(g_ret_sig);
 	return (g_ret_sig);
-}
-
-void	free_paths(char **strings)
-{
-	int	i;
-
-	i = 0;
-	while (strings[i])
-	{
-		free(strings[i]);
-		i++;
-	}
-	free(strings);
-}
-
-void	free_all(char **envp, t_exec *exec)
-{
-	if (envp)
-		free_paths(envp);
-	if (exec)
-		free(exec);
 }
 
 int	execute_command(t_data **start, t_env **env, t_termios *term)

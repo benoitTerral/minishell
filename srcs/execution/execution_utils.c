@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:38:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/05 11:33:48 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/06 15:43:23 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ int	populate_exec_table(t_data *data, t_exec *exec, int nbr_pipes, t_env **env)
 	while (i < nbr_pipes)
 	{
 		if (pipe(exec[i].fd) == -1)
-		{
-			ft_dprintf(STDERR_FILENO, RED "pipe failed" WHITE);
-			return (1);
-		}
+			return (ft_dprintf(STDERR_FILENO, RED "pipe failed" WHITE));
 		if (data->token == 1 && data->str[0])
 		{
 			exec[i].is_builtin = is_build_in_bool(data->str[0]);
@@ -83,28 +80,6 @@ int	populate_exec_table(t_data *data, t_exec *exec, int nbr_pipes, t_env **env)
 		i++;
 	}
 	return (0);
-}
-
-void	print_execution_table(t_exec *exec, int nbr_cmd)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	ft_dprintf(1, "\n Execution table \n");
-	while (i < nbr_cmd)
-	{
-		ft_dprintf(1, "\nCommand number : %d\n", i);
-		j = 0;
-		while (exec[i].cmd[0][j])
-		{
-			ft_dprintf(1, "exec[i].cmd[0][%d]: %s\n", j, exec[i].cmd[0][j]);
-			j++;
-		}
-		ft_dprintf(1, "fd_in: %d\n", exec[i].fd_in);
-		ft_dprintf(1, "fd_out: %d\n", exec[i].fd_out);
-		i++;
-	}
 }
 
 void	get_abs_path_cmd(t_exec *exec, int nbr_cmd, char **envp)
