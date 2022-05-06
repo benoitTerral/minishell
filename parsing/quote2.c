@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 15:22:09 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/04 11:34:37 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/06 15:13:07 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,10 @@ int	jump_delquote(char **str, int i, int quote)
 		return (0);
 	if (quote == SQUOTE_START || quote == DQUOTE_START)
 	{
-	//	printf(GREEN"Q_START=%d\n", i);
 		strdel_index(str, i);
 		while (quote != SQUOTE_STOP && quote != DQUOTE_STOP)
 			quote = status_quote(quote, str[0][i++]);
 		i--;
-	//	printf(YELLOW"Q_STOP=%d\n"WHITE, i);
 		strdel_index(str, i);
 		if (!str[0][i])
 			return (0);

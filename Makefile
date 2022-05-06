@@ -6,7 +6,7 @@
 #    By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:42:02 by bterral           #+#    #+#              #
-#    Updated: 2022/05/04 16:39:28 by laraujo          ###   ########lyon.fr    #
+#    Updated: 2022/05/06 15:19:41 by laraujo          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ SRCS_BUILT_INSD	= srcs/builtins/
 
 EXEC_D			= srcs/execution/
 
-SRC_SIG			= srcs/signal.c
+SRC_SIG			= srcs/signal.c srcs/signal2.c
 
 SRC_VAR_ENV		= $(addprefix $(VAR_ENV_D), environment.c) \
 					$(addprefix $(VAR_ENV_D), environment_utils.c)

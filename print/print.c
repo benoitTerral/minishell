@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:50:33 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/04 11:35:11 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/06 15:16:28 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	printdata(t_data *lexer)
 		while (lexer->next)
 		{
 			lexer = lexer->next;
-		//	is_build_in(lexer);
 			ft_dprintf(1, "\nTOKEN=%d", lexer->token);
 			printsplit(lexer->str);
 			ft_dprintf(1, "lexer->next=%p\n", lexer->next);

@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/05 15:46:44 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 14:56:23 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	get_here_doc(char *delim, t_env **env)
 	int		status;
 
 	if (pipe(fd) == -1)
-		//perror_exit(PIPE_ERROR);
 		ft_dprintf(2, "here_doc error");
 	pid = fork();
 	if (pid == 0)
@@ -34,7 +33,7 @@ int	get_here_doc(char *delim, t_env **env)
 			line = parsing_dollar(readline("> "), env);
 			if (ft_strcmp(line, delim))
 				break ;
-			if (!line /*|| line[0] == '\0'*/)
+			if (!line)
 				break ;
 			if (write(fd[1], line, ft_strlen(line)) == -1)
 				ft_dprintf(2, "Error reading the here_doc");
@@ -101,7 +100,6 @@ int	execute_command(t_data **start, t_env **env, t_termios *term)
 		exit(1);
 	if (populate_exec_table(*start, exec, nbr_pipes, env))
 		return (1);
-	// print_execution_table(exec, nbr_cmd);
 	tcsetattr(0, TCSANOW, &term->old_term);
 	set_sig(&sig_handler_m);
 	envp = get_paths(&(*start)->head);

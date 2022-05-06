@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:03:36 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/04 11:42:38 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/06 15:14:29 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ int	addnext_token(t_data **lexer, char **arg, t_env **head)
 		while (arg[i] != NULL && *arg[i] != '|')
 			i++;
 		if (j)
-			ft_lstadd_back_data(&lexer, ft_lstnew_data(CMD, &arg[j], i - j, head));
+			ft_lstadd_back_data(&lexer,
+				ft_lstnew_data(CMD, &arg[j], i - j, head));
 		while (j < i)
 		{
 			op = strchr_op(arg, &j);
@@ -95,7 +96,6 @@ t_data	*lexer(char **arg, t_env **head)
 		ft_free_split(arg);
 		return (0);
 	}
-	// printf("parsing = OK\n");
 	i = 0;
 	while (arg[i] != NULL && *arg[i] != '|')
 		i++;

@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:33:06 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/05 15:49:52 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 15:11:42 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ static char	**strdup_tab(char *str, int nb_word)
 		return (NULL);
 	while (str[ind.i])
 	{
-		//jump_delquote(&str, &ind.i, &ind.quote);
 		jump_quote(str, &ind.i, &ind.quote);
 		if (!str[ind.i])
 			return (enddup_tab(ind, arg, str));

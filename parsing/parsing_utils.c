@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 15:28:55 by laraujo           #+#    #+#             */
-/*   Updated: 2022/03/29 16:18:35 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 15:10:24 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,6 @@ void	stradd_index(char **str, int index, char c)
 	free(temp);
 	free(end);
 }
-
-// int	main(void)
-// {
-// 	char	*str;
-
-// 	str = ft_strdup("test|c");
-// 	stradd_index(&str, 0, ' ');
-// 	stradd_index(&str, 5, ' ');
-// 	stradd_index(&str, 7, ' ');
-// 	stradd_index(&str, 12, ' ');
-// 	printf("str=%s\n", str);
-// 	free(str);
-// }
 
 static int	jump_single_quote(char *str, int *i, int *quote, int search_char)
 {

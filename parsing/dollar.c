@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:43:10 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/06 09:53:45 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/06 15:09:20 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ char	*get_var_env(char *pt)
 		return (NULL);
 	ft_strlcpy(var, pt, i + 1);
 	return (var);
+}
+
+char	*free_join_var_env(char *line, char **end, char **temp)
+{
+	ft_free(end);
+	ft_free(temp);
+	return (line);
 }
 
 char	*join_var_env(char *line, char *var, int dollar, t_env **head)
@@ -58,9 +65,7 @@ char	*join_var_env(char *line, char *var, int dollar, t_env **head)
 		temp = ft_strjoin(line, "");
 	ft_free(&line);
 	line = ft_strjoin(temp, end);
-	ft_free(&end);
-	ft_free(&temp);
-	return (line);
+	return (free_join_var_env(line, &end, &temp));
 }
 
 char	*parsing_dollar(char *line, t_env **head)

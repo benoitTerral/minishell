@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 15:59:21 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/04 11:36:34 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/06 14:56:29 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,24 +49,22 @@ int	my_exit(t_data **data)
 	long long	buf;
 
 	if ((*data)->nbr_arg > 2)
-	{
-		ft_dprintf(STDERR_FILENO, RED"MiniShell: exit: too many arguments\n"WHITE);
-		return (-1);
-	}
-	ft_dprintf(STDOUT_FILENO, "%se%sxi%st%s\n", BLUE, WHITE, RED, WHITE);
-	free_env(&(*data)->head);
+		return (ft_dprintf(STDERR_FILENO,
+				RED"MiniShell: exit: too many arguments\n"WHITE));
 	if ((*data)->nbr_arg == 1)
 	{
+		ft_dprintf(STDOUT_FILENO, "%se%sxi%st%s\n", BLUE, WHITE, RED, WHITE);
+		free_env(&(*data)->head);
 		ft_lstclear_data(data);
-		ft_dprintf(1, "g_ret_sig=%d\n", g_ret_sig);
 		exit (g_ret_sig);
 	}
-	ft_atoi2((*data)->str[1], &res);
+	if (ft_atoi2((*data)->str[1], &res))
+		return (-1);
 	buf = res % 256;
 	if (res < 0)
-	{
 		buf = 256 + buf;
-	}
+	ft_dprintf(STDOUT_FILENO, "%se%sxi%st%s\n", BLUE, WHITE, RED, WHITE);
+	free_env(&(*data)->head);
 	ft_lstclear_data(data);
 	exit (buf);
 }

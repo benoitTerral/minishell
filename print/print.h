@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:50:51 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/05 14:44:36 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 15:16:51 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@
 # define WHITE	"\033[0;37m"
 
 # define MINISHELL	"\033[0;34mMin\033[0;37miSh\033[0;31mell\033[0;37m $ "
-
-// "%sMin%siS", BLUE, WHITE
-// "h%sell%s $ ", RED, WHITE
 
 typedef struct s_data	t_data;
 

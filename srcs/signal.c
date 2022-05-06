@@ -6,17 +6,11 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:25:58 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/05 15:50:36 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 15:18:33 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	set_sig(void (*sig_fonction)(int))
-{
-	signal(SIGINT, sig_fonction);
-	signal(SIGQUIT, sig_fonction);
-}
 
 void	sig_handler_prompt(int sig)
 {
