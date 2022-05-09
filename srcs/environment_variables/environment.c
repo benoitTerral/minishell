@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:16:52 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/06 17:20:53 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/09 15:34:07 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ char	**env_lst_to_char(t_env *head)
 		ptr = ptr->next;
 		j++;
 	}
+	output[j] = NULL;
 	return (output);
 }

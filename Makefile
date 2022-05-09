@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bterral <bterral@student.42.fr>            +#+  +:+       +#+         #
+#    By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:42:02 by bterral           #+#    #+#              #
-#    Updated: 2022/05/06 17:38:09 by bterral          ###   ########.fr        #
+#    Updated: 2022/05/09 14:52:42 by laraujo          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC				= gcc
 
 CFLAGS			= -Wall -Wextra -Werror
 
-FFLAGS			= -fsanitize=address -g
+#FFLAGS			= -fsanitize=thread -g
 
 NAME			= minishell
 
@@ -75,10 +75,10 @@ LIBFT			= ./libft/libft.a
 all: libft $(NAME)
 	
 $(NAME): $(OBJS) Makefile
-	${CC} $(CFLAGS) -lreadline $(RL_INC) $(RL_LIB) $(OBJS) $(LIBFT) -o $(NAME)
+	${CC} $(CFLAGS) $(FFLAGS) -lreadline $(RL_INC) $(RL_LIB) $(OBJS) $(LIBFT) -o $(NAME)
 
 %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) $(RL_INC) -c $< -o $@ -I ./includes
+	$(CC) $(CFLAGS) $(FFLAGS) $(RL_INC) -c $< -o $@ -I ./includes
 
 libft:
 	$(MAKE) -C ./libft
