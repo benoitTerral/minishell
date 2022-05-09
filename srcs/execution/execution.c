@@ -3,35 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/06 17:38:03 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/09 11:14:07 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+char	*ft_strdup_endl(const char *s)
+{
+	char	*output;
+	size_t	i;
+
+	output = (char *)malloc(sizeof(*output) * (ft_strlen(s) + 2));
+	if (output == NULL)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		output[i] = s[i];
+		i++;
+	}
+	output[i] = '\n';
+	output[i + 1] = '\0';
+	return (output);
+}
+
 void	child_here_doc(char *delim, int fd[2], t_env **env)
 {
 	char	*line;
+	char	*buffer;
+	char	*temp;
 	int		len;
 
 	set_sig(&sig_handler_here);
-	line = NULL;
 	len = ft_strlen(delim);
 	while (1)
 	{
 		line = parsing_dollar(readline("> "), env);
-		if (ft_strcmp(line, delim))
-			break ;
 		if (!line)
+		{
+			if (buffer)
+				write(fd[1], buffer, ft_strlen(buffer));
 			break ;
-		if (write(fd[1], line, ft_strlen(line)) == -1)
-			ft_dprintf(2, "Error reading the here_doc");
+		}
+		else if (ft_strcmp(line, delim))
+		{
+			ft_free(&line);
+			write(fd[1], buffer, ft_strlen(buffer));
+			break ;
+		}
+		temp = line;
+		line = ft_strdup_endl(temp);
+		free(temp);
+		if (buffer)
+		{
+			temp = ft_strdup(buffer);
+			free(buffer);
+			buffer = ft_strjoin(temp, line);
+			ft_free(&temp);
+		}
+		else
+			buffer = ft_strdup(line);
 		free(line);
 	}
-	free(line);
 	close(fd[1]);
 	exit(0);
 }
@@ -49,6 +86,10 @@ int	get_here_doc(char *delim, t_env **env)
 		child_here_doc(delim, fd, env);
 	close(fd[1]);
 	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		dprintf(1, "E_status=%d	=%d\n", status, WEXITSTATUS(status));
+	if (WIFSIGNALED(status))
+		dprintf(1, "S_status=%d	=%d\n", status, WTERMSIG(status));
 	return (fd[0]);
 }
 
