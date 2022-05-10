@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/06 17:37:10 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/10 09:29:38 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,26 @@ void	init_termios(t_termios *term)
 	tcsetattr(ttyslot(), TCSANOW, &term->new_term);
 }
 
+void	mp3(char **env)
+{
+	int		pid;
+	char	**argv;
+
+	pid = fork();
+	argv = ft_split("afplay mp3/La_Marseillaise.mp3", ' ');
+	if (pid == 0)
+		if (execve("/usr/bin/afplay", argv, env))
+			ft_dprintf(2, "Error_mp3");
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_env		*head;
 	t_termios	term;
 	int			ret;
+	int			cpt;
 
+	cpt = 0;
 	(void) argv;
 	if (argc != 1)
 		return (-1);
@@ -66,6 +80,10 @@ int	main(int argc, char **argv, char **env)
 	{
 		tcsetattr(0, TCSANOW, &term.new_term);
 		set_sig(&sig_handler_prompt);
-		ret = prompt(&head, env, &term);
+		if (!cpt)
+			mp3(env);
+		else
+			ret = prompt(&head, env, &term);
+		cpt = 1;
 	}
 }
