@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/10 14:36:44 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/10 15:50:01 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ typedef struct s_termios
 int		is_build_in(t_data **data, int nbr_cmd, t_termios *term);
 int		is_build_in_bool(char *cmd);
 int		echo(t_data *data);
+int		echo_argument(t_data *data);
+int		valid_argument(char *str);
 int		cd(t_data *data);
 int		pwd(t_data *data);
 int		unset(t_data *data);

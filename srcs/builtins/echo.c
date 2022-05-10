@@ -6,31 +6,24 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 11:48:57 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/06 17:39:48 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/10 15:48:33 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	echo_argument(t_data *data)
+int	valid_argument(char *str)
 {
 	int	i;
 
-	if (data->str[1] && ft_strncmp(data->str[1], "-n", 2) == 0)
+	(void)i;
+	if (str && ft_strncmp(str, "-n", 2) == 0)
 	{
 		i = 2;
-		while (data->str[1][i])
+		while (str[i])
 		{
-			if (data->str[1][i] != 'n')
+			if (str[i] != 'n')
 				return (0);
-			i++;
-		}
-		i = 2;
-		while (data->str[i])
-		{
-			ft_dprintf(1, "%s", data->str[i]);
-			if (i < (data->nbr_arg - 1))
-				ft_dprintf(1, " ");
 			i++;
 		}
 		return (1);
@@ -38,12 +31,32 @@ int	echo_argument(t_data *data)
 	return (0);
 }
 
+int	echo_argument(t_data *data)
+{
+	int	i;
+
+	i = 1;
+	if (!valid_argument(data->str[i]))
+		return (0);
+	i++;
+	while (data->str[i] && valid_argument(data->str[i]))
+		i++;
+	while (data->str[i])
+	{
+		ft_dprintf(1, "%s", data->str[i]);
+		if (i < (data->nbr_arg - 1))
+			ft_dprintf(1, " ");
+		i++;
+	}
+	return (1);
+}
+
 int	echo(t_data *data)
 {
 	int	i;
 
 	if (echo_argument(data))
-		return (1);
+		return (0);
 	i = 1;
 	while (data->str[i])
 	{

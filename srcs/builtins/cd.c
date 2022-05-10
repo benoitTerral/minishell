@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 11:49:31 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/06 15:36:09 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 15:10:57 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	cd(t_data *data)
 			ft_dprintf(2, RED "cd : %s: No such file or directory\n" WHITE,
 				data->str[1]);
 			free_return1(str);
+			return (1);
 		}
 		else
 		{
