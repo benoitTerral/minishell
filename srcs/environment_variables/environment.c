@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:16:52 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/09 15:34:07 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 14:06:06 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,9 @@ char	**env_lst_to_char(t_env *head)
 	while (j < i)
 	{
 		tmp1 = ft_strjoin(ptr->name, "=");
-		output[j] = ft_strjoin(tmp1, ptr->value);
+		output[j++] = ft_strjoin(tmp1, ptr->value);
 		free(tmp1);
 		ptr = ptr->next;
-		j++;
 	}
 	output[j] = NULL;
 	return (output);

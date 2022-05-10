@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/10 11:30:52 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 14:35:42 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,37 +49,6 @@ void	dup_buffer(char **buffer, char *line)
 		*buffer = ft_strdup(line);
 	free(line);
 }
-
-void	child_here_doc(char *delim, int fd[2], t_env **env)
-{
-	char	*line;
-	char	*buffer;
-	int		len;
-
-	len = ft_strlen(delim);
-	buffer = NULL;
-	while (1)
-	{
-		line = parsing_dollar(readline("> "), env);
-		if (!line)
-		{
-			if (buffer)
-				write(fd[1], buffer, ft_strlen(buffer));
-			break ;
-		}
-		else if (ft_strcmp(line, delim))
-		{
-			ft_free(&line);
-			if (buffer)
-				write(fd[1], buffer, ft_strlen(buffer));
-			break ;
-		}
-		dup_buffer(&buffer, line);
-	}
-	exit(close(fd[1]));
-}
-
-
 
 int	get_here_doc(char *delim, t_env **env)
 {

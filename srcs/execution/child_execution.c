@@ -3,16 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   child_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:54:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/10 10:43:40 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 14:35:39 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 #define ERROR_FORK "minishell: fork: Resource temporarily unavailable\n"
+
+void	child_here_doc(char *delim, int fd[2], t_env **env)
+{
+	char	*line;
+	char	*buffer;
+	int		len;
+
+	len = ft_strlen(delim);
+	buffer = NULL;
+	while (1)
+	{
+		line = parsing_dollar(readline("> "), env);
+		if (!line)
+		{
+			if (buffer)
+				write(fd[1], buffer, ft_strlen(buffer));
+			break ;
+		}
+		else if (ft_strcmp(line, delim))
+		{
+			ft_free(&line);
+			if (buffer)
+				write(fd[1], buffer, ft_strlen(buffer));
+			break ;
+		}
+		dup_buffer(&buffer, line);
+	}
+	exit(close(fd[1]));
+}
 
 void	manage_fd_in(t_exec *exec, int i)
 {
@@ -37,10 +66,28 @@ void	manage_fd_out(t_exec *exec, int nbr_cmd, int i)
 		dup2(exec[i].fd[1], STDOUT_FILENO);
 }
 
+void	execute_child_process(t_exec *exec, int nbr_p, int i, t_termios *term)
+{
+	char	**env;
+
+	set_sig(&sig_handler_child);
+	manage_fd_in(exec, i);
+	manage_fd_out(exec, nbr_p, i);
+	if (exec[i].is_cmd && exec[i].is_builtin)
+		exit(is_build_in(&(exec[i].data), nbr_p, term));
+	else if (exec[i].is_cmd)
+	{
+		env = env_lst_to_char(exec[i].data->head);
+		if (execve(exec[i].cmd_full_path, exec[i].cmd[0], env) == -1)
+			exit(127);
+	}
+	else
+		exit (0);
+}
+
 int	child_process(t_exec *exec, int nbr_pipes, t_termios *term)
 {
 	int		i;
-	char	**env;
 
 	i = 0;
 	while (i < nbr_pipes)
@@ -52,21 +99,7 @@ int	child_process(t_exec *exec, int nbr_pipes, t_termios *term)
 			exit(1);
 		}
 		if (exec[i].pid == 0)
-		{
-			set_sig(&sig_handler_child);
-			manage_fd_in(exec, i);
-			manage_fd_out(exec, nbr_pipes, i);
-			if (exec[i].is_cmd && exec[i].is_builtin)
-				exit(is_build_in(&(exec[i].data), nbr_pipes, term));
-			else if (exec[i].is_cmd)
-			{
-				env = env_lst_to_char(exec[i].data->head);
-				if (execve(exec[i].cmd_full_path, exec[i].cmd[0], env) == -1)
-					exit(127);
-			}
-			else
-				exit (0);
-		}
+			execute_child_process(exec, nbr_pipes, i, term);
 		close(exec[i].fd[1]);
 		if (i != 0)
 			close(exec[i - 1].fd[0]);

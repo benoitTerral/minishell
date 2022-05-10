@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/10 11:01:25 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 14:36:44 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,11 @@ void	free_env(t_env **head);
 void	ft_envdel_node(t_env *env);
 char	*my_getenv(char *var_name, t_env **head);
 int		init_from_bash(char **envp, t_env **head);
-int		update_SHLVL(t_env **head);
+int		update_shlvl(t_env **head);
 int		error_free_env(t_env **head);
 char	**env_lst_to_char(t_env *head);
+int		shlvl_exists(t_env **head);
+int		pwd_missing(t_env **head);
 
 /// EXECUTION ///
 
@@ -126,6 +128,9 @@ void	manage_fd_in(t_exec *exec, int i);
 void	manage_fd_out(t_exec *exec, int nbr_cmd, int i);
 void	free_paths(char **strings);
 void	free_all(char **envp, t_exec *exec);
+void	execute_child_process(t_exec *exec, int nbr_p, int i, t_termios *term);
+void	child_here_doc(char *delim, int fd[2], t_env **env);
+void	dup_buffer(char **buffer, char *line);
 
 /// SIGNAUX ///
 
