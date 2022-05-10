@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/10 10:37:18 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 11:08:38 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	child_here_doc(char *delim, int fd[2], t_env **env)
 
 
 
-int	get_here_doc(char *delim, t_env **env, t_data **data, t_exec **exec)
+int	get_here_doc(char *delim, t_env **env)
 {
 	int		fd[2];
 	pid_t	pid;
@@ -89,12 +89,9 @@ int	get_here_doc(char *delim, t_env **env, t_data **data, t_exec **exec)
 
 	if (pipe(fd) == -1)
 		ft_dprintf(2, "here_doc error");
-	//sleep(20);
-	printf("data=%p\nexec=%p\nenv=%p\n", data, exec, env);
 	pid = fork();
 	if (pid == 0)
 	{
-		printf("data=%p\nexec=%p\nenv=%p\n", data, exec, env);
 		child_here_doc(delim, fd, env);
 	}
 	close(fd[1]);

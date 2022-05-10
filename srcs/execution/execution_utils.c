@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:38:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/10 10:34:39 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 11:09:02 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	populate_exec_addinfo(t_exec *exec, t_data *data, int i, t_env **env)
 	else if (data->token == 5)
 		exec[i].fd_out = open(data->str[1], O_CREAT | O_RDWR | O_APPEND, 0644);
 	else if (data->token == 3)
-		exec[i].fd_in = get_here_doc(data->str[1], env, &data, &exec);
+		exec[i].fd_in = get_here_doc(data->str[1], env);
 	if (data->token == 2)
 		error_permission_files(exec[i].fd_in, data->str[1]);
 	else if (data->token == 4 || data->token == 5)
