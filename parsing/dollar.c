@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:43:10 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/10 10:59:50 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 16:02:27 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ char	*join_var_env(char *line, char *var, int dollar, t_env **head)
 	char	*dollar_zero;
 	int		end_var;
 
+	dollar_zero = NULL;
 	end_var = ft_strlen(var) + dollar;
 	end = ft_substr(line, end_var, ft_strlen(&line[end_var]));
 	line[dollar] = '\0';
