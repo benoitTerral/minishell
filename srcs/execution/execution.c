@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/10 11:08:38 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 11:30:52 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	child_here_doc(char *delim, int fd[2], t_env **env)
 	char	*buffer;
 	int		len;
 
-	set_sig(&sig_handler_here);
 	len = ft_strlen(delim);
 	buffer = NULL;
 	while (1)
@@ -71,7 +70,8 @@ void	child_here_doc(char *delim, int fd[2], t_env **env)
 		else if (ft_strcmp(line, delim))
 		{
 			ft_free(&line);
-			write(fd[1], buffer, ft_strlen(buffer));
+			if (buffer)
+				write(fd[1], buffer, ft_strlen(buffer));
 			break ;
 		}
 		dup_buffer(&buffer, line);
@@ -92,6 +92,7 @@ int	get_here_doc(char *delim, t_env **env)
 	pid = fork();
 	if (pid == 0)
 	{
+		set_sig(&sig_handler_here);
 		child_here_doc(delim, fd, env);
 	}
 	close(fd[1]);
