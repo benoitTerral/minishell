@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:43:10 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/10 16:02:27 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 17:14:18 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,8 @@ char	*parsing_dollar(char *line, t_env **head)
 	var = get_var_env(pt);
 	if (!var)
 		return (NULL);
-	if (var[1] != '\0' && var[1] != '$')
-	{
-		line = join_var_env(line, var, i, head);
-		ft_free(&var);
-		line = parsing_dollar(line, head);
-	}
+	line = join_var_env(line, var, i, head);
+	ft_free(&var);
+	line = parsing_dollar(line, head);
 	return (line);
 }
