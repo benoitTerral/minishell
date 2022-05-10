@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/10 09:54:45 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 10:37:18 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ void	child_here_doc(char *delim, int fd[2], t_env **env)
 	exit(close(fd[1]));
 }
 
-int	get_here_doc(char *delim, t_env **env)
+
+
+int	get_here_doc(char *delim, t_env **env, t_data **data, t_exec **exec)
 {
 	int		fd[2];
 	pid_t	pid;
@@ -87,9 +89,12 @@ int	get_here_doc(char *delim, t_env **env)
 
 	if (pipe(fd) == -1)
 		ft_dprintf(2, "here_doc error");
+	//sleep(20);
+	printf("data=%p\nexec=%p\nenv=%p\n", data, exec, env);
 	pid = fork();
 	if (pid == 0)
 	{
+		printf("data=%p\nexec=%p\nenv=%p\n", data, exec, env);
 		child_here_doc(delim, fd, env);
 	}
 	close(fd[1]);
@@ -129,24 +134,22 @@ int	execute_command(t_data **start, t_env **env, t_termios *term)
 	char	**envp;
 
 	g_ret_sig = 0;
+	envp = 0;
 	nbr_pipes = nbr_of_cmd(start);
 	exec = ft_calloc(nbr_pipes, sizeof(t_exec));
 	if (!exec)
 		exit(1);
 	if (populate_exec_table(*start, exec, nbr_pipes, env))
 		return (1);
-	dprintf(2, "G_=%d\n", g_ret_sig);
 	tcsetattr(0, TCSANOW, &term->old_term);
 	set_sig(&sig_handler_m);
-	dprintf(2, "G_=%d\n", g_ret_sig);
 	if (!g_ret_sig)
 	{
 		envp = get_paths(&(*start)->head);
 		get_abs_path_cmd(exec, nbr_pipes, envp);
 		child_process(exec, nbr_pipes, term);
 		wait_all_pid(exec, nbr_pipes);
-		free_all(envp, exec);
 	}
-	dprintf(2, "finG_=%d\n", g_ret_sig);
+	free_all(envp, exec);
 	return (0);
 }

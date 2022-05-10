@@ -6,7 +6,7 @@
 #    By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:42:02 by bterral           #+#    #+#              #
-#    Updated: 2022/05/10 09:51:05 by laraujo          ###   ########lyon.fr    #
+#    Updated: 2022/05/10 11:00:27 by laraujo          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC				= gcc
 
 CFLAGS			= -Wall -Wextra -Werror
 
-#FFLAGS			= -fsanitize=thread -g
+#FFLAGS			= -fsanitize=address -g
 
 NAME			= minishell
 

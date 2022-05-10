@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:54:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/09 15:36:06 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 10:43:40 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,8 @@ int	child_process(t_exec *exec, int nbr_pipes, t_termios *term)
 			else if (exec[i].is_cmd)
 			{
 				env = env_lst_to_char(exec[i].data->head);
-			//	dprintf(2, "exec[i].cmd_full_path=%s\n", exec[i].cmd_full_path);
-			//	printsplit(exec[i].cmd[0]);
-			//	printsplit(env);
 				if (execve(exec[i].cmd_full_path, exec[i].cmd[0], env) == -1)
-				{
-					printf("bcebcdfcd\n");
 					exit(127);
-				}
 			}
 			else
 				exit (0);

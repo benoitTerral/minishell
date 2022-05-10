@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 11:01:26 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/05 15:49:44 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 10:33:09 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	**parsing(char *line, t_env **head)
 		return (ft_free(&line));
 	if (check_error_operator(arg))
 	{
+		g_ret_sig = 258;
 		ft_free_split(arg);
 		return (ft_free(&line));
 	}

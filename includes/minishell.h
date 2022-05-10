@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/06 17:38:30 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/10 10:15:30 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int		populate_exec_table(t_data *data, t_exec *exec, int nbr_pipes,
 void	get_abs_path_cmd(t_exec *exec, int nbr_pipes, char **envp);
 int		wait_all_pid(t_exec *exec, int nbr_pipes);
 void	free_paths(char **strings);
-int		get_here_doc(char *delim, t_env **env);
+int		get_here_doc(char *delim, t_env **env, t_data **data, t_exec **exec);
 void	manage_fd_in(t_exec *exec, int i);
 void	manage_fd_out(t_exec *exec, int nbr_cmd, int i);
 void	free_paths(char **strings);
