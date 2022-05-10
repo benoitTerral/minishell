@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/06 17:37:10 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/10 13:26:20 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 int	g_ret_sig;
 
-int	prompt(t_env **head, char **env, t_termios *term)
+int	prompt(t_env **head, char **env, t_termios *term, char *argv)
 {
 	t_data	*lex;
 	char	*line;
 
 	(void)env;
-	line = readline(MINISHELL);
+//	line = readline(MINISHELL);
+	line = ft_strdup(argv);
 	if (!line)
 	{
 		tcsetattr(0, TCSANOW, &term->old_term);
@@ -57,15 +58,15 @@ int	main(int argc, char **argv, char **env)
 	t_termios	term;
 	int			ret;
 
-	(void) argv;
-	if (argc != 1)
-		return (-1);
+	(void) argc;
+//	if (argc != 1)
+//		return (-1);
 	init_env_var(env, &head);
 	init_termios(&term);
-	while (1)
-	{
+//	while (1)
+//	{
 		tcsetattr(0, TCSANOW, &term.new_term);
 		set_sig(&sig_handler_prompt);
-		ret = prompt(&head, env, &term);
-	}
+		ret = prompt(&head, env, &term, argv[2]);
+//	}
 }
