@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/09 15:21:01 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 09:54:45 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,14 +138,15 @@ int	execute_command(t_data **start, t_env **env, t_termios *term)
 	dprintf(2, "G_=%d\n", g_ret_sig);
 	tcsetattr(0, TCSANOW, &term->old_term);
 	set_sig(&sig_handler_m);
-	envp = get_paths(&(*start)->head);
-	get_abs_path_cmd(exec, nbr_pipes, envp);
+	dprintf(2, "G_=%d\n", g_ret_sig);
 	if (!g_ret_sig)
 	{
+		envp = get_paths(&(*start)->head);
+		get_abs_path_cmd(exec, nbr_pipes, envp);
 		child_process(exec, nbr_pipes, term);
 		wait_all_pid(exec, nbr_pipes);
-  }
-	free_all(envp, exec);
+		free_all(envp, exec);
+	}
 	dprintf(2, "finG_=%d\n", g_ret_sig);
 	return (0);
 }
