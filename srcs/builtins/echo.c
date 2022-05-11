@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 11:48:57 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/10 15:48:33 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/11 16:24:31 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,10 @@ int	echo(t_data *data)
 	while (data->str[i])
 	{
 		ft_dprintf(1, "%s", data->str[i]);
-		if (i == (data->nbr_arg - 1))
-			ft_dprintf(1, "\n");
-		else
+		if (i != (data->nbr_arg - 1))
 			ft_dprintf(1, " ");
 		i++;
 	}
+	ft_dprintf(1, "\n");
 	return (0);
 }
