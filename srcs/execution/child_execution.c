@@ -6,42 +6,13 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:54:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/11 15:53:04 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/11 17:53:01 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 #define ERROR_FORK "minishell: fork: Resource temporarily unavailable\n"
-
-void	child_here_doc(char *delim, int fd[2], t_env **env)
-{
-	char	*line;
-	char	*buffer;
-	int		len;
-
-	len = ft_strlen(delim);
-	buffer = NULL;
-	while (1)
-	{
-		line = parsing_dollar(readline("> "), env, 0, NO_QUOTE);
-		if (!line)
-		{
-			if (buffer)
-				write(fd[1], buffer, ft_strlen(buffer));
-			break ;
-		}
-		else if (ft_strcmp(line, delim))
-		{
-			ft_free(&line);
-			if (buffer)
-				write(fd[1], buffer, ft_strlen(buffer));
-			break ;
-		}
-		dup_buffer(&buffer, line);
-	}
-	exit(close(fd[1]));
-}
 
 void	manage_fd_in(t_exec *exec, int i)
 {

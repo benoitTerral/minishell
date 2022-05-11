@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/10 15:50:01 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/11 17:58:25 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,13 @@ typedef struct s_termios
 	struct termios	new_term;
 }	t_termios;
 
+typedef struct s_norm
+{
+	char	*delim;
+	int		i;
+	int		quote;
+}	t_norm;
+
 /// builtsins ///
 int		is_build_in(t_data **data, int nbr_cmd, t_termios *term);
 int		is_build_in_bool(char *cmd);
@@ -131,8 +138,6 @@ void	manage_fd_out(t_exec *exec, int nbr_cmd, int i);
 void	free_paths(char **strings);
 void	free_all(char **envp, t_exec *exec);
 void	execute_child_process(t_exec *exec, int nbr_p, int i, t_termios *term);
-void	child_here_doc(char *delim, int fd[2], t_env **env);
-void	dup_buffer(char **buffer, char *line);
 
 /// SIGNAUX ///
 

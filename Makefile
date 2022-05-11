@@ -6,7 +6,7 @@
 #    By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:42:02 by bterral           #+#    #+#              #
-#    Updated: 2022/05/11 13:01:33 by laraujo          ###   ########lyon.fr    #
+#    Updated: 2022/05/11 18:00:37 by laraujo          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC				= gcc
 
 CFLAGS			= -Wall -Wextra -Werror
 
-FFLAGS			= -fsanitize=address -g
+#FFLAGS			= -fsanitize=address -g
 
 NAME			= minishell
 
@@ -64,6 +64,7 @@ SRC_EXEC		= $(addprefix $(EXEC_D), execution.c) \
 					$(addprefix $(EXEC_D), get_env_var.c) \
 					$(addprefix $(EXEC_D), execution_utils.c) \
 					$(addprefix $(EXEC_D), child_execution.c) \
+					$(addprefix $(EXEC_D), here_doc.c) \
 					$(addprefix $(EXEC_D), ft_free_exec.c)
 
 OBJS			= $(SRC:.c=.o) $(SRC_ALLOC:.c=.o) ${SRC_LEXER:.c=.o} \
