@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:43:10 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/10 17:14:18 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/11 16:14:17 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,12 @@ char	*get_var_env(char *pt)
 	char	*var;
 
 	i = 1;
-	if (pt[i] == '?' || !ft_isalpha(pt[i]))
+	if (pt[i] == '?' || ft_isdigit(pt[i]) || pt[i] == '@' || pt[i] == '#'
+		|| pt[i] == '_' || pt[i] == '\'' || pt[i] == '"')
 		i++;
-	else
-	{
-		while (!is_whitespace(pt[i]) && pt[i] != '"' && pt[i] != '\'' && pt[i]
-			&& pt[i] != '$' && pt[i] != '/' && ft_isalnum(pt[i]))
+	else if (ft_isalpha(pt[i]))
+		while (ft_isalnum(pt[i]))
 			i++;
-	}
 	var = malloc(sizeof(char) * (i + 1));
 	if (!var)
 		return (NULL);
@@ -69,14 +67,11 @@ char	*join_var_env(char *line, char *var, int dollar, t_env **head)
 	return (free_join_var_env(line, &end, &temp));
 }
 
-char	*parsing_dollar(char *line, t_env **head)
+char	*parsing_dollar(char *line, t_env **head, int *i, int *quote)
 {
-	char	*pt;
-	char	*var;
-	int		i;
-	int		quote;
+	char		*pt;
+	char		*var;
 
-	quote = NO_QUOTE;
 	if (!line)
 		return (NULL);
 	pt = ft_strchr2(line, '$', &i, &quote);
@@ -85,8 +80,10 @@ char	*parsing_dollar(char *line, t_env **head)
 	var = get_var_env(pt);
 	if (!var)
 		return (NULL);
-	line = join_var_env(line, var, i, head);
+	line = join_var_env(line, var, *i, head);
+	if (ft_strcmp(var, "$"))
+		*i += 1;
 	ft_free(&var);
-	line = parsing_dollar(line, head);
+	line = parsing_dollar(line, head, i, quote);
 	return (line);
 }

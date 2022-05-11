@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:16:52 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/10 14:06:06 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/11 14:55:16 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ char	*my_getenv(char *var_name, t_env **head)
 	t_env	*ptr;
 	char	*var_value;
 
+	if (var_name[0] == '\0')
+		return ("$");
+	if (var_name[0] == '\'')
+		return ("\'");
+	if (var_name[0] == '"')
+		return ("\"");
 	var_value = NULL;
 	ptr = *(head);
 	while (ptr)

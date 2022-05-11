@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:54:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/10 14:35:39 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/11 15:53:04 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	child_here_doc(char *delim, int fd[2], t_env **env)
 	buffer = NULL;
 	while (1)
 	{
-		line = parsing_dollar(readline("> "), env);
+		line = parsing_dollar(readline("> "), env, 0, NO_QUOTE);
 		if (!line)
 		{
 			if (buffer)

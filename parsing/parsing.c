@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 11:01:26 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/10 10:33:09 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/11 16:25:54 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,17 @@ int	check_error_operator(char **arg)
 char	**parsing(char *line, t_env **head)
 {
 	char	**arg;
+	int		i;
+	int		quote;
 
 	if (!line || line[0] == '\0')
 		return (ft_free(&line));
 	if (check_error_quote(line))
 		return (NULL);
 	line = parsing_operator(line);
-	line = parsing_dollar(line, head);
+	i = 0;
+	quote = NO_QUOTE;
+	line = parsing_dollar(line, head, &i, &quote);
 	arg = split_quote(line);
 	if (!arg)
 		return (ft_free(&line));

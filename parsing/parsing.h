@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
+/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:43:20 by laraujo           #+#    #+#             */
-/*   Updated: 2022/04/29 14:57:43 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/11 15:50:58 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		is_redi(char c);
 
 char	*get_var_env(char *pt);
 char	*join_var_env(char *line, char *var, int dollar, t_env **head);
-char	*parsing_dollar(char *line, t_env **head);
+char	*parsing_dollar(char *line, t_env **head, int *i, int *quote);
 
 /*---parsing.c---*/
 
@@ -69,7 +69,7 @@ char	**parsing(char *line, t_env **head);
 int		is_whitespace(char c);
 void	strdel_index(char **str, int index);
 void	stradd_index(char **str, int index, char c);
-char	*ft_strchr2(char *str, int search_char, int *i, int *quote);
+char	*ft_strchr2(char *str, int search_char, int **i, int **quote);
 
 /*---quote.c---*/
 
