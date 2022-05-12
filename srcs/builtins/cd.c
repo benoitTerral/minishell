@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 11:49:31 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/10 16:59:13 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/12 14:18:09 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,19 @@ int	empty_cd(t_data *data)
 		{
 			ft_dprintf(2, RED "minishell: cd : %s: No such file or directory\n"
 				WHITE, home_dir);
-			exit(1);
+			return (1);
 		}
 		else
 		{
 			update_var(data, current_dir, "OLDPWD");
-			update_var(data, home_dir, "PWD");
+			update_var(data, ft_strdup(home_dir), "PWD");
 			return (0);
 		}
 	}
 	else
 	{
 		ft_dprintf(2, RED "minishell : cd: HOME not set\n" WHITE);
-		exit(1);
+		return (1);
 	}
 }
 
@@ -73,9 +73,9 @@ int	cd(t_data *data)
 {
 	char	*str;
 
-	str = getcwd(NULL, 0);
 	if (data->str[1])
 	{
+		str = getcwd(NULL, 0);
 		if (disable_option(data->str[1], "cd"))
 			free_return1(str);
 		else if (chdir(data->str[1]))
@@ -94,6 +94,6 @@ int	cd(t_data *data)
 		}
 	}
 	else
-		empty_cd(data);
+		return (empty_cd(data));
 	return (0);
 }
