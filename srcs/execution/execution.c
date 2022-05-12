@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/11 17:56:05 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/12 13:34:42 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,14 @@ int	wait_all_pid(t_exec *exec, int nbr_pipes)
 	if (WIFEXITED(g_ret_sig))
 		g_ret_sig = WEXITSTATUS(g_ret_sig);
 	else if (WIFSIGNALED(g_ret_sig))
-		g_ret_sig = WTERMSIG(g_ret_sig);
+	{
+		if (g_ret_sig == 2)
+			g_ret_sig = 130;
+		else if (g_ret_sig == 3)
+			g_ret_sig = 131;
+		else
+			g_ret_sig = WTERMSIG(g_ret_sig);
+	}
 	else
 		g_ret_sig = 0;
 	return (g_ret_sig);

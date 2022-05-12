@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/11 17:58:25 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/12 13:35:19 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@
 # include <termios.h>
 # include <errno.h>
 # include <fcntl.h>
-
-// # include <term.h>
-// # include <curses.h>
 
 extern int				g_ret_sig;
 

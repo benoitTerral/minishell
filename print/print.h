@@ -6,7 +6,7 @@
 /*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:50:51 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/09 15:25:25 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/12 13:39:07 by laraujo          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 # define CYAN	"\033[0;36m"
 # define WHITE	"\033[0;37m"
 
-# define MINISHELL	"\033[0;34mMin\033[0;37miSh\033[0;31mell\033[0;37m $ "
+# define MINISHELL_C	"\033[0;34mMin\033[0;37miSh\033[0;31mell\033[0;37m $ "
+# define MINISHELL		"MiniShell $ "
 
 typedef struct s_data	t_data;
 
@@ -34,6 +35,6 @@ typedef struct s_data	t_data;
 
 void	printsplit(char **split);
 void	printdata(t_data *lexer);
-//void	print_execution_table(t_exec *exec, int nbr_cmd);
+/*void	print_execution_table(t_exec *exec, int nbr_cmd);*/
 
 #endif
