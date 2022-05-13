@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:54:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/11 17:53:01 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/13 15:50:35 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	manage_fd_in(t_exec *exec, int i)
 	else if (i != 0)
 		dup2(exec[i - 1].fd[0], STDIN_FILENO);
 	close(exec[i].fd[0]);
+	if (exec[i].fd_in)
+		close (exec[i].fd_in);
 }
 
 void	manage_fd_out(t_exec *exec, int nbr_cmd, int i)
@@ -35,6 +37,9 @@ void	manage_fd_out(t_exec *exec, int nbr_cmd, int i)
 		dup2(1, STDOUT_FILENO);
 	else
 		dup2(exec[i].fd[1], STDOUT_FILENO);
+	close(exec[i].fd[1]);
+	if (exec[i].fd_out)
+		close(exec[i].fd_out);
 }
 
 void	execute_child_process(t_exec *exec, int nbr_p, int i, t_termios *term)
@@ -71,11 +76,12 @@ int	child_process(t_exec *exec, int nbr_pipes, t_termios *term)
 		}
 		if (exec[i].pid == 0)
 			execute_child_process(exec, nbr_pipes, i, term);
+		close(exec[i].fd[0]);
 		close(exec[i].fd[1]);
-		if (i != 0)
-			close(exec[i - 1].fd[0]);
-		else if (i == 0 && nbr_pipes == 1)
-			close(exec[i].fd[0]);
+		if (exec[i].fd_in)
+			close(exec[i].fd_in);
+		if (exec[i].fd_out)
+			close(exec[i].fd_out);
 		i++;
 	}
 	return (0);
