@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/12 13:35:19 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/23 16:57:04 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct s_exec
 	int			fd_out;
 	pid_t		pid;
 	char		*cmd_full_path;
-	int			fd[2];
 	int			is_builtin;
 	int			is_cmd;
 	t_data		*data;
@@ -76,6 +75,13 @@ typedef struct s_norm
 	int		i;
 	int		quote;
 }	t_norm;
+
+typedef struct s_pipe_fd
+{
+	int fd[2];
+	int *fd_tmp;
+	int	nbr_cmd;
+}	t_p;
 
 /// builtsins ///
 int		is_build_in(t_data **data, int nbr_cmd, t_termios *term);
@@ -130,11 +136,11 @@ void	get_abs_path_cmd(t_exec *exec, int nbr_pipes, char **envp);
 int		wait_all_pid(t_exec *exec, int nbr_pipes);
 void	free_paths(char **strings);
 int		get_here_doc(char *delim, t_env **env);
-void	manage_fd_in(t_exec *exec, int i);
-void	manage_fd_out(t_exec *exec, int nbr_cmd, int i);
+void	manage_fd_in(t_exec *exec, int i, t_p p_fd);
+void	manage_fd_out(t_exec *exec, int i, t_p p_fd);
 void	free_paths(char **strings);
 void	free_all(char **envp, t_exec *exec);
-void	execute_child_process(t_exec *exec, int nbr_p, int i, t_termios *term);
+void	execute_child_process(t_exec *exec, int i, t_p p_fd, t_termios *term);
 
 /// SIGNAUX ///
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:46:14 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/11 18:03:34 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/23 18:01:54 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,23 @@
 
 int	g_ret_sig;
 
-int	prompt(t_env **head, char **env, t_termios *term)
+void	process_line(char *line, t_termios *term, t_env **head)
 {
 	t_data	*lex;
+
+	set_sig(&sig_handler_disable);
+	add_history(line);
+	lex = lexer(parsing(line, head), head);
+	if (lex && lex->str[0] && is_build_in_bool(lex->str[0])
+		&& lex->next == NULL)
+		g_ret_sig = is_build_in(&lex, 1, term);
+	else if (lex)
+		execute_command(&lex, head, term);
+	ft_lstclear_data(&lex);
+}
+
+int	prompt(t_env **head, char **env, t_termios *term)
+{
 	char	*line;
 
 	(void)env;
@@ -28,18 +42,10 @@ int	prompt(t_env **head, char **env, t_termios *term)
 		ft_dprintf(1, "%se%sxi%st%s\n", BLUE, WHITE, RED, WHITE);
 		exit(g_ret_sig);
 	}
+	else if (ft_strcmp(line, ""))
+		free(line);
 	else
-	{
-		set_sig(&sig_handler_disable);
-		add_history(line);
-		lex = lexer(parsing(line, head), head);
-		if (lex && lex->str[0] && is_build_in_bool(lex->str[0])
-			&& lex->next == NULL)
-			g_ret_sig = is_build_in(&lex, 1, term);
-		else if (lex)
-			execute_command(&lex, head, term);
-		ft_lstclear_data(&lex);
-	}
+		process_line(line, term, head);
 	return (0);
 }
 

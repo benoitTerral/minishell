@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:38:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/13 15:09:38 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/23 16:01:20 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	error_permission_files(int fd, char *file_name)
 
 void	populate_exec_addinfo(t_exec *exec, t_data *data, int i, t_env **env)
 {
+	exec[i].fd_in = 0;
+	exec[i].fd_out = 0;
 	if (data->token == 2)
 		exec[i].fd_in = open(data->str[1], O_RDONLY);
 	else if (data->token == 4)
@@ -60,8 +62,6 @@ int	populate_exec_table(t_data *data, t_exec *exec, int nbr_pipes, t_env **env)
 	i = 0;
 	while (i < nbr_pipes)
 	{
-		if (pipe(exec[i].fd) == -1)
-			return (ft_dprintf(STDERR_FILENO, RED "pipe failed" WHITE));
 		if (data->token == 1 && data->str[0])
 		{
 			exec[i].is_builtin = is_build_in_bool(data->str[0]);

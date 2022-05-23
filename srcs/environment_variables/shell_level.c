@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 15:56:34 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/10 14:14:43 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/23 18:42:01 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	init_from_bash(char **env, t_env **head)
 	char	**split;
 	t_env	*env_ptr;
 
+	(*head) = NULL;
 	while (*env)
 	{
 		split = ft_split(*env, '=');
