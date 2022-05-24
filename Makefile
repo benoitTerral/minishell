@@ -6,7 +6,7 @@
 #    By: bterral <bterral@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:42:02 by bterral           #+#    #+#              #
-#    Updated: 2022/05/23 17:06:00 by bterral          ###   ########.fr        #
+#    Updated: 2022/05/24 11:53:53 by bterral          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,8 @@ SRC_EXEC		= $(addprefix $(EXEC_D), execution.c) \
 					$(addprefix $(EXEC_D), execution_utils.c) \
 					$(addprefix $(EXEC_D), child_execution.c) \
 					$(addprefix $(EXEC_D), here_doc.c) \
-					$(addprefix $(EXEC_D), ft_free_exec.c)
+					$(addprefix $(EXEC_D), ft_free_exec.c) \
+					$(addprefix $(EXEC_D), child_execution_utils.c)
 
 OBJS			= $(SRC:.c=.o) $(SRC_ALLOC:.c=.o) ${SRC_LEXER:.c=.o} \
 					$(SRC_PARSING:.c=.o) $(SRC_PRINT:.c=.o) $(SRC_VAR_ENV:.c=.o) \

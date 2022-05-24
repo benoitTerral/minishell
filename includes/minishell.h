@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/23 16:57:04 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/24 12:01:28 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ typedef struct s_norm
 
 typedef struct s_pipe_fd
 {
-	int fd[2];
-	int *fd_tmp;
+	int	fd[2];
+	int	*fd_tmp;
 	int	nbr_cmd;
 }	t_p;
 
@@ -141,6 +141,10 @@ void	manage_fd_out(t_exec *exec, int i, t_p p_fd);
 void	free_paths(char **strings);
 void	free_all(char **envp, t_exec *exec);
 void	execute_child_process(t_exec *exec, int i, t_p p_fd, t_termios *term);
+void	initialize_pipe_structure(t_p *p_fd, int nbr_pipes);
+void	close_swap_fds(int fd_0, int fd_1, int *fd_tmp);
+void	error_pid(int fd_0, int fd_1);
+void	close_in_out(int fd_in, int fd_out);
 
 /// SIGNAUX ///
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laraujo <laraujo@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:25:58 by laraujo           #+#    #+#             */
-/*   Updated: 2022/05/12 13:06:22 by laraujo          ###   ########lyon.fr   */
+/*   Updated: 2022/05/24 11:22:59 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ void	sig_handler_m(int sig)
 {
 	if (sig == SIGINT)
 	{
-		dprintf(2, "\n");
+		ft_dprintf(2, "\n");
 		return ;
 	}
 	else if (sig == SIGQUIT)
 	{
-		dprintf(2, " Quit: 3\n");
+		ft_dprintf(2, " Quit: 3\n");
 		return ;
 	}
 }

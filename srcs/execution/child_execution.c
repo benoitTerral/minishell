@@ -6,13 +6,11 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:54:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/23 17:47:03 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/24 12:03:50 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-#define ERROR_FORK "minishell: fork: Resource temporarily unavailable\n"
 
 void	manage_fd_in(t_exec *exec, int i, t_p p_fd)
 {
@@ -70,9 +68,7 @@ int	child_process(t_exec *exec, int nbr_pipes, t_termios *term)
 	t_p	p_fd;
 
 	i = 0;
-	p_fd.fd_tmp = (int *)malloc(sizeof(int) * 1);
-	*(p_fd.fd_tmp) = 10;
-	p_fd.nbr_cmd = nbr_pipes;
+	initialize_pipe_structure(&p_fd, nbr_pipes);
 	while (i < nbr_pipes)
 	{
 		if (pipe(p_fd.fd) == -1)
@@ -80,20 +76,13 @@ int	child_process(t_exec *exec, int nbr_pipes, t_termios *term)
 		exec[i].pid = fork();
 		if (exec[i].pid == -1)
 		{
-			ft_dprintf(2, RED ERROR_FORK WHITE);
-			close(p_fd.fd[0]);
-			close(p_fd.fd[1]);
+			error_pid(p_fd.fd[0], p_fd.fd[1]);
 			exit(1);
 		}
 		if (exec[i].pid == 0)
 			execute_child_process(exec, i, p_fd, term);
-		if (exec[i].fd_in && exec[i].fd_in != -1)
-			close(exec[i].fd_in);
-		if (exec[i].fd_out && exec[i].fd_out != -1)
-			close(exec[i].fd_out);
-		close(p_fd.fd[1]);
-		close(*(p_fd.fd_tmp));
-		*(p_fd.fd_tmp) = p_fd.fd[0];
+		close_in_out(exec[i].fd_in, exec[i].fd_out);
+		close_swap_fds(p_fd.fd[0], p_fd.fd[1], p_fd.fd_tmp);
 		i++;
 	}
 	if (*(p_fd.fd_tmp))
