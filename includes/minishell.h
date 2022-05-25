@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:54:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/24 12:01:28 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/25 10:30:44 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ void	initialize_pipe_structure(t_p *p_fd, int nbr_pipes);
 void	close_swap_fds(int fd_0, int fd_1, int *fd_tmp);
 void	error_pid(int fd_0, int fd_1);
 void	close_in_out(int fd_in, int fd_out);
+void	disable_signal_minishellception(char *str);
 
 /// SIGNAUX ///
 

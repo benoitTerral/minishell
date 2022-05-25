@@ -6,11 +6,21 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/24 11:29:12 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/25 10:30:37 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	disable_signal_minishellception(char *str)
+{
+	char	*lower_str;
+
+	lower_str = ft_str_tolower(str);
+	if (ft_strcmp(lower_str, "./minishell"))
+		set_sig(&sig_handler_disable);
+	free(lower_str);
+}
 
 int	wait_all_pid(t_exec *exec, int nbr_pipes)
 {
@@ -19,6 +29,7 @@ int	wait_all_pid(t_exec *exec, int nbr_pipes)
 	i = 0;
 	while (i < nbr_pipes)
 	{
+		disable_signal_minishellception(exec[i].cmd_full_path);
 		waitpid(exec[i].pid, &g_ret_sig, 0);
 		if (exec[i].is_cmd)
 			free(exec[i].cmd_full_path);
