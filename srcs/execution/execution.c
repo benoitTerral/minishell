@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:25:20 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/25 10:30:37 by bterral          ###   ########.fr       */
+/*   Updated: 2022/05/31 16:44:26 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	disable_signal_minishellception(char *str)
 {
 	char	*lower_str;
 
+	if (!str)
+		return ;
 	lower_str = ft_str_tolower(str);
 	if (ft_strcmp(lower_str, "./minishell"))
 		set_sig(&sig_handler_disable);
