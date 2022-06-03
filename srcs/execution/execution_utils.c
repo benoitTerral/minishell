@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:38:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/05/25 09:44:35 by bterral          ###   ########.fr       */
+/*   Updated: 2022/06/03 15:25:04 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	error_permission_files(int fd, char *file_name)
 
 void	populate_exec_addinfo(t_exec *exec, t_data *data, int i, t_env **env)
 {
-	exec[i].fd_in = 0;
-	exec[i].fd_out = 0;
 	if (data->token == 2)
 		exec[i].fd_in = open(data->str[1], O_RDONLY);
 	else if (data->token == 4)
